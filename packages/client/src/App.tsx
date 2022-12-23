@@ -13,7 +13,7 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App"><StartPage/></div>
+  return <div id='App' className="App"><StartPage/></div>
 }
 
 export default App

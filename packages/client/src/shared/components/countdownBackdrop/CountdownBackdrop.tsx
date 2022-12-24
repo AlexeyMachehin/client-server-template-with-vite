@@ -2,6 +2,8 @@ import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import classes from './CountdownBackdrop.module.css';
 
+//Компонент с обратным отсчетом перед стартом игры. Он будет использован на странице с игрой.
+
 export default function CountdownBackdrop() {
   const [open, setOpen] = React.useState(false);
   const [timer, setTimer] = React.useState(3);

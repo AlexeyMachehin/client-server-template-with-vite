@@ -5,7 +5,7 @@ import classes from './StartPage.module.css';
 export default function StartPage() {
   return (
     <div className={classes.startPageWrapper}>
-      <div className={classes.startPageTitle}>BOMBERMAN</div>
+      <h1 className={classes.startPageTitle}>BOMBERMAN</h1>
       <NumberOfPlayersButtons />
       <NavigateLinks />
     </div>

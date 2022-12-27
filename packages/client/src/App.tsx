@@ -1,3 +1,4 @@
+import { Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import './App.css'
 
@@ -12,7 +13,13 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+  return (
+    <div className="App">
+      <Routes>
+        <Route />
+      </Routes>
+    </div>
+  )
 }
 
 export default App

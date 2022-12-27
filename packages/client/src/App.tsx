@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
+import Login from './Pages/Login/index'
+import { CssBaseline } from '@mui/material'
 
 function App() {
   useEffect(() => {
@@ -12,7 +14,12 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+  return (
+    <>
+      <CssBaseline />
+      <Login />
+    </>
+  )
 }
 
 export default App

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import '@fontsource/orbitron/400.css';
-import classes from './NumberOfPlayersButtons.module.css';
+import classes from './numberOfPlayersButtons.module.css';
 
 const images = [
   {

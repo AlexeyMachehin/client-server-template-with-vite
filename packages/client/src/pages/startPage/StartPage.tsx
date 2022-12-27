@@ -1,6 +1,6 @@
 import NavigateLinks from './components/navigateLinks/NavigateLinks';
 import NumberOfPlayersButtons from './components/numberOfPlayersButtons/NumberOfPlayersButtons';
-import classes from './StartPage.module.css';
+import classes from './startPage.module.css';
 
 export default function StartPage() {
   return (

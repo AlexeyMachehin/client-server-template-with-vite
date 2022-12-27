@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { useState, forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSpring, animated } from 'react-spring';
 import Tooltip from '@mui/material/Tooltip';
-import classes from './HowToPlayModal.module.css';
+import classes from './howToPlayModal.module.css';
 
 interface FadeProps {
   children?: React.ReactElement;
@@ -14,10 +14,7 @@ interface FadeProps {
   onExited?: () => void;
 }
 
-const Fade = React.forwardRef<HTMLDivElement, FadeProps>(function Fade(
-  props,
-  ref
-) {
+const Fade = forwardRef<HTMLDivElement, FadeProps>(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
   const style = useSpring({
     from: { opacity: 0 },
@@ -42,7 +39,7 @@ const Fade = React.forwardRef<HTMLDivElement, FadeProps>(function Fade(
 });
 
 export default function HowToPlayModal() {
-  const [open, setOpen] = React.useState(false);
+  const [isModalOpen, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -52,12 +49,13 @@ export default function HowToPlayModal() {
         <Button onClick={handleOpen}>How to play</Button>
       </Tooltip>
       <Modal
+        className={classes.modalWrapper}
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
-        open={open}
+        open={isModalOpen}
         onClose={handleClose}
         closeAfterTransition>
-        <Fade in={open}>
+        <Fade in={isModalOpen}>
           <Box className={classes.textModal}>
             <Typography id="spring-modal-title" variant="h6" component="h2">
               Text in a modal

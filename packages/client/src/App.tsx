@@ -1,19 +1,7 @@
-import { useEffect } from 'react'
-import './styles/App.css'
-import StartPage from './pages/startPage/StartPage'
+import './styles/App.css';
 
 function App() {
-  useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
-    }
-
-    fetchServerData()
-  }, [])
-  return <div id='App' className="App"><StartPage/></div>
+  return <div id="App" className="App"></div>;
 }
 
-export default App
+export default App;

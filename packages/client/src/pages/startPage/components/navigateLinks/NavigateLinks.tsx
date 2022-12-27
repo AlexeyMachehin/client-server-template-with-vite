@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import HowToPlayModal from '../howToPlayModal/HowToPlayModal';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import classes from './NavigateLinks.module.css';
+import classes from './navigateLinks.module.css';
 
 const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 

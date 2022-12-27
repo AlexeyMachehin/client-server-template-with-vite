@@ -1,0 +1,14 @@
+:root {
+  /* general colors */
+  --backdrop: black;
+  --borderColor: black;
+  --modalBackground: white;
+  --error: #ef5350;
+  /* start page colors */
+  --startPageTitle: #ffb74d;
+  --startPageBackground: black;
+  --startButtons: white;
+  /* end page colors */
+  --userCardBackground: #bdbdbd;
+  --nextLevelButton: #4caf50;
+}

@@ -1,0 +1,50 @@
+* {
+  font-family: 'Orbitron', sans-serif !important;
+}
+
+.backdrop {
+  backdrop-filter: blur(9px);
+  overflow-y: auto;
+}
+
+.backdropContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.cardsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.winTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 70px;
+  color: var(--startPageTitle);
+  margin: 30px 0;
+}
+
+.gameOverTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 70px;
+  color: var(--error);
+  margin: 30px 0;
+}
+
+.stageTitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  font-size: 50px;
+  color: var(--startButtons);
+}

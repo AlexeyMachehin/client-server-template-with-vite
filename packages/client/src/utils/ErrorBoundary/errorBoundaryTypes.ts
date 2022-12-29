@@ -5,7 +5,7 @@ export type TriggerErrorType = ({
   errorInfo,
 }: {
   err: Error;
-  errorInfo: ErrorInfo;
+  errorInfo?: ErrorInfo;
 }) => void;
 
 export type ErrorBoundaryProps = {

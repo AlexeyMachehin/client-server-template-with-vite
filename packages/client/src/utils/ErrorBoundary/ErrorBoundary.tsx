@@ -1,9 +1,8 @@
 import { Component, ErrorInfo, createContext, useContext } from 'react';
+import { TriggerErrorType } from './errorBoundaryTypes';
 
-const ErrorBoundaryContext = createContext(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  ({ err, errorInfo }: { err: Error; errorInfo: ErrorInfo }) => {}
-);
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const ErrorBoundaryContext = createContext<TriggerErrorType>(() => {});
 
 export const useErrorHandling = () => {
   return useContext(ErrorBoundaryContext);
@@ -22,7 +21,7 @@ export class ErrorBoundary extends Component<any, any> {
     console.log({ err, errorInfo });
   }
 
-  triggerError = ({ err, errorInfo }: { err: Error; errorInfo: ErrorInfo }) => {
+  triggerError: TriggerErrorType = ({ err, errorInfo }) => {
     console.log({ err, errorInfo });
     this.setState({ error: err });
   };

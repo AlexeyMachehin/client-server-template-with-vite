@@ -3,9 +3,19 @@ import styles from "./Login.module.css"
 import { Avatar, Button, Checkbox, FormControlLabel, Link, TextField } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import { authService } from '../../service/AuthService'
+import { ILoginFormValues, useLoginFormik } from '../../features/Login/hooks/useLoginFormik'
 
 
 const Login:FC = () => {
+  const handleSubmit = async (values: ILoginFormValues) => {
+    await authService.login({
+      login: values.login,
+      password: values.password,
+    })
+  }
+  const formik = useLoginFormik({onSubmit: handleSubmit})
+
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.mainBackground} />
@@ -18,18 +28,22 @@ const Login:FC = () => {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form noValidate={true}>
+        <form onSubmit={formik.handleSubmit}>
           <TextField
+            value={formik.values.login}
+            onChange={formik.handleChange}
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="login"
+            label="Login"
+            name="login"
+            autoComplete="login"
             autoFocus
           />
           <TextField
+            value={formik.values.password}
+            onChange={formik.handleChange}
             margin="normal"
             required
             fullWidth

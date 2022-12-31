@@ -16,6 +16,12 @@ export type IBasePayload = AnyObject | AnyArray;
 export abstract class AxiosService {
   private readonly axios: AxiosInstance = apiAxiosInstance
 
+  protected constructor() {
+    this.axios.interceptors.response.use(undefined, (error) => {
+      return Promise.reject(error?.response?.data?.reason)
+    })
+  }
+
   public async get<T>(url: string): Promise<T> {
     const result = await this.axios.get<T>(url);
     return result.data;

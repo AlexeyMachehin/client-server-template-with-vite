@@ -1,18 +1,28 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import styles from "./Login.module.css"
 import { Avatar, Button, Checkbox, FormControlLabel, Link, TextField } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { authService } from '../../service/AuthService'
 import { ILoginFormValues, useLoginFormik } from '../../features/Login/hooks/useLoginFormik'
+import Alert from '@mui/material/Alert';
 
 
 const Login:FC = () => {
+  const [loginStatus, setLoginStatus] = useState<null | string>(null)
+
   const handleSubmit = async (values: ILoginFormValues) => {
-    await authService.login({
-      login: values.login,
-      password: values.password,
-    })
+    try {
+      await authService.login({
+        login: values.login,
+        password: values.password,
+      })
+      setLoginStatus(null)
+    } catch (e) {
+      if(typeof e === "string") {
+        setLoginStatus(e)
+      }
+    }
   }
   const formik = useLoginFormik({onSubmit: handleSubmit})
 
@@ -40,6 +50,8 @@ const Login:FC = () => {
             name="login"
             autoComplete="login"
             autoFocus
+            error={formik.touched.login && Boolean(formik.errors.login)}
+            helperText={formik.touched.login && formik.errors.login}
           />
           <TextField
             value={formik.values.password}
@@ -52,7 +64,10 @@ const Login:FC = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
+          {loginStatus && <Alert severity="error">{loginStatus}</Alert>}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

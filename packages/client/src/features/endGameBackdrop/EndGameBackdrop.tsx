@@ -48,9 +48,9 @@ export default function EndGameBackdrop() {
         open={true}>
         <div className={classes.backdropContainer}>
           {isWin ? (
-            <h2 className={classes.winTitle}>Win !</h2>
+            <h2 className={classes.endGameTitle + ' ' + classes.winColor}>Win !</h2>
           ) : (
-            <h2 className={classes.gameOverTitle}>Game over</h2>
+            <h2 className={classes.endGameTitle + ' ' + classes.gameOverColor}>Game over</h2>
           )}
           <div className={classes.stageTitle}>Stage {stage}</div>
           <div className={classes.cardsWrapper}>

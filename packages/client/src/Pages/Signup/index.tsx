@@ -1,17 +1,14 @@
-import { FC } from 'react'
-import styles from "./Signup.module.css"
-import { Avatar, Button, TextField } from '@mui/material'
+import { FC } from 'react';
+import styles from './Signup.module.css';
+import { Avatar, Button, TextField } from '@mui/material';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Typography from '@mui/material/Typography';
 
-
-const Signup:FC = () => {
+const Signup: FC = () => {
   return (
     <div className={styles.mainWrapper}>
-      <div
-        className={styles.loginWrapper}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} >
+      <div className={styles.loginWrapper}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <CheckBoxIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -92,16 +89,14 @@ const Signup:FC = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+            sx={{ mt: 3, mb: 2 }}>
             Sign Up
           </Button>
         </form>
       </div>
       <div className={styles.mainBackground} />
     </div>
-  )
-}
+  );
+};
 
-export default Signup
-
+export default Signup;

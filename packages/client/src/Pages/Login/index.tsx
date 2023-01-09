@@ -1,37 +1,44 @@
-import { FC, useState } from 'react'
-import styles from "./Login.module.css"
-import { Avatar, Button, Checkbox, FormControlLabel, Link, TextField } from '@mui/material'
+import { FC, useState } from 'react';
+import styles from './Login.module.css';
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Link,
+  TextField,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { authService } from '../../service/AuthService'
-import { ILoginFormValues, useLoginFormik } from '../../features/Login/hooks/useLoginFormik'
+import { authService } from '../../service/AuthService';
+import {
+  ILoginFormValues,
+  useLoginFormik,
+} from '../../features/Login/hooks/useLoginFormik';
 import Alert from '@mui/material/Alert';
 
-
-const Login:FC = () => {
-  const [loginStatus, setLoginStatus] = useState<null | string>(null)
+const Login: FC = () => {
+  const [loginError, setLoginError] = useState<null | string>(null);
 
   const handleSubmit = async (values: ILoginFormValues) => {
     try {
       await authService.login({
         login: values.login,
         password: values.password,
-      })
-      setLoginStatus(null)
+      });
+      setLoginError(null);
     } catch (e) {
-      if(typeof e === "string") {
-        setLoginStatus(e)
+      if (typeof e === 'string') {
+        setLoginError(e);
       }
     }
-  }
-  const formik = useLoginFormik({onSubmit: handleSubmit})
+  };
+  const formik = useLoginFormik({ onSubmit: handleSubmit });
 
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.mainBackground} />
-      <div
-        className={styles.loginWrapper}
-      >
+      <div className={styles.loginWrapper}>
         <Avatar sx={{ m: 1 }}>
           <LockOutlinedIcon />
         </Avatar>
@@ -67,7 +74,7 @@ const Login:FC = () => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          {loginStatus && <Alert severity="error">{loginStatus}</Alert>}
+          {loginError && <Alert severity="error">{loginError}</Alert>}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
@@ -76,18 +83,16 @@ const Login:FC = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+            sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
           <Link href="#" variant="body2">
-            {"Don't have an account? Sign Up"}
+            "Don't have an account? Sign Up"
           </Link>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
-
+export default Login;

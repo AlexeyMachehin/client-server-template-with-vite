@@ -4,14 +4,26 @@ import HowToPlayModal from '../howToPlayModal/HowToPlayModal';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import classes from './navigateLinks.module.css';
-import { authService } from '../../../../service/AuthService'
+import Alert from '@mui/material/Alert';
+import { useState } from 'react';
+import { authService } from '../../../../service/AuthService';
 
 const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 
 export default function NavigateLinks() {
+  const [logoutError, setLogoutError] = useState<null | string>(null);
+
   const handleLogout = async () => {
-    await authService.logout()
-  }
+    try {
+      await authService.logout();
+
+      setLogoutError(null);
+    } catch (e) {
+      if (typeof e === 'string') {
+        setLogoutError(e);
+      }
+    }
+  };
 
   return (
     <Box
@@ -24,7 +36,9 @@ export default function NavigateLinks() {
       }}
       onClick={preventDefault}>
       <Tooltip title="Logout from system">
-        <Button href="#text-buttons" onClick={handleLogout}>Logout</Button>
+        <Button href="#text-buttons" onClick={handleLogout}>
+          Logout
+        </Button>
       </Tooltip>
       <Tooltip title="Go to Forum">
         <Button href="#text-buttons">Forum</Button>
@@ -33,6 +47,11 @@ export default function NavigateLinks() {
         <Button href="#text-buttons">Leaderboard</Button>
       </Tooltip>
       <HowToPlayModal />
+      {logoutError && (
+        <Alert className={classes.errorWrapper} severity="error">
+          {logoutError}
+        </Alert>
+      )}
     </Box>
   );
 }

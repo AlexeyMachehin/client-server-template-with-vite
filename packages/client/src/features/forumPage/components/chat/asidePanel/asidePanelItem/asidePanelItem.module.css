@@ -1,0 +1,19 @@
+.name p {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
+}
+
+.title {
+  overflow: hidden;
+  max-height: 18px;
+}
+
+.time p {
+  text-align: center;
+}
+
+.active {
+  display: none;
+}

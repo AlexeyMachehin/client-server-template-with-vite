@@ -11,4 +11,9 @@
   /* end page colors */
   --userCardBackground: #bdbdbd;
   --nextLevelButton: #4caf50;
+  /* forum page colors */
+  --forumPageBackground: white;
+  --forumPageHeader: black;
+  --asidePanelBorder: rgba(128, 128, 128, 0.212);
+  --forumPageShadow: inset 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
 }

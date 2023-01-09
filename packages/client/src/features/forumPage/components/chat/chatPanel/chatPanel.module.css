@@ -1,0 +1,44 @@
+.chatPanel {
+  width: 100%;
+  max-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+}
+
+.chatPanelHeader {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  max-height: 300px;
+  padding: 5px 16px;
+  overflow: hidden;
+}
+
+.chatPanelMain {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1 1 auto;
+  box-shadow: var(--forumPageShadow);
+  padding: 16px;
+}
+
+.chatPanelFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 16px;
+}
+
+.answerMessageBox {
+  padding: 10px;
+}
+
+.chatPanelFooterWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.closeButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,10 +1,10 @@
-import StartPage from './pages/startPage/StartPage';
+import ForumPage from './pages/forumPage/ForumPage';
 import './styles/App.css';
 
 function App() {
   return (
     <div id="App" className="App">
-      <StartPage />
+      <ForumPage />
     </div>
   );
 }

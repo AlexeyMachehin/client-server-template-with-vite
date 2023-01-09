@@ -1,30 +1,31 @@
-import { FC } from 'react'
-import styles from "./Signup.module.css"
-import { Avatar, Button, TextField } from '@mui/material'
+import { FC } from 'react';
+import styles from './Signup.module.css';
+import { Avatar, Button, TextField } from '@mui/material';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Typography from '@mui/material/Typography';
-import { ISignupFormValues, useSignupFormik } from '../../features/Signup/hooks/useSignupFormik'
-import { authService } from '../../service/AuthService'
+import {
+  ISignupFormValues,
+  useSignupFormik,
+} from '../../features/Signup/hooks/useSignupFormik';
+import { authService } from '../../service/AuthService';
 
-const Signup:FC = () => {
+const Signup: FC = () => {
   const handleSubmit = async (values: ISignupFormValues) => {
-   await authService.signup({
-     first_name: values.firstName,
-     second_name: values.surname,
-     email: values.email,
-     phone: values.phone,
-     login: values.login,
-     password: values.password,
-   })
-  }
-  const formik = useSignupFormik({onSubmit: handleSubmit})
+    await authService.signup({
+      first_name: values.firstName,
+      second_name: values.surname,
+      email: values.email,
+      phone: values.phone,
+      login: values.login,
+      password: values.password,
+    });
+  };
+  const formik = useSignupFormik({ onSubmit: handleSubmit });
 
   return (
     <div className={styles.mainWrapper}>
-      <div
-        className={styles.loginWrapper}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} >
+      <div className={styles.loginWrapper}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <CheckBoxIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -125,8 +126,13 @@ const Signup:FC = () => {
             label="Password-Again"
             type="password"
             id="password-again"
-            error={formik.touched.passwordAgain && Boolean(formik.errors.passwordAgain)}
-            helperText={formik.touched.passwordAgain && formik.errors.passwordAgain}
+            error={
+              formik.touched.passwordAgain &&
+              Boolean(formik.errors.passwordAgain)
+            }
+            helperText={
+              formik.touched.passwordAgain && formik.errors.passwordAgain
+            }
           />
 
           <Button
@@ -134,22 +140,17 @@ const Signup:FC = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            size="large"
-          >
+            size="large">
             Sign Up
           </Button>
-          <Button
-            fullWidth
-            size="large"
-          >
+          <Button fullWidth size="large">
             Login
           </Button>
         </form>
       </div>
       <div className={styles.mainBackground} />
     </div>
-  )
-}
+  );
+};
 
-export default Signup
-
+export default Signup;

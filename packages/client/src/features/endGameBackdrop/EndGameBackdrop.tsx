@@ -1,24 +1,31 @@
 import Backdrop from '@mui/material/Backdrop';
-import NavigateLinks from './navigateLinks/NavigateLinks';
+import NavigateLinks from './components/navigateLinks/NavigateLinks';
 import classes from './endGameBackdrop.module.css';
-import UserCard from './userCard/UserCard';
+import UserCard from './components/userCard/UserCard';
 import Confetti from 'react-confetti';
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { IUser } from '../../service/types/endGameBackdrop/IUser';
 
 export default function EndGameBackdrop() {
-  const [width, setWidth] = React.useState(
-    document.documentElement.clientWidth
-  );
-  const [height, setHeight] = React.useState(
-    document.documentElement.clientHeight
-  );
-  window.onresize = () => {
+  const [width, setWidth] = useState(document.documentElement.clientWidth);
+  const [height, setHeight] = useState(document.documentElement.clientHeight);
+
+  function onResize() {
     setWidth(document.documentElement.clientWidth);
     setHeight(document.documentElement.clientHeight);
-  };
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
   const isWin = true;
   const stage = 1;
-  const users = [
+
+  const users: IUser[] = [
     {
       name: 'Danil',
       score: 12345,
@@ -48,13 +55,17 @@ export default function EndGameBackdrop() {
         open={true}>
         <div className={classes.backdropContainer}>
           {isWin ? (
-            <h2 className={classes.endGameTitle + ' ' + classes.winColor}>Win !</h2>
+            <h2 className={`${classes.endGameTitle} ${classes.winColor}`}>
+              Win !
+            </h2>
           ) : (
-            <h2 className={classes.endGameTitle + ' ' + classes.gameOverColor}>Game over</h2>
+            <h2 className={`${classes.endGameTitle} ${classes.gameOverColor}`}>
+              Game over
+            </h2>
           )}
           <div className={classes.stageTitle}>Stage {stage}</div>
           <div className={classes.cardsWrapper}>
-            {users.map((user: any) => (
+            {users.map((user: IUser) => (
               <UserCard key={user.id} user={user} />
             ))}
           </div>

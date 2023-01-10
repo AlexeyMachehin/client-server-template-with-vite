@@ -2,9 +2,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { IUser } from '../../../../service/types/endGameBackdrop/IUser';
 import classes from './userCard.module.css';
 
-export default function UserCard(props: any) {
+export default function UserCard(props: { user: IUser }) {
   return (
     <Card className={classes.userCard}>
       <CardMedia

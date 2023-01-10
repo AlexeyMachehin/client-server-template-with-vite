@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { SyntheticEvent } from 'react';
 import Button from '@mui/material/Button';
 import classes from './navigateLinks.module.css';
 import { Box } from '@mui/material';
 
-const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
+const preventDefault = (event: SyntheticEvent) => event.preventDefault();
 
 export default function NavigateLinks(props: any) {
   return (

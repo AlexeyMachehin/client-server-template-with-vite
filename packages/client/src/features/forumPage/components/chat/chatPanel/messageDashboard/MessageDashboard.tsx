@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import classes from './messageDashboard.module.css';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
+import classes from './messageDashboard.module.css';
 
-export default function MessageDashboard(props: any) {
+interface IMessageDashboardProps {
+  setInputFooterValue?: React.Dispatch<React.SetStateAction<string>>;
+  setAnswerMessage:
+    | React.Dispatch<React.SetStateAction<JSX.Element | null>>
+    | undefined;
+  message: IMessage;
+  createAnswerTemplate: () => JSX.Element | void;
+}
+
+export default function MessageDashboard(props: IMessageDashboardProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (): void => {
     setAnchorEl(null);
   };
 
@@ -24,7 +34,7 @@ export default function MessageDashboard(props: any) {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}>
-        <MenuIcon style={{ color: '#1976d2' }} />
+        <MenuIcon className={classes.buttonIcon} />
       </IconButton>
 
       <Menu
@@ -38,11 +48,12 @@ export default function MessageDashboard(props: any) {
         <MenuItem
           onClick={() => {
             handleClose();
-            props.setAnswerMessage(props.createAnswerTemplate);
+            if (props.setAnswerMessage && props.createAnswerTemplate) {
+              props.setAnswerMessage(props.createAnswerTemplate);
+            }
           }}>
           To answer
         </MenuItem>
-        <MenuItem>Delete</MenuItem>
       </Menu>
     </div>
   );

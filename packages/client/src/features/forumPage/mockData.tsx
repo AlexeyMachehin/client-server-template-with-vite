@@ -1,6 +1,7 @@
 export const forumState = {
   myProfile: {
-    myMessage: true,
+    id: 123123,
+    isMyMessage: true,
     name: 'Andrey',
     time: new Date(),
     avatarURL:
@@ -159,16 +160,17 @@ export const forumState = {
   messages: [
     {
       id: 1,
-      myMessage: true,
+      isMyMessage: true,
       name: 'Danilth',
       time: '2020-01-02T14:22:22.000Z',
-      message: 'wwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWA',
+      message:
+        'wwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWAwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWA',
       avatarURL:
         'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
     },
     {
       id: 2,
-      myMessage: false,
+      isMyMessage: false,
       name: 'Daniltrhb5',
       time: '2020-01-02T14:22:22.000Z',
       message:
@@ -178,7 +180,7 @@ export const forumState = {
     },
     {
       id: 3,
-      myMessage: true,
+      isMyMessage: true,
       name: 'Danildfg345t',
       time: '2020-01-02T14:22:22.000Z',
       message:
@@ -188,7 +190,7 @@ export const forumState = {
     },
     {
       id: 4,
-      myMessage: true,
+      isMyMessage: true,
       name: 'Dreg45anil',
       time: '2020-01-02T14:22:22.000Z',
       message:
@@ -198,7 +200,7 @@ export const forumState = {
     },
     {
       id: 5,
-      myMessage: false,
+      isMyMessage: false,
       name: 'D54ganil',
       time: '2020-01-02T14:22:22.000Z',
       message:
@@ -208,7 +210,7 @@ export const forumState = {
     },
     {
       id: 6,
-      myMessage: true,
+      isMyMessage: true,
       name: 'Da54gnil',
       time: '2020-01-02T14:22:22.000Z',
       message:
@@ -218,7 +220,7 @@ export const forumState = {
     },
     {
       id: 7,
-      myMessage: true,
+      isMyMessage: true,
       name: 'D54anil',
       time: '2020-01-02T14:22:22.000Z',
       message:
@@ -228,7 +230,7 @@ export const forumState = {
     },
     {
       id: 8,
-      myMessage: true,
+      isMyMessage: true,
       name: 'Da5g4nil',
       time: '2020-01-02T14:22:22.000Z',
       message: 'текст сообщения текст сообщениятятекст сообщениятекст',
@@ -237,7 +239,7 @@ export const forumState = {
     },
     {
       id: 9,
-      myMessage: false,
+      isMyMessage: false,
       name: 'Da45gnil',
       time: '2020-01-02T14:22:22.000Z',
       message: 'текст',

@@ -17,3 +17,14 @@
 .active {
   display: none;
 }
+
+.AsidePanelItemContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.AsidePanelItemFooter {
+  display: flex;
+  flex-direction: row;
+  width: 220px;
+}

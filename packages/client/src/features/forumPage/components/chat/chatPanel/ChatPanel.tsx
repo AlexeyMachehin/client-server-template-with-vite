@@ -1,23 +1,36 @@
-import classes from './chatPanel.module.css';
+import { useRef, useState, useEffect } from 'react';
 import WestIcon from '@mui/icons-material/West';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import { useRef, useState } from 'react';
 import Message from './message/Message';
-import { forumState } from '../../../mockData';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { IMessage } from '../../../../../service/types/forumPage/IMessage';
+import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
+import { forumState } from '../../../mockData';
+import classes from './chatPanel.module.css';
 
-export default function ChatPanel(props: any) {
-  const [inputFooterValue, setInputFooterValue] = useState('');
-  const [answerMessage, setAnswerMessage] = useState(null);
+interface IChatPanelProps {
+  selectedQuestion: null | IQuestion;
+}
+
+export default function ChatPanel(props: IChatPanelProps) {
+  const [inputFooterValue, setInputFooterValue] = useState<string>('');
+  const [answerMessage, setAnswerMessage] = useState<null | JSX.Element>(null);
   const [answerMessageComponent, setAnswerMessageComponent] =
     useState<null | JSX.Element>(null);
 
-  const inputFooter = useRef(null);
+  const inputFooter = useRef<null | JSX.Element>(null);
+  const messagesPanel = useRef<HTMLDivElement>(null);
 
-  const createAnswerTemplate = message => {
+  useEffect(() => {
+    if (messagesPanel.current) {
+      messagesPanel.current.scrollTo(0, messagesPanel.current.scrollHeight);
+    }
+  }, []);
+
+  const createAnswerTemplate = (message: IMessage): JSX.Element => {
     return (
       <div
         style={{
@@ -33,23 +46,26 @@ export default function ChatPanel(props: any) {
     );
   };
 
-  const closeAnswerMessageBox = () => {
+  const closeAnswerMessageBox = (): void => {
     setAnswerMessage(null);
   };
 
   return (
     <div className={classes.chatPanel}>
       <div className={classes.chatPanelHeader}>
-        {props.item ? (
-          <div style={{ wordBreak: 'break-word' }}>{props.item.title}</div>
+        {props.selectedQuestion ? (
+          <div className={classes.selectionQuestionTitle}>
+            {props.selectedQuestion.title}
+          </div>
         ) : (
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <WestIcon style={{ marginRight: '8px' }} /> Choose or ask a question
+          <div className={classes.mainTitle}>
+            <WestIcon className={classes.mainTitleIcon} /> Choose or ask a
+            question
           </div>
         )}
       </div>
-      <div className={classes.chatPanelMain}>
-        {forumState.messages.map(message => (
+      <div ref={messagesPanel} className={classes.chatPanelMain}>
+        {forumState.messages.map((message: IMessage) => (
           <Message
             setInputFooterValue={setInputFooterValue}
             setAnswerMessage={setAnswerMessage}
@@ -60,7 +76,6 @@ export default function ChatPanel(props: any) {
         ))}
 
         {/* test answer */}
-
         {answerMessageComponent}
       </div>
 
@@ -69,7 +84,7 @@ export default function ChatPanel(props: any) {
           <div className={classes.answerMessageBox}>
             <div className={classes.closeButtonContainer}>
               <IconButton onClick={() => closeAnswerMessageBox()}>
-                <CloseIcon style={{ color: '#1976d2' }} />
+                <CloseIcon className={classes.answerMessageBoxCloseIcon} />
               </IconButton>
             </div>
 
@@ -78,19 +93,20 @@ export default function ChatPanel(props: any) {
         )}
         <div className={classes.chatPanelFooter}>
           <TextField
+            className={classes.chatPanelInput}
             inputRef={inputFooter}
             value={inputFooterValue}
             onChange={event => {
               setInputFooterValue(event.target.value);
               console.log(inputFooterValue);
             }}
-            style={{ width: '100%' }}
             id="outlined-multiline-flexible"
             label="message"
             multiline
             maxRows={20}
           />
           <Button
+            className={classes.sendButton}
             component="button"
             onClick={() => {
               console.log(inputFooterValue);
@@ -100,17 +116,17 @@ export default function ChatPanel(props: any) {
               setAnswerMessageComponent(
                 <Message
                   message={{
-                    myMessage: forumState.myProfile.myMessage,
-                    message: inputFooterValue,
-                    time: forumState.myProfile.time,
-                    avatarURL: forumState.myProfile.avatarURL,
                     name: forumState.myProfile.name,
+                    id: forumState.myProfile.id,
+                    isMyMessage: forumState.myProfile.isMyMessage,
+                    time: forumState.myProfile.time.toDateString(),
+                    message: inputFooterValue,
+                    avatarURL: forumState.myProfile.avatarURL,
                   }}
                   answerMessage={answerMessage}
                 />
               );
             }}
-            style={{ marginLeft: '16px', maxHeight: '40px' }}
             variant="outlined"
             endIcon={<SendIcon />}>
             Send

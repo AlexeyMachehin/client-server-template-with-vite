@@ -20,5 +20,5 @@
 }
 
 .search {
-  background-color: black;
+  background-color: var(--forumPageHeader);
 }

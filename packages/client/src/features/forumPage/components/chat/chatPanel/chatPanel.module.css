@@ -42,3 +42,28 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.chatPanelInput {
+  width: 100%;
+}
+
+.sendButton {
+  margin-left: 16px !important;
+}
+
+.mainTitle {
+  display: flex;
+  align-items: center;
+}
+
+.mainTitleIcon {
+  margin-right: 8px;
+}
+
+.selectionQuestionTitle {
+  word-break: break-word;
+}
+
+.answerMessageBoxCloseIcon {
+  color: var(--closeIcon);
+}

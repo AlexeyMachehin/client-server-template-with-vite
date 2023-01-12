@@ -7,8 +7,8 @@ export default function ForumPage() {
   return (
     <div className={classes.forumPageWrapper}>
       <Header />
-      {/* <MainList /> */}
-      <Chat />
+      <MainList />
+      {/* <Chat /> */}
     </div>
   );
 }

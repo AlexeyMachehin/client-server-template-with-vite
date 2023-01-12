@@ -1,7 +1,7 @@
-import classes from './header.module.css';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import classes from './header.module.css';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -10,9 +10,8 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 1),
   },
-  marginLeft: "8px",
+  marginLeft: '8px',
   minWidth: '290px',
- 
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -37,10 +36,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
   return (
     <div className={classes.header}>
-      <Search
-        onChange={e => {
-          console.log(e.target.value);
-        }}>
+      <Search>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>

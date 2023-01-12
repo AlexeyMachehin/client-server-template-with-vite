@@ -2,24 +2,33 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import classes from './message.module.css';
 import MessageDashboard from '../messageDashboard/MessageDashboard';
+import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
+import classes from './message.module.css';
 
-export default function Message(props: any) {
+interface IMessageProps {
+  setInputFooterValue?: React.Dispatch<React.SetStateAction<string>>;
+  setAnswerMessage?: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
+  createAnswerTemplate?: (message: IMessage) => JSX.Element ;
+  message: IMessage;
+  answerMessage?: null | JSX.Element;
+}
+
+export default function Message(props: IMessageProps) {
   const myMessageColor = {
-    backgroundColor: '#2e94fa11',
+    backgroundColor: 'var(--myMessageColor)',
   };
 
   return (
     <ListItem
       className={classes.message}
-      sx={props.message.myMessage ? myMessageColor : {}}>
+      sx={props.message.isMyMessage ? myMessageColor : {}}>
       <ListItemAvatar>
         <Avatar alt={props.message.name} src={props.message.avatarURL} />
       </ListItemAvatar>
 
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div className={classes.messageContent}>
+        <div className={classes.messageHeader}>
           <div>
             <ListItemText
               className={classes.name}
@@ -36,14 +45,16 @@ export default function Message(props: any) {
             setInputFooterValue={props.setInputFooterValue}
             setAnswerMessage={props.setAnswerMessage}
             message={props.message}
-            createAnswerTemplate={() =>
-              props.createAnswerTemplate(props.message)
-            }
+            createAnswerTemplate={() => {
+              if (props.createAnswerTemplate) {
+                props.createAnswerTemplate(props.message);
+              }
+            }}
           />
         </div>
         {props.answerMessage}
         <ListItemText
-          className={classes.content}
+          className={classes.message}
           primary={props.message.message}
         />
       </div>

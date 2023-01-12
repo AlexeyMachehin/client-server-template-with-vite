@@ -16,6 +16,16 @@
   border-radius: 4px;
 }
 
-.content {
+.message {
   word-break: break-word;
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
 }

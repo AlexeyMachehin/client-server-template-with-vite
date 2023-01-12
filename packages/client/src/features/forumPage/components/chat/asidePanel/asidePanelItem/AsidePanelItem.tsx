@@ -3,27 +3,31 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
+import { IQuestion } from '../../../../../../service/types/forumPage/IQuestion';
 import classes from './asidePanelItem.module.css';
 
-export default function AsidePanelItem(props: any) {
+interface IAsidePanelItemProps {
+  isWideAsidePanel: boolean;
+  question: IQuestion;
+  color: string;
+  handleSelectedQuestion: () => void;
+}
+
+export default function AsidePanelItem(props: IAsidePanelItemProps) {
   return (
     <>
       <ListItem
         style={{ backgroundColor: props.color }}
-        onClick={props.handleSelectedItem}
+        onClick={props.handleSelectedQuestion}
         button>
         <ListItemAvatar>
-          <Avatar alt={props.item.name} src={props.item.avatarURL} />
+          <Avatar alt={props.question.name} src={props.question.avatarURL} />
         </ListItemAvatar>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-          }}>
+        <div className={classes.AsidePanelItemContent}>
           <ListItemText
             sx={
-              props.togglerWidthButton
+              props.isWideAsidePanel
                 ? {}
                 : {
                     overflow: 'visible',
@@ -32,22 +36,17 @@ export default function AsidePanelItem(props: any) {
                   }
             }
             className={classes.title}
-            primary={props.item.title}
+            primary={props.question.title}
           />
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              width: '220px',
-            }}>
+          <div className={classes.AsidePanelItemFooter}>
             <ListItemText
               className={classes.name}
-              secondary={props.item.name}
+              secondary={props.question.name}
             />
             <ListItemText
               className={classes.time}
-              secondary={new Date(props.item.time).toDateString()}
+              secondary={new Date(props.question.time).toDateString()}
             />
           </div>
         </div>

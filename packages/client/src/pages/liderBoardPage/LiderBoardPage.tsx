@@ -16,11 +16,13 @@ const liders = [
     id: 1,
     name: 'Иван Петров',
     rating: 1235,
+    avatar: 'https://placekitten.com/100',
   },
   {
     id: 2,
     name: 'Петр Иванов',
     rating: 1135,
+    avatar: 'https://placekitten.com/100',
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const liders = [
     id: 4,
     name: 'Вениамин Скачков',
     rating: 135,
+    avatar: 'https://placekitten.com/100',
   },
 ];
 
@@ -53,29 +56,25 @@ const LiderBoardPage = () => {
   return (
     <div className={styles.liderBoard}>
       <Container maxWidth="lg">
-        <Typography variant="h4">
-          <h1 className={styles.title}>LiderboardPage</h1>
-        </Typography>
+        <h1 className={styles.title}>LiderboardPage</h1>
         <List>
           {liders.map((lider, index) => (
             <ListItem key={lider.id} className={styles.listItem}>
               <ListItemAvatar>
-                <Avatar>
+                <Avatar src={lider.avatar} alt={lider.name}>
                   <AccountCircleIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText>{lider.name}</ListItemText>
-              <Typography ml="auto">
-                <ListItemText>
-                  <Typography
-                    display="flex"
-                    alignItems="center"
-                    color={getColor(index)}>
-                    {lider.rating}
-                    {getIcon(index)}
-                  </Typography>
-                </ListItemText>
-              </Typography>
+              <ListItemText sx={{marginLeft: 'auto', flexGrow: '0'}}>
+                <Typography
+                  display="flex"
+                  alignItems="center"
+                  color={getColor(index)}>
+                  {lider.rating}
+                  {getIcon(index)}
+                </Typography>
+              </ListItemText>
             </ListItem>
           ))}
         </List>

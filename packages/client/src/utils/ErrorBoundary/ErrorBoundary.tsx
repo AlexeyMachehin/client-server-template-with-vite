@@ -25,11 +25,11 @@ export class ErrorBoundary extends Component<
 
   componentDidCatch(err: Error, errorInfo: ErrorInfo) {
     // Можно также сохранить информацию об ошибке в соответствующую службу журнала ошибок
-    console.log({ err, errorInfo });
+    console.error({ err, errorInfo });
   }
 
   triggerError: TriggerErrorType = ({ err, errorInfo }) => {
-    console.log({ err, errorInfo });
+    console.error({ err, errorInfo });
     this.setState({ error: err });
   };
 

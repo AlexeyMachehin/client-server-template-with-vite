@@ -12,7 +12,7 @@ import CanvasContext from '../../CanvasContext';
 import { MAP_DIMENSIONS, MAP_TILE_SIZE } from '../../constants';
 import { GameLoopProps, Nullable } from '../../gameEngineTypes';
 import { checkMapCollision } from '../../utils';
-import useKeypress from '../hooks/useKeypress';
+import useKeypress from '../../hooks/useKeypress';
 
 const GameLoop: FC<GameLoopProps> = ({ children }) => {
   const width = MAP_DIMENSIONS.COLS * MAP_TILE_SIZE;
@@ -37,7 +37,7 @@ const GameLoop: FC<GameLoopProps> = ({ children }) => {
   });
 
   const movePlayer1 = (mX: number, mY: number) => {
-    if (!checkMapCollision(player1X + mX, player1X + mY)) {
+    if (!checkMapCollision(player1X + mX, player1Y + mY)) {
       setIsUpdateRequired(true);
       setPlayer1X(player1X + mX);
       setPlayer1Y(player1Y + mY);

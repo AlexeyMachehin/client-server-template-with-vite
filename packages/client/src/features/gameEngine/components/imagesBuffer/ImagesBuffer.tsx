@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import spriteSheet from '../../assets/general_sprite_sheet.png';
+import spriteSheet from '../../../../assets/general_sprite_sheet.png';
 import classes from './ImagesBuffer.module.css';
 
 type ImagesBufferProps = {

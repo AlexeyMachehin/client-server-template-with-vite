@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import WestIcon from '@mui/icons-material/West';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -14,6 +14,11 @@ import classes from './chatPanel.module.css';
 interface IChatPanelProps {
   selectedQuestion: null | IQuestion;
 }
+
+export const chatPanelContext = React.createContext<{
+  setAnswerMessage: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
+  createAnswerTemplate: (message: IMessage) => JSX.Element;
+} | null>(null);
 
 export default function ChatPanel(props: IChatPanelProps) {
   const [inputFooterValue, setInputFooterValue] = useState<string>('');
@@ -51,88 +56,89 @@ export default function ChatPanel(props: IChatPanelProps) {
   };
 
   return (
-    <div className={classes.chatPanel}>
-      <div className={classes.chatPanelHeader}>
-        {props.selectedQuestion ? (
-          <div className={classes.selectionQuestionTitle}>
-            {props.selectedQuestion.title}
-          </div>
-        ) : (
-          <div className={classes.mainTitle}>
-            <WestIcon className={classes.mainTitleIcon} /> Choose or ask a
-            question
-          </div>
-        )}
-      </div>
-      <div ref={messagesPanel} className={classes.chatPanelMain}>
-        {forumState.messages.map((message: IMessage) => (
-          <Message
-            setInputFooterValue={setInputFooterValue}
-            setAnswerMessage={setAnswerMessage}
-            createAnswerTemplate={createAnswerTemplate}
-            key={message.id}
-            message={message}
-          />
-        ))}
-
-        {/* test answer */}
-        {answerMessageComponent}
-      </div>
-
-      <div className={classes.chatPanelFooterWrapper}>
-        {answerMessage && (
-          <div className={classes.answerMessageBox}>
-            <div className={classes.closeButtonContainer}>
-              <IconButton onClick={() => closeAnswerMessageBox()}>
-                <CloseIcon className={classes.answerMessageBoxCloseIcon} />
-              </IconButton>
+    <chatPanelContext.Provider
+      value={{
+        setAnswerMessage: setAnswerMessage,
+        createAnswerTemplate: createAnswerTemplate,
+      }}>
+      <div className={classes.chatPanel}>
+        <div className={classes.chatPanelHeader}>
+          {props.selectedQuestion ? (
+            <div className={classes.selectionQuestionTitle}>
+              {props.selectedQuestion.title}
             </div>
+          ) : (
+            <div className={classes.mainTitle}>
+              <WestIcon className={classes.mainTitleIcon} /> Choose or ask a
+              question
+            </div>
+          )}
+        </div>
 
-            {answerMessage}
+        <div ref={messagesPanel} className={classes.chatPanelMain}>
+          {forumState.messages.map((message: IMessage) => (
+            <Message key={message.id} message={message} />
+          ))}
+
+          {/* test answer */}
+          {answerMessageComponent}
+        </div>
+
+        <div className={classes.chatPanelFooterWrapper}>
+          {answerMessage && (
+            <div className={classes.answerMessageBox}>
+              <div className={classes.closeButtonContainer}>
+                <IconButton onClick={() => closeAnswerMessageBox()}>
+                  <CloseIcon className={classes.answerMessageBoxCloseIcon} />
+                </IconButton>
+              </div>
+
+              {answerMessage}
+            </div>
+          )}
+          <div className={classes.chatPanelFooter}>
+            <TextField
+              className={classes.chatPanelInput}
+              inputRef={inputFooter}
+              value={inputFooterValue}
+              onChange={event => {
+                setInputFooterValue(event.target.value);
+                console.log(inputFooterValue);
+              }}
+              id="outlined-multiline-flexible"
+              label="message"
+              multiline
+              maxRows={20}
+            />
+            <Button
+              className={classes.sendButton}
+              component="button"
+              onClick={() => {
+                console.log(inputFooterValue);
+
+                closeAnswerMessageBox();
+                setInputFooterValue('');
+                setAnswerMessageComponent(
+                  <Message
+                    message={{
+                      name: forumState.myProfile.name,
+                      id: forumState.myProfile.id,
+                      isMyMessage: forumState.myProfile.isMyMessage,
+                      time: forumState.myProfile.time.toDateString(),
+                      message: inputFooterValue,
+                      avatarURL: forumState.myProfile.avatarURL,
+                    }}
+                    answerMessage={answerMessage}
+                  />
+                );
+              }}
+              variant="outlined"
+              endIcon={<SendIcon />}>
+              Send
+            </Button>
           </div>
-        )}
-        <div className={classes.chatPanelFooter}>
-          <TextField
-            className={classes.chatPanelInput}
-            inputRef={inputFooter}
-            value={inputFooterValue}
-            onChange={event => {
-              setInputFooterValue(event.target.value);
-              console.log(inputFooterValue);
-            }}
-            id="outlined-multiline-flexible"
-            label="message"
-            multiline
-            maxRows={20}
-          />
-          <Button
-            className={classes.sendButton}
-            component="button"
-            onClick={() => {
-              console.log(inputFooterValue);
-
-              closeAnswerMessageBox();
-              setInputFooterValue('');
-              setAnswerMessageComponent(
-                <Message
-                  message={{
-                    name: forumState.myProfile.name,
-                    id: forumState.myProfile.id,
-                    isMyMessage: forumState.myProfile.isMyMessage,
-                    time: forumState.myProfile.time.toDateString(),
-                    message: inputFooterValue,
-                    avatarURL: forumState.myProfile.avatarURL,
-                  }}
-                  answerMessage={answerMessage}
-                />
-              );
-            }}
-            variant="outlined"
-            endIcon={<SendIcon />}>
-            Send
-          </Button>
         </div>
       </div>
-    </div>
+    </chatPanelContext.Provider>
   );
 }

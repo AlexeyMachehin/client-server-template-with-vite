@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { chatPanelContext } from '../ChatPanel';
 import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
 import classes from './messageDashboard.module.css';
 
 interface IMessageDashboardProps {
-  setInputFooterValue?: React.Dispatch<React.SetStateAction<string>>;
-  setAnswerMessage:
-    | React.Dispatch<React.SetStateAction<JSX.Element | null>>
-    | undefined;
   message: IMessage;
-  createAnswerTemplate: () => JSX.Element | void;
 }
 
 export default function MessageDashboard(props: IMessageDashboardProps) {
@@ -25,6 +21,8 @@ export default function MessageDashboard(props: IMessageDashboardProps) {
     setAnchorEl(null);
   };
 
+  const functions = useContext(chatPanelContext);
+  console.log(functions);
   return (
     <div>
       <IconButton
@@ -48,9 +46,9 @@ export default function MessageDashboard(props: IMessageDashboardProps) {
         <MenuItem
           onClick={() => {
             handleClose();
-            if (props.setAnswerMessage && props.createAnswerTemplate) {
-              props.setAnswerMessage(props.createAnswerTemplate);
-            }
+            functions?.setAnswerMessage(
+              functions.createAnswerTemplate(props.message)
+            );
           }}>
           To answer
         </MenuItem>

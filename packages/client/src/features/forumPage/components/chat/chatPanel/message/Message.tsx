@@ -7,10 +7,8 @@ import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
 import classes from './message.module.css';
 
 interface IMessageProps {
-  setInputFooterValue?: React.Dispatch<React.SetStateAction<string>>;
-  setAnswerMessage?: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
-  createAnswerTemplate?: (message: IMessage) => JSX.Element ;
   message: IMessage;
+
   answerMessage?: null | JSX.Element;
 }
 
@@ -41,16 +39,7 @@ export default function Message(props: IMessageProps) {
               secondary={new Date(props.message.time).toDateString()}
             />
           </div>
-          <MessageDashboard
-            setInputFooterValue={props.setInputFooterValue}
-            setAnswerMessage={props.setAnswerMessage}
-            message={props.message}
-            createAnswerTemplate={() => {
-              if (props.createAnswerTemplate) {
-                props.createAnswerTemplate(props.message);
-              }
-            }}
-          />
+          <MessageDashboard message={props.message} />
         </div>
         {props.answerMessage}
         <ListItemText

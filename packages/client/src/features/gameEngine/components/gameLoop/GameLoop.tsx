@@ -31,7 +31,7 @@ const GameLoop: FC<GameLoopProps> = ({ children }) => {
 
   const childrenWithProps = Children.map(children, child => {
     if (isValidElement(child)) {
-      return cloneElement(child, { player1X, player1Y });
+      return cloneElement<any>(child, { player1X, player1Y });
     }
     return child;
   });

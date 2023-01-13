@@ -1,11 +1,18 @@
 import ForumPage from './pages/forumPage/ForumPage';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import StartPage from './pages/startPage/StartPage';
 import './styles/App.css';
 
 function App() {
   return (
-    <div id="App" className="App">
-      <ForumPage />
-    </div>
+    <BrowserRouter>
+      <div id="App" className="App">
+        <Routes>
+          <Route path="/" element={<StartPage />} />
+          <Route path="/forum" element={<ForumPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

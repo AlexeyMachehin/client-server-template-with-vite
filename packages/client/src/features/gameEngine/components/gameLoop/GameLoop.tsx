@@ -23,7 +23,10 @@ const GameLoop: FC<GameLoopProps> = ({ children }) => {
   const [player1Y, setPlayer1Y] = useState(1);
   const [isUpdateRequired, setIsUpdateRequired] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const loopRef = useRef<number>();
+  const requestIdRef = useRef<Nullable<number>>(null);
+  const deltaTimeRef = useRef(0);
+  const lastUpdate = useRef(0);
+  const maxIntervalRef = useRef(40);
 
   useEffect(() => {
     setCtx(canvasRef.current && canvasRef.current.getContext('2d'));
@@ -46,22 +49,34 @@ const GameLoop: FC<GameLoopProps> = ({ children }) => {
 
   useKeypress(movePlayer1);
 
-  const tick = useCallback(() => {
-    // console.log('tick');
-    if (isUpdateRequired) {
-      setIsVisible(false);
-      setIsVisible(true);
-      setIsUpdateRequired(false);
-    }
-    loopRef.current = requestAnimationFrame(tick);
-  }, [isUpdateRequired, setIsVisible, setIsUpdateRequired]);
+  const tick = useCallback(
+    (currentTime = 0) => {
+      console.log('tick');
+
+      if (!canvasRef.current) return;
+
+      requestIdRef.current = requestAnimationFrame(tick);
+      deltaTimeRef.current = currentTime - lastUpdate.current;
+
+      if (deltaTimeRef.current < maxIntervalRef.current) {
+        if (isUpdateRequired) {
+          setIsVisible(false);
+          setIsVisible(true);
+          setIsUpdateRequired(false);
+        }
+      }
+
+      lastUpdate.current = currentTime;
+    },
+    [isUpdateRequired, setIsVisible, setIsUpdateRequired]
+  );
 
   useEffect(() => {
-    loopRef.current = requestAnimationFrame(tick);
+    requestIdRef.current = requestAnimationFrame(tick);
     return () => {
-      loopRef.current && cancelAnimationFrame(loopRef.current);
+      requestIdRef.current && cancelAnimationFrame(requestIdRef.current);
     };
-  }, [loopRef, tick]);
+  }, []);
 
   return (
     <CanvasContext.Provider value={ctx}>

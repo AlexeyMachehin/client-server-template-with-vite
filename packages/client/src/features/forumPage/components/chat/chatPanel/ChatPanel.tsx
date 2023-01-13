@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import WestIcon from '@mui/icons-material/West';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -13,6 +13,11 @@ import classes from './chatPanel.module.css';
 
 interface IChatPanelProps {
   selectedQuestion: null | IQuestion;
+  currentMainTheme:
+    | 'discussionOfGameMoments'
+    | 'technicalIssues'
+    | 'errorQuestions'
+    | null;
 }
 
 export const chatPanelContext = React.createContext<{
@@ -39,6 +44,8 @@ export default function ChatPanel(props: IChatPanelProps) {
     return (
       <div
         style={{
+          width: '100%',
+          wordBreak: 'break-word',
           display: 'flex',
           flexDirection: 'column',
           borderLeft: '1px solid black',
@@ -76,9 +83,20 @@ export default function ChatPanel(props: IChatPanelProps) {
         </div>
 
         <div ref={messagesPanel} className={classes.chatPanelMain}>
-          {forumState.messages.map((message: IMessage) => (
-            <Message key={message.id} message={message} />
-          ))}
+          {
+            props.selectedQuestion &&
+              props.selectedQuestion.messages.map((message: IMessage) => (
+                <Message key={message.id} message={message} />
+              ))
+
+            // forumState.mainThemes[props.currentMainTheme].map(theme => {
+            //   if (props.selectedQuestion?.id === theme.id) {
+            //     return theme.messages.map((message: IMessage) => (
+            //       <Message key={message.id} message={message} />
+            //     ));
+            //   }
+            // })
+          }
 
           {/* test answer */}
           {answerMessageComponent}
@@ -88,7 +106,7 @@ export default function ChatPanel(props: IChatPanelProps) {
           {answerMessage && (
             <div className={classes.answerMessageBox}>
               <div className={classes.closeButtonContainer}>
-                <IconButton onClick={() => closeAnswerMessageBox()}>
+                <IconButton onClick={closeAnswerMessageBox}>
                   <CloseIcon className={classes.answerMessageBoxCloseIcon} />
                 </IconButton>
               </div>
@@ -103,9 +121,8 @@ export default function ChatPanel(props: IChatPanelProps) {
               value={inputFooterValue}
               onChange={event => {
                 setInputFooterValue(event.target.value);
-                console.log(inputFooterValue);
+                // console.log(inputFooterValue);
               }}
-              id="outlined-multiline-flexible"
               label="message"
               multiline
               maxRows={20}
@@ -114,7 +131,7 @@ export default function ChatPanel(props: IChatPanelProps) {
               className={classes.sendButton}
               component="button"
               onClick={() => {
-                console.log(inputFooterValue);
+                // console.log(inputFooterValue);
 
                 closeAnswerMessageBox();
                 setInputFooterValue('');

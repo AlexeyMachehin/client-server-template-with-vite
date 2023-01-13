@@ -11,9 +11,19 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { CURRENT_MAIN_THEME } from '../../../../../../service/types/forumPage/currentMainTheme';
 import classes from './askQuestionModal.module.css';
 
-export default function AskQuestionModal() {
+export default function AskQuestionModal(props: {
+  currentMainTheme:
+    | 'discussionOfGameMoments'
+    | 'technicalIssues'
+    | 'errorQuestions'
+    | null;
+}) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -22,6 +32,12 @@ export default function AskQuestionModal() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const [titleInputValue, setTitleInputValue] = useState(
+    props.currentMainTheme?.toString()
+  );
+  const handleChange = (event: SelectChangeEvent) => {
+    setTitleInputValue(event.target.value);
   };
 
   return (
@@ -40,7 +56,27 @@ export default function AskQuestionModal() {
       <Divider />
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Ask a question</DialogTitle>
+        <DialogTitle className={classes.title}>
+          <FormControl variant="standard" sx={{ m: 1 }}>
+            <Select
+              displayEmpty={true}
+              renderValue={value => value ?? 'Choose main theme'}
+              value={titleInputValue}
+              onChange={handleChange}>
+              <MenuItem value={'discussionOfGameMoments'}>
+                {CURRENT_MAIN_THEME.discussionOfGameMoments}
+              </MenuItem>
+              <MenuItem value={'technicalIssues'}>
+                {CURRENT_MAIN_THEME.technicalIssues}
+              </MenuItem>
+              <MenuItem value={'errorQuestions'}>
+                {CURRENT_MAIN_THEME.errorQuestions}
+              </MenuItem>
+            </Select>
+          </FormControl>
+          / your question:
+        </DialogTitle>
+
         <DialogContent className={classes.askQuestionInput}>
           <TextField
             margin="dense"

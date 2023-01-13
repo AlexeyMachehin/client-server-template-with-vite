@@ -14,10 +14,6 @@
   text-align: center;
 }
 
-.active {
-  display: none;
-}
-
 .AsidePanelItemContent {
   display: flex;
   flex-direction: column;

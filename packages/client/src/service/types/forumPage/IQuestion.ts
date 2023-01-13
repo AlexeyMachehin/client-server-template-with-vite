@@ -1,3 +1,5 @@
+import { IMessage } from './IMessage';
+
 export interface IQuestion {
   title: string;
   name: string;
@@ -5,4 +7,5 @@ export interface IQuestion {
   time: string;
   content: string;
   avatarURL: string;
+  messages: IMessage[] | [];
 }

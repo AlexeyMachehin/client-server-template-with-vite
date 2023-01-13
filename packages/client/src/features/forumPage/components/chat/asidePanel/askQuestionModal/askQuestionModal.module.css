@@ -9,3 +9,8 @@
 .askQuestionAvatar {
   background-color: var(--nextLevelButton) !important;
 }
+
+.title {
+  display: flex;
+  align-items: center;
+}

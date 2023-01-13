@@ -22,12 +22,11 @@ export default function MessageDashboard(props: IMessageDashboardProps) {
   };
 
   const functions = useContext(chatPanelContext);
-  console.log(functions);
+
   return (
     <div>
       <IconButton
         className={classes.button}
-        id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
@@ -36,7 +35,6 @@ export default function MessageDashboard(props: IMessageDashboardProps) {
       </IconButton>
 
       <Menu
-        id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}

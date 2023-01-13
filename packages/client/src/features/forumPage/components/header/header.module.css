@@ -22,3 +22,24 @@
 .search {
   background-color: var(--forumPageHeader);
 }
+
+.searchInputWrapper {
+  position: relative;
+  background-color: white;
+  margin-left: 8px;
+  min-width: 290px;
+}
+
+.searchInput {
+  color: inherit;
+  width: 100%;
+}
+
+.searchInputIconWrapper {
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

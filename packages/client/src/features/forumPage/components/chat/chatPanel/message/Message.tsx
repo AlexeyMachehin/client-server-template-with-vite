@@ -8,7 +8,6 @@ import classes from './message.module.css';
 
 interface IMessageProps {
   message: IMessage;
-
   answerMessage?: null | JSX.Element;
 }
 

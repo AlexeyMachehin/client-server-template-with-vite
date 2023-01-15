@@ -17,7 +17,7 @@ export default function ForumPage() {
         setFoundQuestions={setFoundQuestions}
         setIsChatOpen={setIsChatOpen}
         setCurrentMainTheme={setCurrentMainTheme}
-       
+        currentMainTheme={currentMainTheme}
       />
       {isChatOpen ? (
         <Chat

@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AskQuestionModal from './askQuestionModal/AskQuestionModal';
-import { forumState } from '../../../mockData';
+import { forumState } from '../../../../mockData/forumState';
 import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
 import classes from './asidePanel.module.css';
 
@@ -25,8 +25,6 @@ const SELECTED_QUESTION_COLOR = '#4caf4f2f';
 const DEFAULT_ASIDE_PANEL_WIDTH = 310;
 
 export default function AsidePanel(props: IAsidePanelProps) {
-  // console.log(props.currentMainTheme);
-  console.log(props.foundQuestions);
   const [asidePanelWidth, setAsidePanelWidth] = useState<number>(
     DEFAULT_ASIDE_PANEL_WIDTH
   );
@@ -114,7 +112,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
             ? renderAsidePanelItems(props.foundQuestions)
             : props.currentMainTheme
             ? renderAsidePanelItems(
-                forumState.mainThemes[props.currentMainTheme]
+                forumState.forumState[props.currentMainTheme]
               )
             : null}
         </div>

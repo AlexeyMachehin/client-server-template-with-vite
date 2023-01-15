@@ -1,18 +1,12 @@
-export const forumState = {
-  myProfile: {
-    id: 123123,
-    isMyMessage: true,
-    name: 'Andrey',
-    time: new Date(),
-    avatarURL:
-      'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
-  },
-  mainThemes: {
+import { IForumState } from '../../service/types/forumPage/IForumState';
+
+export const forumState: IForumState = {
+  forumState: {
     discussionOfGameMoments: [
       {
         id: 1,
         name: 'Danil',
-        title: 'discussionOfGameMoment 1',
+        title: 'discussionOfGameMoment 1M',
         time: '2020-01-02T14:22:22.000Z',
         content: 'this is message content',
         avatarURL:
@@ -83,7 +77,7 @@ export const forumState = {
       {
         id: 2,
         name: 'Danil',
-        title: 'discussionOfGameMoment 2',
+        title: 'discussionOfGameMoment 2F',
         time: '2020-01-02T14:22:22.000Z',
         content: 'this is message content',
         avatarURL:

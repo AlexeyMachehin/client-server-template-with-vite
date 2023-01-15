@@ -6,10 +6,12 @@ import SendIcon from '@mui/icons-material/Send';
 import Message from './message/Message';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
 import { IMessage } from '../../../../../service/types/forumPage/IMessage';
 import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
-import { forumState } from '../../../mockData';
+import { forumState } from '../../../../mockData/forumState';
 import classes from './chatPanel.module.css';
+import { myProfile } from '../../../../mockData/myProfile';
 
 interface IChatPanelProps {
   selectedQuestion: null | IQuestion;
@@ -75,28 +77,18 @@ export default function ChatPanel(props: IChatPanelProps) {
               {props.selectedQuestion.title}
             </div>
           ) : (
-            <div className={classes.mainTitle}>
+            <Typography className={classes.mainTitle}>
               <WestIcon className={classes.mainTitleIcon} /> Choose or ask a
               question
-            </div>
+            </Typography>
           )}
         </div>
 
         <div ref={messagesPanel} className={classes.chatPanelMain}>
-          {
-            props.selectedQuestion &&
-              props.selectedQuestion.messages.map((message: IMessage) => (
-                <Message key={message.id} message={message} />
-              ))
-
-            // forumState.mainThemes[props.currentMainTheme].map(theme => {
-            //   if (props.selectedQuestion?.id === theme.id) {
-            //     return theme.messages.map((message: IMessage) => (
-            //       <Message key={message.id} message={message} />
-            //     ));
-            //   }
-            // })
-          }
+          {props.selectedQuestion &&
+            props.selectedQuestion.messages.map((message: IMessage) => (
+              <Message key={message.id} message={message} />
+            ))}
 
           {/* test answer */}
           {answerMessageComponent}
@@ -121,7 +113,6 @@ export default function ChatPanel(props: IChatPanelProps) {
               value={inputFooterValue}
               onChange={event => {
                 setInputFooterValue(event.target.value);
-                // console.log(inputFooterValue);
               }}
               label="message"
               multiline
@@ -131,19 +122,17 @@ export default function ChatPanel(props: IChatPanelProps) {
               className={classes.sendButton}
               component="button"
               onClick={() => {
-                // console.log(inputFooterValue);
-
                 closeAnswerMessageBox();
                 setInputFooterValue('');
                 setAnswerMessageComponent(
                   <Message
                     message={{
-                      name: forumState.myProfile.name,
-                      id: forumState.myProfile.id,
-                      isMyMessage: forumState.myProfile.isMyMessage,
-                      time: forumState.myProfile.time.toDateString(),
+                      name: myProfile.name,
+                      id: myProfile.id,
+                      isMyMessage: true,
+                      time: new Date().toDateString(),
                       message: inputFooterValue,
-                      avatarURL: forumState.myProfile.avatarURL,
+                      avatarURL: myProfile.avatarURL,
                     }}
                     answerMessage={answerMessage}
                   />

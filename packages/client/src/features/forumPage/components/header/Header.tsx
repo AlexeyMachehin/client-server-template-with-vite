@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { forumState } from '../../mockData';
+import Typography from '@mui/material/Typography';
+import { forumState } from '../../../mockData/forumState';
 import classes from './header.module.css';
 
 const Search = styled('div')(({ theme }) => ({
@@ -21,6 +22,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface IHeaderProps {
+  currentMainTheme:
+    | 'discussionOfGameMoments'
+    | 'technicalIssues'
+    | 'errorQuestions'
+    | null;
   setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setFoundQuestions: React.Dispatch<React.SetStateAction<null>>;
   setCurrentMainTheme: React.Dispatch<
@@ -49,12 +55,12 @@ export default function Header(props: IHeaderProps) {
 
   const handleOnChangeInput = () => {
     const searchInputValue = searchInput.current?.value as string;
-    searchQuestion(searchInputValue, forumState.mainThemes);
+    searchQuestion(searchInputValue, forumState.forumState);
     if (searchInputValue.length > 0) {
       props.setIsChatOpen(true);
     } else {
       props.setFoundQuestions(null);
-      props.setIsChatOpen(false);
+      props.currentMainTheme ? null : props.setIsChatOpen(false);
     }
   };
 
@@ -74,7 +80,9 @@ export default function Header(props: IHeaderProps) {
         />
       </Search>
       <div className={classes.titleWrapper}>
-        <h2 className={classes.headerTitle}>Forum</h2>
+        <Typography variant="h6" className={classes.headerTitle}>
+          Forum
+        </Typography>
       </div>
     </div>
   );

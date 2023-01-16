@@ -1,7 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap'); */
-
 .forumPageWrapper {
-  /* font-family: 'Orbitron', sans-serif ; */
   width: 100%;
   height: 100vh;
   background-color: var(--forumPageBackground);

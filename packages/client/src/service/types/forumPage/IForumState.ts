@@ -1,5 +1,4 @@
 import { IQuestion } from './IQuestion';
-
 export interface IForumState {
   forumState: {
     discussionOfGameMoments: IQuestion[] | [];

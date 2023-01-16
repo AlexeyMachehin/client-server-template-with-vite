@@ -14,7 +14,7 @@ const style = {
   bgcolor: 'background.paper',
 };
 
-interface MainListProps {
+interface IMainListProps {
   setFoundQuestions: React.Dispatch<React.SetStateAction<null>>;
   setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentMainTheme: React.Dispatch<
@@ -24,7 +24,7 @@ interface MainListProps {
   >;
 }
 
-export default function MainList(props: MainListProps) {
+export default function MainList(props: IMainListProps) {
   return (
     <List sx={style} component="nav" aria-label="mailbox folders">
       <ListItem

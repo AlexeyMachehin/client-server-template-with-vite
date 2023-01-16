@@ -14,7 +14,7 @@
   /* forum page colors */
   --forumPageBackground: white;
   --forumPageHeader: black;
-  --asidePanelBorder: rgba(128, 128, 128, 0.212);
+  --asidePanelBorder: 1px solid rgba(128, 128, 128, 0.212);
   --forumPageShadow: inset 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
   --closeIcon: #1976d2;
   --myMessageColor: #2e94fa11;

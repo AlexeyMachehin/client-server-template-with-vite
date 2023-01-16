@@ -1,14 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { chatPanelContext } from '../ChatPanel';
 import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
 import classes from './messageDashboard.module.css';
 
 interface IMessageDashboardProps {
+  setAnswerMessage: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
   message: IMessage;
+  createAnswerTemplate: (message: IMessage) => JSX.Element;
 }
 
 export default function MessageDashboard(props: IMessageDashboardProps) {
@@ -20,8 +21,6 @@ export default function MessageDashboard(props: IMessageDashboardProps) {
   const handleClose = (): void => {
     setAnchorEl(null);
   };
-
-  const functions = useContext(chatPanelContext);
 
   return (
     <div>
@@ -44,9 +43,7 @@ export default function MessageDashboard(props: IMessageDashboardProps) {
         <MenuItem
           onClick={() => {
             handleClose();
-            functions?.setAnswerMessage(
-              functions.createAnswerTemplate(props.message)
-            );
+            props.setAnswerMessage(props.createAnswerTemplate(props.message));
           }}>
           To answer
         </MenuItem>

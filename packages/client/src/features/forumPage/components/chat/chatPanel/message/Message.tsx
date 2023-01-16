@@ -7,6 +7,8 @@ import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
 import classes from './message.module.css';
 
 interface IMessageProps {
+  setAnswerMessage: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
+  createAnswerTemplate: (message: IMessage) => JSX.Element;
   message: IMessage;
   answerMessage?: null | JSX.Element;
 }
@@ -38,7 +40,11 @@ export default function Message(props: IMessageProps) {
               secondary={new Date(props.message.time).toDateString()}
             />
           </div>
-          <MessageDashboard message={props.message} />
+          <MessageDashboard
+            setAnswerMessage={props.setAnswerMessage}
+            createAnswerTemplate={props.createAnswerTemplate}
+            message={props.message}
+          />
         </div>
         {props.answerMessage}
         <ListItemText

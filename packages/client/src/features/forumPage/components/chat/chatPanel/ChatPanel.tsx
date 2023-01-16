@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import WestIcon from '@mui/icons-material/West';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -20,11 +20,6 @@ interface IChatPanelProps {
     | 'errorQuestions'
     | null;
 }
-
-export const chatPanelContext = React.createContext<{
-  setAnswerMessage: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
-  createAnswerTemplate: (message: IMessage) => JSX.Element;
-} | null>(null);
 
 export default function ChatPanel(props: IChatPanelProps) {
   const [inputFooterValue, setInputFooterValue] = useState<string>('');
@@ -64,11 +59,7 @@ export default function ChatPanel(props: IChatPanelProps) {
   };
 
   return (
-    <chatPanelContext.Provider
-      value={{
-        setAnswerMessage: setAnswerMessage,
-        createAnswerTemplate: createAnswerTemplate,
-      }}>
+    <>
       <div className={classes.chatPanel}>
         <div className={classes.chatPanelHeader}>
           {props.selectedQuestion ? (
@@ -86,7 +77,12 @@ export default function ChatPanel(props: IChatPanelProps) {
         <div ref={messagesPanel} className={classes.chatPanelMain}>
           {props.selectedQuestion &&
             props.selectedQuestion.messages.map((message: IMessage) => (
-              <Message key={message.id} message={message} />
+              <Message
+                setAnswerMessage={setAnswerMessage}
+                createAnswerTemplate={createAnswerTemplate}
+                key={message.id}
+                message={message}
+              />
             ))}
 
           {/* test answer */}
@@ -133,7 +129,9 @@ export default function ChatPanel(props: IChatPanelProps) {
                       message: inputFooterValue,
                       avatarURL: myProfile.avatarURL,
                     }}
+                    setAnswerMessage={setAnswerMessage}
                     answerMessage={answerMessage}
+                    createAnswerTemplate={createAnswerTemplate}
                   />
                 );
               }}
@@ -144,6 +142,6 @@ export default function ChatPanel(props: IChatPanelProps) {
           </div>
         </div>
       </div>
-    </chatPanelContext.Provider>
+    </>
   );
 }

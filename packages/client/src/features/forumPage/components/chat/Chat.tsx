@@ -4,7 +4,7 @@ import ChatPanel from './chatPanel/ChatPanel';
 import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 import classes from './chat.module.css';
 
-export default function Chat(props: {
+interface IChatProps {
   setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   foundQuestions: IQuestion[] | null;
   currentMainTheme:
@@ -12,12 +12,12 @@ export default function Chat(props: {
     | 'technicalIssues'
     | 'errorQuestions'
     | null;
-}) {
-  const [selectedItemId, setSelectedItemId] = useState<number>(0);
+}
+
+export default function Chat(props: IChatProps) {
   const [selectedQuestion, setItem] = useState<null | IQuestion>(null);
 
   const handleSelectedQuestion = (selectedQuestion: IQuestion): void => {
-    setSelectedItemId(selectedQuestion.id);
     setItem(selectedQuestion);
   };
 
@@ -28,7 +28,6 @@ export default function Chat(props: {
         foundQuestions={props.foundQuestions}
         currentMainTheme={props.currentMainTheme}
         handleSelectedQuestion={handleSelectedQuestion}
-        selectedItemId={selectedItemId}
         selectedQuestion={selectedQuestion}
       />
       <ChatPanel

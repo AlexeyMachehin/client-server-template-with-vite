@@ -41,7 +41,6 @@ export default function Header(props: IHeaderProps) {
   const searchInput = useRef<null | JSX.IntrinsicElements['input']>(null);
 
   useEffect(() => {
-    console.log(window.location.pathname);
     if (window.location.pathname === '/forum/mainList') {
       props.setIsChatOpen(false);
       if (searchInput.current) {

@@ -34,7 +34,7 @@ export default function ChatPanel(props: IChatPanelProps) {
     if (messagesPanel.current) {
       messagesPanel.current.scrollTo(0, messagesPanel.current.scrollHeight);
     }
-  }, []);
+  }, [props.selectedQuestion]);
 
   const createAnswerTemplate = (message: IMessage): JSX.Element => {
     return (

@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import { forumState } from '../../../mockData/forumState';
+import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 import classes from './header.module.css';
 
 const Search = styled('div')(({ theme }) => ({
@@ -39,10 +40,21 @@ interface IHeaderProps {
 export default function Header(props: IHeaderProps) {
   const searchInput = useRef<null | JSX.IntrinsicElements['input']>(null);
 
+  useEffect(() => {
+    console.log(window.location.pathname);
+    if (window.location.pathname === '/forum/mainList') {
+      props.setIsChatOpen(false);
+      if (searchInput.current) {
+        props.setCurrentMainTheme(null);
+        searchInput.current.value = '';
+      }
+    }
+  }, [window.location.pathname]);
+
   const searchQuestion = (inputValue: string, mainThemes: any) => {
     for (const mainTheme in mainThemes) {
-      const foundQuestionsArray: any = [];
-      mainThemes[mainTheme].forEach((question: any) => {
+      const foundQuestionsArray: IQuestion[] | [] = [];
+      mainThemes[mainTheme].forEach((question: IQuestion) => {
         const regExp = new RegExp(`${inputValue.toLowerCase()}`);
         const value = question.title.toLowerCase();
         if (regExp.test(value)) {

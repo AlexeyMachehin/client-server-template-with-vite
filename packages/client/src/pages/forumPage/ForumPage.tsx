@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, Route, Routes } from 'react-router-dom';
 import Chat from '../../features/forumPage/components/chat/Chat';
 import Header from '../../features/forumPage/components/header/Header';
 import MainList from '../../features/forumPage/components/mainList/MainList';
@@ -11,6 +12,16 @@ export default function ForumPage() {
   >(null);
   const [foundQuestions, setFoundQuestions] = useState(null);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    isChatOpen
+      ? currentMainTheme
+        ? navigate(`${currentMainTheme?.toString()}`)
+        : navigate('chat')
+      : navigate('mainList');
+  }, [isChatOpen]);
+
   return (
     <div className={classes.forumPageWrapper}>
       <Header
@@ -19,18 +30,29 @@ export default function ForumPage() {
         setCurrentMainTheme={setCurrentMainTheme}
         currentMainTheme={currentMainTheme}
       />
-      {isChatOpen ? (
-        <Chat
-          foundQuestions={foundQuestions}
-          currentMainTheme={currentMainTheme}
+
+      <Routes>
+        <Route
+          path={currentMainTheme ? `${currentMainTheme?.toString()}` : 'chat'}
+          element={
+            <Chat
+              setIsChatOpen={setIsChatOpen}
+              foundQuestions={foundQuestions}
+              currentMainTheme={currentMainTheme}
+            />
+          }
         />
-      ) : (
-        <MainList
-          setIsChatOpen={setIsChatOpen}
-          setCurrentMainTheme={setCurrentMainTheme}
-          setFoundQuestions={setFoundQuestions}
+        <Route
+          path="mainList"
+          element={
+            <MainList
+              setIsChatOpen={setIsChatOpen}
+              setCurrentMainTheme={setCurrentMainTheme}
+              setFoundQuestions={setFoundQuestions}
+            />
+          }
         />
-      )}
+      </Routes>
     </div>
   );
 }

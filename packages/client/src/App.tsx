@@ -3,7 +3,6 @@ import ForumPage from './pages/forumPage/ForumPage';
 import StartPage from './pages/startPage/StartPage';
 import '@fontsource/orbitron';
 import './styles/App.css';
-import Chat from './features/forumPage/components/chat/Chat';
 
 function App() {
   return (
@@ -11,8 +10,7 @@ function App() {
       <div id="App" className="App">
         <Routes>
           <Route path="/" element={<StartPage />} />
-          <Route path="/forum" element={<ForumPage />}>
-          </Route>
+          <Route path="forum/*" element={<ForumPage />} />
         </Routes>
       </div>
     </BrowserRouter>

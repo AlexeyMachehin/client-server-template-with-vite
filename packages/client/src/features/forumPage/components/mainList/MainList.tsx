@@ -14,22 +14,24 @@ const style = {
   bgcolor: 'background.paper',
 };
 
-export default function MainList(props: {
+interface MainListProps {
   setFoundQuestions: React.Dispatch<React.SetStateAction<null>>;
   setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentMainTheme: React.Dispatch<
     React.SetStateAction<
-      'discussionOfGameMoments' | 'technicalIssues' | 'errorQuestions'| null
+      'discussionOfGameMoments' | 'technicalIssues' | 'errorQuestions' | null
     >
   >;
-}) {
+}
+
+export default function MainList(props: MainListProps) {
   return (
     <List sx={style} component="nav" aria-label="mailbox folders">
       <ListItem
         onClick={() => {
           props.setFoundQuestions(null);
-          props.setIsChatOpen(true);
           props.setCurrentMainTheme('discussionOfGameMoments');
+          props.setIsChatOpen(true);
         }}
         button>
         <ListItemAvatar>
@@ -43,8 +45,8 @@ export default function MainList(props: {
       <ListItem
         onClick={() => {
           props.setFoundQuestions(null);
-          props.setIsChatOpen(true);
           props.setCurrentMainTheme('technicalIssues');
+          props.setIsChatOpen(true);
         }}
         button
         divider>
@@ -58,8 +60,8 @@ export default function MainList(props: {
       <ListItem
         onClick={() => {
           props.setFoundQuestions(null);
-          props.setIsChatOpen(true);
           props.setCurrentMainTheme('errorQuestions');
+          props.setIsChatOpen(true);
         }}
         button>
         <ListItemAvatar>

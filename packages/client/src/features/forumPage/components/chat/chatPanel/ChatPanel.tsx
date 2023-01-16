@@ -9,9 +9,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { IMessage } from '../../../../../service/types/forumPage/IMessage';
 import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
-import { forumState } from '../../../../mockData/forumState';
-import classes from './chatPanel.module.css';
 import { myProfile } from '../../../../mockData/myProfile';
+import classes from './chatPanel.module.css';
 
 interface IChatPanelProps {
   selectedQuestion: null | IQuestion;

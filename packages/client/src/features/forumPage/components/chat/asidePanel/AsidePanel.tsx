@@ -11,9 +11,9 @@ import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
 import classes from './asidePanel.module.css';
 
 interface IAsidePanelProps {
-  selectedItemId: number;
+  setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selectedQuestion: IQuestion | null;
-  foundQuestions: any;
+  foundQuestions: IQuestion[] | null;
   handleSelectedQuestion: (selectedQuestion: IQuestion) => void;
   currentMainTheme:
     | 'discussionOfGameMoments'
@@ -21,6 +21,7 @@ interface IAsidePanelProps {
     | 'errorQuestions'
     | null;
 }
+
 const SELECTED_QUESTION_COLOR = '#4caf4f2f';
 const DEFAULT_ASIDE_PANEL_WIDTH = 310;
 
@@ -80,9 +81,9 @@ export default function AsidePanel(props: IAsidePanelProps) {
     bgcolor: 'background.paper',
   };
 
-  const renderAsidePanelItems = (arrayOfItems: any) => {
+  const renderAsidePanelItems = (arrayOfItems: IQuestion[]) => {
     return arrayOfItems
-      .sort((a: any, b: any) => a.title.localeCompare(b.title))
+      .sort((a: IQuestion, b: IQuestion) => a.title.localeCompare(b.title))
       .map((question: IQuestion) => (
         <AsidePanelItem
           isWideAsidePanel={isWideAsidePanel}
@@ -118,7 +119,14 @@ export default function AsidePanel(props: IAsidePanelProps) {
         </div>
 
         <div className={classes.asidePanelFooter}>
-          <Link href="#">Go back</Link>
+          <Link
+            className={classes.goBackLink}
+            onClick={() => {
+              props.setIsChatOpen(false);
+            }}>
+            Go back to main list
+          </Link>
+
           <Button
             onClick={() => {
               handleWidth();

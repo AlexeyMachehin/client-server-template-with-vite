@@ -4,7 +4,7 @@ export const forumState: IForumState = {
   forumState: {
     discussionOfGameMoments: [
       {
-        id: 1,
+        id: 100500,
         name: 'Danil',
         title: 'discussionOfGameMoment 1M',
         time: '2020-01-02T14:22:22.000Z',

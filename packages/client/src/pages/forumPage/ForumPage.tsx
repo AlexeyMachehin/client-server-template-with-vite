@@ -44,7 +44,7 @@ export default function ForumPage() {
         /> */}
 
         <Route
-          path=":mainTheme/:questionTitle"
+          path=":mainTheme/:questionId"
           element={
             <Chat
               setFoundQuestions={setFoundQuestions}

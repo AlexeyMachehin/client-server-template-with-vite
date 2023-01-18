@@ -15,10 +15,10 @@ interface IChatProps {
 }
 
 export default function Chat(props: IChatProps) {
-  const [selectedQuestion, setItem] = useState<null | IQuestion>(null);
+  const [selectedQuestion, setSelectedQuestion] = useState<null | IQuestion>(null);
 
   const handleSelectedQuestion = (selectedQuestion: IQuestion): void => {
-    setItem(selectedQuestion);
+    setSelectedQuestion(selectedQuestion);
   };
 
   return (

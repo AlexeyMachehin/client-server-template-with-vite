@@ -8,8 +8,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AskQuestionModal from './askQuestionModal/AskQuestionModal';
 import { forumState } from '../../../../mockData/forumState';
 import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
-import classes from './asidePanel.module.css';
+import { IForumState } from '../../../../../service/types/forumPage/IForumState';
 import { useNavigate, useParams } from 'react-router-dom';
+import classes from './asidePanel.module.css';
 
 interface IAsidePanelProps {
   setFoundQuestions: React.Dispatch<React.SetStateAction<IQuestion[] | null>>
@@ -40,7 +41,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
 
   const urlParams = useParams();
 
-  console.log(urlParams.questionTitle);
+  console.log(urlParams.questionId);
 
   const handleButtonProperties = () => {
     if (isWideAsidePanel === true) {
@@ -119,17 +120,16 @@ export default function AsidePanel(props: IAsidePanelProps) {
   //   }
   //   return foundQuestionsArray;
   // };
-  const searchByURLTitle = (title: string, mainThemes: any) => {
+  const searchByURLId = (id: string, mainThemes: any) => {
     const foundQuestionsArray: IQuestion[]  = [];
     for (const mainTheme in mainThemes) {
       mainThemes[mainTheme].forEach((question: IQuestion) => {
-        const regExp = new RegExp(`${title.toLowerCase()}`);
-        const value = question.title.toLowerCase();
-        if (regExp.test(value)) {
+        if (id === question.id.toString()) {
           foundQuestionsArray.push(question);
         }
       });
     }
+    console.log(foundQuestionsArray)
     return foundQuestionsArray;
   };
 
@@ -143,7 +143,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
         <AskQuestionModal currentMainTheme={props.currentMainTheme} />
 
         <div className={classes.questionsList}>
-{urlParams.questionTitle ? renderAsidePanelItems(searchByURLTitle(urlParams.questionTitle, forumState.forumState)) : props.foundQuestions ? renderAsidePanelItems(props.foundQuestions) : props.currentMainTheme ? renderAsidePanelItems(forumState.forumState[props.currentMainTheme]) : null}
+{urlParams.questionId ? renderAsidePanelItems(searchByURLId(urlParams.questionId, forumState.forumState)) : props.foundQuestions ? renderAsidePanelItems(props.foundQuestions) : props.currentMainTheme ? renderAsidePanelItems(forumState.forumState[props.currentMainTheme]) : null}
           {/* {urlParams.questionTitle && renderAsidePanelItems(searchByURLTitle(urlParams.questionTitle, forumState.forumState))} */}
 
           {/* {

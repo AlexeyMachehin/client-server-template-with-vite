@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import {useParams} from "react-router-dom"
 import AsidePanel from './asidePanel/AsidePanel';
 import ChatPanel from './chatPanel/ChatPanel';
 import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 import classes from './chat.module.css';
 
 interface IChatProps {
- 
-  foundQuestions: IQuestion[] | null ;
+  setFoundQuestions: React.Dispatch<React.SetStateAction<IQuestion[] | null>>;
+  foundQuestions: IQuestion[] | null;
   currentMainTheme:
     | 'discussionOfGameMoments'
     | 'technicalIssues'
@@ -17,15 +16,15 @@ interface IChatProps {
 
 export default function Chat(props: IChatProps) {
   const [selectedQuestion, setItem] = useState<null | IQuestion>(null);
- 
+
   const handleSelectedQuestion = (selectedQuestion: IQuestion): void => {
     setItem(selectedQuestion);
   };
- 
+
   return (
     <div className={classes.chatWrapper}>
       <AsidePanel
-       
+        setFoundQuestions={props.setFoundQuestions}
         foundQuestions={props.foundQuestions}
         currentMainTheme={props.currentMainTheme}
         handleSelectedQuestion={handleSelectedQuestion}

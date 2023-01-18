@@ -12,6 +12,7 @@ import classes from './asidePanel.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 
 interface IAsidePanelProps {
+  setFoundQuestions: React.Dispatch<React.SetStateAction<IQuestion[] | null>>
   selectedQuestion: IQuestion | null;
   foundQuestions: IQuestion[] | null;
   handleSelectedQuestion: (selectedQuestion: IQuestion) => void;
@@ -105,8 +106,21 @@ export default function AsidePanel(props: IAsidePanelProps) {
       ));
   };
 
+  // const searchByURLTitle = (title: string, mainThemes: any) => {
+  //   const foundQuestionsArray: IQuestion[]  = [];
+  //   for (const mainTheme in mainThemes) {
+  //     mainThemes[mainTheme].forEach((question: IQuestion) => {
+  //       const regExp = new RegExp(`${title.toLowerCase()}`);
+  //       const value = question.title.toLowerCase();
+  //       if (regExp.test(value)) {
+  //         foundQuestionsArray.push(question);
+  //       }
+  //     });
+  //   }
+  //   return foundQuestionsArray;
+  // };
   const searchByURLTitle = (title: string, mainThemes: any) => {
-    const foundQuestionsArray: IQuestion[] | [] = [];
+    const foundQuestionsArray: IQuestion[]  = [];
     for (const mainTheme in mainThemes) {
       mainThemes[mainTheme].forEach((question: IQuestion) => {
         const regExp = new RegExp(`${title.toLowerCase()}`);
@@ -129,14 +143,13 @@ export default function AsidePanel(props: IAsidePanelProps) {
         <AskQuestionModal currentMainTheme={props.currentMainTheme} />
 
         <div className={classes.questionsList}>
-          {urlParams.questionTitle &&
-            renderAsidePanelItems(
-              searchByURLTitle(urlParams.questionTitle, forumState.forumState)
-            )}
+{urlParams.questionTitle ? renderAsidePanelItems(searchByURLTitle(urlParams.questionTitle, forumState.forumState)) : props.foundQuestions ? renderAsidePanelItems(props.foundQuestions) : props.currentMainTheme ? renderAsidePanelItems(forumState.forumState[props.currentMainTheme]) : null}
+          {/* {urlParams.questionTitle && renderAsidePanelItems(searchByURLTitle(urlParams.questionTitle, forumState.forumState))} */}
 
           {/* {
           props.foundQuestions ? renderAsidePanelItems(props.foundQuestions) : props.currentMainTheme ? renderAsidePanelItems(forumState.forumState[props.currentMainTheme]) : null
         } */}
+
         </div>
 
         <div className={classes.asidePanelFooter}>

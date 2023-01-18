@@ -9,6 +9,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import { CURRENT_MAIN_THEME } from '../../../../service/types/forumPage/currentMainTheme';
 import { useNavigate } from 'react-router-dom';
+import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 
 const style = {
   width: '100%',
@@ -16,7 +17,7 @@ const style = {
 };
 
 interface IMainListProps {
-  setFoundQuestions: React.Dispatch<React.SetStateAction<null>>;
+  setFoundQuestions: React.Dispatch<React.SetStateAction<IQuestion[] | null>>;
   // setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentMainTheme: React.Dispatch<
     React.SetStateAction<

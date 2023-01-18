@@ -3,6 +3,7 @@ import { useNavigate, Route, Routes, useParams } from 'react-router-dom';
 import Chat from '../../features/forumPage/components/chat/Chat';
 import Header from '../../features/forumPage/components/header/Header';
 import MainList from '../../features/forumPage/components/mainList/MainList';
+import { IQuestion } from '../../service/types/forumPage/IQuestion';
 import classes from './forumPage.module.css';
 
 export default function ForumPage() {
@@ -10,9 +11,9 @@ export default function ForumPage() {
   const [currentMainTheme, setCurrentMainTheme] = useState<
     'discussionOfGameMoments' | 'technicalIssues' | 'errorQuestions' | null
   >(null);
-  const [foundQuestions, setFoundQuestions] = useState(null);
-
-   
+  const [foundQuestions, setFoundQuestions] = useState<IQuestion[] | null>(
+    null
+  );
 
   // useEffect(() => {
   //   isChatOpen
@@ -44,13 +45,20 @@ export default function ForumPage() {
 
         <Route
           path=":mainTheme/:questionTitle"
-          element={<Chat foundQuestions={null} currentMainTheme={null} />}
+          element={
+            <Chat
+              setFoundQuestions={setFoundQuestions}
+              foundQuestions={null}
+              currentMainTheme={null}
+            />
+          }
         />
 
         <Route
           path="/discussionOfGameMoments"
           element={
             <Chat
+              setFoundQuestions={setFoundQuestions}
               foundQuestions={foundQuestions}
               currentMainTheme={'discussionOfGameMoments'}
             />
@@ -60,6 +68,7 @@ export default function ForumPage() {
           path="/technicalIssues"
           element={
             <Chat
+              setFoundQuestions={setFoundQuestions}
               foundQuestions={foundQuestions}
               currentMainTheme={'technicalIssues'}
             />
@@ -69,6 +78,7 @@ export default function ForumPage() {
           path="/errorQuestions"
           element={
             <Chat
+              setFoundQuestions={setFoundQuestions}
               foundQuestions={foundQuestions}
               currentMainTheme={'errorQuestions'}
             />
@@ -79,6 +89,7 @@ export default function ForumPage() {
           path="foundQuestions"
           element={
             <Chat
+              setFoundQuestions={setFoundQuestions}
               foundQuestions={foundQuestions}
               currentMainTheme={currentMainTheme}
             />

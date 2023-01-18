@@ -30,7 +30,7 @@ interface IHeaderProps {
     | 'errorQuestions'
     | null;
 
-  setFoundQuestions: React.Dispatch<React.SetStateAction<null>>;
+  setFoundQuestions: React.Dispatch<React.SetStateAction<IQuestion[] | null>>;
   setCurrentMainTheme: React.Dispatch<
     React.SetStateAction<
       'discussionOfGameMoments' | 'technicalIssues' | 'errorQuestions' | null
@@ -73,9 +73,9 @@ export default function Header(props: IHeaderProps) {
     }
   }, [window.location.pathname]);
 
-  const searchQuestion = (inputValue: string, mainThemes: any ) => {
+  const searchQuestion = (inputValue: string, mainThemes: any) => {
     for (const mainTheme in mainThemes) {
-      const foundQuestionsArray: IQuestion[] | [] = [];
+      const foundQuestionsArray: IQuestion[] = [];
       mainThemes[mainTheme].forEach((question: IQuestion) => {
         const regExp = new RegExp(`${inputValue.toLowerCase()}`);
         const value = question.title.toLowerCase();
@@ -105,12 +105,12 @@ export default function Header(props: IHeaderProps) {
 
   const handleOnChangeInput = () => {
     const searchInputValue = searchInput.current?.value as string;
-    // searchQuestion(searchInputValue, forumState.forumState);
-    searchQuestion(
-      searchInputValue,
-      forumState.forumState,
-      props.setFoundQuestions
-    );
+    searchQuestion(searchInputValue, forumState.forumState);
+    // searchQuestion(
+    //   searchInputValue,
+    //   forumState.forumState,
+    //   props.setFoundQuestions
+    // );
     if (searchInputValue.length > 0) {
       //
       // props.setFoundQuestions(foundQuestionsArray);
@@ -119,7 +119,7 @@ export default function Header(props: IHeaderProps) {
     } else {
       props.setFoundQuestions(null);
       props.currentMainTheme
-        ? navigate(`mainList/${props.currentMainTheme?.toString()}`)
+        ? navigate(`${props.currentMainTheme?.toString()}`)
         : navigate('mainList');
     }
   };

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { forumState } from '../../../mockData/forumState';
 import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 import classes from './header.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -28,7 +29,7 @@ interface IHeaderProps {
     | 'technicalIssues'
     | 'errorQuestions'
     | null;
-  setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
+
   setFoundQuestions: React.Dispatch<React.SetStateAction<null>>;
   setCurrentMainTheme: React.Dispatch<
     React.SetStateAction<
@@ -37,12 +38,34 @@ interface IHeaderProps {
   >;
 }
 
+// export const searchQuestion = (
+//   inputValue: any,
+//   mainThemes: any,
+//   callback?: any
+// ) => {
+//   const foundQuestionsArray: IQuestion[] = [];
+//   for (const mainTheme in mainThemes) {
+//     mainThemes[mainTheme].forEach((question: IQuestion) => {
+//       const regExp = new RegExp(`${inputValue.toLowerCase()}`);
+//       const value = question.title.toLowerCase();
+//       if (regExp.test(value)) {
+//         foundQuestionsArray.push(question);
+//       }
+//     });
+//   }
+//   if (callback) {
+//     callback(foundQuestionsArray);
+//   } else {
+//     return foundQuestionsArray;
+//   }
+// };
+
 export default function Header(props: IHeaderProps) {
   const searchInput = useRef<null | JSX.IntrinsicElements['input']>(null);
-
+  const navigate = useNavigate();
+  // console.log(useParams());
   useEffect(() => {
     if (window.location.pathname === '/forum/mainList') {
-      props.setIsChatOpen(false);
       if (searchInput.current) {
         props.setCurrentMainTheme(null);
         searchInput.current.value = '';
@@ -50,7 +73,7 @@ export default function Header(props: IHeaderProps) {
     }
   }, [window.location.pathname]);
 
-  const searchQuestion = (inputValue: string, mainThemes: any) => {
+  const searchQuestion = (inputValue: string, mainThemes: any ) => {
     for (const mainTheme in mainThemes) {
       const foundQuestionsArray: IQuestion[] | [] = [];
       mainThemes[mainTheme].forEach((question: IQuestion) => {
@@ -64,14 +87,40 @@ export default function Header(props: IHeaderProps) {
     }
   };
 
+  // const searchQuestion = (inputValue: string, mainThemes: any) => {
+  //   for (const mainTheme in mainThemes) {
+  //     const foundQuestionsArray: IQuestion[] | [] = [];
+  //     mainThemes[mainTheme].forEach((question: IQuestion) => {
+  //       const regExp = new RegExp(`${inputValue.toLowerCase()}`);
+  //       const value = question.title.toLowerCase();
+  //       if (regExp.test(value)) {
+  //         foundQuestionsArray.push(question);
+  //         return foundQuestionsArray
+  //       }else {
+  //         return []
+  //       }
+  //     });
+  //   }
+  // };
+
   const handleOnChangeInput = () => {
     const searchInputValue = searchInput.current?.value as string;
-    searchQuestion(searchInputValue, forumState.forumState);
+    // searchQuestion(searchInputValue, forumState.forumState);
+    searchQuestion(
+      searchInputValue,
+      forumState.forumState,
+      props.setFoundQuestions
+    );
     if (searchInputValue.length > 0) {
-      props.setIsChatOpen(true);
+      //
+      // props.setFoundQuestions(foundQuestionsArray);
+      //
+      navigate('foundQuestions');
     } else {
       props.setFoundQuestions(null);
-      props.currentMainTheme ? null : props.setIsChatOpen(false);
+      props.currentMainTheme
+        ? navigate(`mainList/${props.currentMainTheme?.toString()}`)
+        : navigate('mainList');
     }
   };
 

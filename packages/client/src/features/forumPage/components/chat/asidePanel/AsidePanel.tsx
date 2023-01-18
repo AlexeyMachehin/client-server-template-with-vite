@@ -9,9 +9,9 @@ import AskQuestionModal from './askQuestionModal/AskQuestionModal';
 import { forumState } from '../../../../mockData/forumState';
 import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
 import classes from './asidePanel.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface IAsidePanelProps {
-  setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selectedQuestion: IQuestion | null;
   foundQuestions: IQuestion[] | null;
   handleSelectedQuestion: (selectedQuestion: IQuestion) => void;
@@ -34,6 +34,12 @@ export default function AsidePanel(props: IAsidePanelProps) {
   const [widthButtonArrow, setWidthButtonArrow] = useState<JSX.Element>(
     <ArrowForwardIosIcon />
   );
+
+  const navigate = useNavigate();
+
+  const urlParams = useParams();
+
+  console.log(urlParams.questionTitle);
 
   const handleButtonProperties = () => {
     if (isWideAsidePanel === true) {
@@ -99,6 +105,20 @@ export default function AsidePanel(props: IAsidePanelProps) {
       ));
   };
 
+  const searchByURLTitle = (title: string, mainThemes: any) => {
+    const foundQuestionsArray: IQuestion[] | [] = [];
+    for (const mainTheme in mainThemes) {
+      mainThemes[mainTheme].forEach((question: IQuestion) => {
+        const regExp = new RegExp(`${title.toLowerCase()}`);
+        const value = question.title.toLowerCase();
+        if (regExp.test(value)) {
+          foundQuestionsArray.push(question);
+        }
+      });
+    }
+    return foundQuestionsArray;
+  };
+
   return (
     <div className={classes.asidePanelWrapper}>
       <List
@@ -109,20 +129,21 @@ export default function AsidePanel(props: IAsidePanelProps) {
         <AskQuestionModal currentMainTheme={props.currentMainTheme} />
 
         <div className={classes.questionsList}>
-          {props.foundQuestions
-            ? renderAsidePanelItems(props.foundQuestions)
-            : props.currentMainTheme
-            ? renderAsidePanelItems(
-                forumState.forumState[props.currentMainTheme]
-              )
-            : null}
+          {urlParams.questionTitle &&
+            renderAsidePanelItems(
+              searchByURLTitle(urlParams.questionTitle, forumState.forumState)
+            )}
+
+          {/* {
+          props.foundQuestions ? renderAsidePanelItems(props.foundQuestions) : props.currentMainTheme ? renderAsidePanelItems(forumState.forumState[props.currentMainTheme]) : null
+        } */}
         </div>
 
         <div className={classes.asidePanelFooter}>
           <Link
             className={classes.goBackLink}
             onClick={() => {
-              props.setIsChatOpen(false);
+              navigate('/forum/mainList');
             }}>
             Go back to main list
           </Link>

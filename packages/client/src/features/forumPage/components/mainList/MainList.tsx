@@ -8,6 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ErrorIcon from '@mui/icons-material/Error';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import { CURRENT_MAIN_THEME } from '../../../../service/types/forumPage/currentMainTheme';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   width: '100%',
@@ -16,7 +17,7 @@ const style = {
 
 interface IMainListProps {
   setFoundQuestions: React.Dispatch<React.SetStateAction<null>>;
-  setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentMainTheme: React.Dispatch<
     React.SetStateAction<
       'discussionOfGameMoments' | 'technicalIssues' | 'errorQuestions' | null
@@ -25,13 +26,15 @@ interface IMainListProps {
 }
 
 export default function MainList(props: IMainListProps) {
+  const navigate = useNavigate();
   return (
     <List sx={style} component="nav" aria-label="mailbox folders">
       <ListItem
         onClick={() => {
           props.setFoundQuestions(null);
           props.setCurrentMainTheme('discussionOfGameMoments');
-          props.setIsChatOpen(true);
+          // props.setIsChatOpen(true);
+          navigate('/forum/discussionOfGameMoments')
         }}
         button>
         <ListItemAvatar>
@@ -46,7 +49,8 @@ export default function MainList(props: IMainListProps) {
         onClick={() => {
           props.setFoundQuestions(null);
           props.setCurrentMainTheme('technicalIssues');
-          props.setIsChatOpen(true);
+          // props.setIsChatOpen(true);
+          navigate('/forum/technicalIssues')
         }}
         button
         divider>
@@ -61,7 +65,8 @@ export default function MainList(props: IMainListProps) {
         onClick={() => {
           props.setFoundQuestions(null);
           props.setCurrentMainTheme('errorQuestions');
-          props.setIsChatOpen(true);
+          // props.setIsChatOpen(true);
+          navigate('/forum/errorQuestions')
         }}
         button>
         <ListItemAvatar>

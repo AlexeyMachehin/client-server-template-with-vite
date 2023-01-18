@@ -26,6 +26,7 @@ export default function ForumPage() {
   return (
     <div className={classes.forumPageWrapper}>
       <Header
+        foundQuestions={foundQuestions}
         setFoundQuestions={setFoundQuestions}
         setCurrentMainTheme={setCurrentMainTheme}
         currentMainTheme={currentMainTheme}

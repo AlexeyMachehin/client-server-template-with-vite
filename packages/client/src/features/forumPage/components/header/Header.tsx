@@ -24,6 +24,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface IHeaderProps {
+  foundQuestions: IQuestion[] | null;
   currentMainTheme:
     | 'discussionOfGameMoments'
     | 'technicalIssues'
@@ -63,7 +64,8 @@ interface IHeaderProps {
 export default function Header(props: IHeaderProps) {
   const searchInput = useRef<null | JSX.IntrinsicElements['input']>(null);
   const navigate = useNavigate();
-  // console.log(useParams());
+  const searchInputValuef = searchInput.current?.value as string;
+
   useEffect(() => {
     if (window.location.pathname === '/forum/mainList') {
       if (searchInput.current) {
@@ -71,6 +73,14 @@ export default function Header(props: IHeaderProps) {
         searchInput.current.value = '';
       }
     }
+    if (
+      window.location.pathname === '/forum/foundQuestions' &&
+      props.foundQuestions === null &&
+      props.currentMainTheme === null
+    ) {
+      navigate('mainList');
+    }
+   
   }, [window.location.pathname]);
 
   const searchQuestion = (inputValue: string, mainThemes: any) => {

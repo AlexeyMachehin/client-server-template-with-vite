@@ -3276,13 +3276,6 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-window@^1.8.5":
-  "integrity" "sha512-V9q3CvhC9Jk9bWBOysPGaWy/Z0lxYcTXLtLipkt2cnRj1JOSFNF7wqGpkScSXMgBwC+fnVRg/7shwgddBG5ICw=="
-  "resolved" "https://registry.npmjs.org/@types/react-window/-/react-window-1.8.5.tgz"
-  "version" "1.8.5"
-  dependencies:
-    "@types/react" "*"
-
 "@types/react@*", "@types/react@^17.0.0 || ^18.0.0", "@types/react@^18.0.17":
   "integrity" "sha512-38ETy4tL+rn4uQQi7mB81G7V1g0u2ryquNmsVIOKUAEIDK+3CUjZ6rSRpdvS99dNBnkLFL83qfmtLacGOTIhwQ=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-18.0.17.tgz"

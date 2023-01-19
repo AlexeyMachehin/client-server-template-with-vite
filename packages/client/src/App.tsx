@@ -1,8 +1,7 @@
-import { Route, Routes, BrowserRouter} from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import ForumPage from './pages/forumPage/ForumPage';
 import StartPage from './pages/startPage/StartPage';
 import Chat from './features/forumPage/components/chat/Chat';
-import '@fontsource/orbitron';
 import './styles/App.css';
 
 function App() {

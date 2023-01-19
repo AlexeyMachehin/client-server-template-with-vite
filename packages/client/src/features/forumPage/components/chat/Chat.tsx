@@ -5,6 +5,8 @@ import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 import classes from './chat.module.css';
 
 interface IChatProps {
+  selectedQuestion: IQuestion | null;
+  setSelectedQuestion: any;
   setFoundQuestions: React.Dispatch<React.SetStateAction<IQuestion[] | null>>;
   foundQuestions: IQuestion[] | null;
   currentMainTheme:
@@ -15,25 +17,16 @@ interface IChatProps {
 }
 
 export default function Chat(props: IChatProps) {
-  const [selectedQuestion, setSelectedQuestion] = useState<null | IQuestion>(null);
-
-  const handleSelectedQuestion = (selectedQuestion: IQuestion): void => {
-    setSelectedQuestion(selectedQuestion);
-  };
-
   return (
     <div className={classes.chatWrapper}>
       <AsidePanel
         setFoundQuestions={props.setFoundQuestions}
         foundQuestions={props.foundQuestions}
         currentMainTheme={props.currentMainTheme}
-        handleSelectedQuestion={handleSelectedQuestion}
-        selectedQuestion={selectedQuestion}
+        setSelectedQuestion={props.setSelectedQuestion}
+        selectedQuestion={props.selectedQuestion}
       />
-      <ChatPanel
-        currentMainTheme={props.currentMainTheme}
-        selectedQuestion={selectedQuestion}
-      />
+      <ChatPanel selectedQuestion={props.selectedQuestion} />
     </div>
   );
 }

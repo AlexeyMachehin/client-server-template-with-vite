@@ -1,5 +1,5 @@
 .asidePanelWrapper {
-  height: 100vh
+  height: 100vh;
 }
 
 .asidePanel {
@@ -15,22 +15,4 @@
   overflow-x: hidden;
   flex: 1 1 auto;
   box-shadow: var(--forumPageShadow);
-}
-
-.asidePanelFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 66px;
-  height: 74px;
-  padding: 0 16px;
-}
-
-.changeWidthButton {
-  width: 30px;
-  height: 100%;
-}
-
-.goBackLink {
-  cursor: pointer;
 }

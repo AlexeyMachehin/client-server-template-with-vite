@@ -6,18 +6,13 @@ import './styles/App.css';
 import Chat from './features/forumPage/components/chat/Chat';
 
 function App() {
- 
   return (
     <BrowserRouter>
       <div id="App" className="App">
         <Routes>
           <Route path="/" element={<StartPage />} />
           <Route path="forum/*" element={<ForumPage />} />
-          {/* <Route
-            path="forum/:mainTheme/:questionTitle"
-            element={<Chat foundQuestions={null} currentMainTheme={null} />}
-          /> */}
-          <Route path="forum" element={<Navigate to="mainList" />} />
+          <Route path="forum" element={<Navigate to="main" />} />
         </Routes>
       </div>
     </BrowserRouter>

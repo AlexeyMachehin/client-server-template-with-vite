@@ -17,8 +17,8 @@ const style = {
 };
 
 interface IMainListProps {
+  setSelectedQuestion: React.Dispatch<React.SetStateAction<IQuestion | null>>;
   setFoundQuestions: React.Dispatch<React.SetStateAction<IQuestion[] | null>>;
-  // setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentMainTheme: React.Dispatch<
     React.SetStateAction<
       'discussionOfGameMoments' | 'technicalIssues' | 'errorQuestions' | null
@@ -34,8 +34,8 @@ export default function MainList(props: IMainListProps) {
         onClick={() => {
           props.setFoundQuestions(null);
           props.setCurrentMainTheme('discussionOfGameMoments');
-          // props.setIsChatOpen(true);
-          navigate('/forum/discussionOfGameMoments')
+          props.setSelectedQuestion(null);
+          navigate('/forum/discussionOfGameMoments');
         }}
         button>
         <ListItemAvatar>
@@ -50,8 +50,8 @@ export default function MainList(props: IMainListProps) {
         onClick={() => {
           props.setFoundQuestions(null);
           props.setCurrentMainTheme('technicalIssues');
-          // props.setIsChatOpen(true);
-          navigate('/forum/technicalIssues')
+          props.setSelectedQuestion(null);
+          navigate('/forum/technicalIssues');
         }}
         button
         divider>
@@ -66,8 +66,8 @@ export default function MainList(props: IMainListProps) {
         onClick={() => {
           props.setFoundQuestions(null);
           props.setCurrentMainTheme('errorQuestions');
-          // props.setIsChatOpen(true);
-          navigate('/forum/errorQuestions')
+          props.setSelectedQuestion(null);
+          navigate('/forum/errorQuestions');
         }}
         button>
         <ListItemAvatar>

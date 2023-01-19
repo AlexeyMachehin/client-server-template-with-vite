@@ -8,15 +8,14 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AskQuestionModal from './askQuestionModal/AskQuestionModal';
 import { forumState } from '../../../../mockData/forumState';
 import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
-import { IForumState } from '../../../../../service/types/forumPage/IForumState';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useMatch, useMatches, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import classes from './asidePanel.module.css';
 
 interface IAsidePanelProps {
   setFoundQuestions: React.Dispatch<React.SetStateAction<IQuestion[] | null>>
   selectedQuestion: IQuestion | null;
   foundQuestions: IQuestion[] | null;
-  handleSelectedQuestion: (selectedQuestion: IQuestion) => void;
+  setSelectedQuestion: any
   currentMainTheme:
     | 'discussionOfGameMoments'
     | 'technicalIssues'
@@ -40,8 +39,9 @@ export default function AsidePanel(props: IAsidePanelProps) {
   const navigate = useNavigate();
 
   const urlParams = useParams();
+  const location = useLocation();
 
-  console.log(urlParams.questionId);
+  console.log(urlParams)
 
   const handleButtonProperties = () => {
     if (isWideAsidePanel === true) {
@@ -89,11 +89,31 @@ export default function AsidePanel(props: IAsidePanelProps) {
     bgcolor: 'background.paper',
   };
 
-  const renderAsidePanelItems = (arrayOfItems: IQuestion[]) => {
+  // const renderAsidePanelItems = (arrayOfItems: IQuestion[] ) => {
+  //   return arrayOfItems
+  //     .sort((a: IQuestion, b: IQuestion) => a.title.localeCompare(b.title))
+  //     .map((question: IQuestion) => (
+  //       <AsidePanelItem
+  //         isWideAsidePanel={isWideAsidePanel}
+  //         key={question.id}
+  //         question={question}
+  //         color={
+  //           question.id === props.selectedQuestion?.id
+  //             ? SELECTED_QUESTION_COLOR
+  //             : ''
+  //         }
+  //         setSelectedQuestion={() => props.setSelectedQuestion(question)}
+  //       />
+  //     ));
+  // };
+  const renderAsidePanelItems = (arrayOfItems: IQuestion[], selectedQuestionId = null ) => {
     return arrayOfItems
       .sort((a: IQuestion, b: IQuestion) => a.title.localeCompare(b.title))
-      .map((question: IQuestion) => (
-        <AsidePanelItem
+      .map((question: IQuestion) => {
+       
+       
+       
+        return <AsidePanelItem
           isWideAsidePanel={isWideAsidePanel}
           key={question.id}
           question={question}
@@ -102,24 +122,12 @@ export default function AsidePanel(props: IAsidePanelProps) {
               ? SELECTED_QUESTION_COLOR
               : ''
           }
-          handleSelectedQuestion={() => props.handleSelectedQuestion(question)}
+          setSelectedQuestion={() => props.setSelectedQuestion(question)}
         />
-      ));
+      });
   };
 
-  // const searchByURLTitle = (title: string, mainThemes: any) => {
-  //   const foundQuestionsArray: IQuestion[]  = [];
-  //   for (const mainTheme in mainThemes) {
-  //     mainThemes[mainTheme].forEach((question: IQuestion) => {
-  //       const regExp = new RegExp(`${title.toLowerCase()}`);
-  //       const value = question.title.toLowerCase();
-  //       if (regExp.test(value)) {
-  //         foundQuestionsArray.push(question);
-  //       }
-  //     });
-  //   }
-  //   return foundQuestionsArray;
-  // };
+
   const searchByURLId = (id: string, mainThemes: any) => {
     const foundQuestionsArray: IQuestion[]  = [];
     for (const mainTheme in mainThemes) {
@@ -129,10 +137,22 @@ export default function AsidePanel(props: IAsidePanelProps) {
         }
       });
     }
-    console.log(foundQuestionsArray)
+    props.setSelectedQuestion(foundQuestionsArray[0])
     return foundQuestionsArray;
   };
 
+  const urlId = (url:any) => {
+    let result = '';
+    result = url.pathname.split("/")
+    return result[result.length - 1] 
+  }
+  const urlMainPath = (url:any) => {
+    let result = '';
+    result = url.pathname.split("/")
+    return result[result.length - 2] 
+  }
+
+ 
   return (
     <div className={classes.asidePanelWrapper}>
       <List
@@ -143,12 +163,16 @@ export default function AsidePanel(props: IAsidePanelProps) {
         <AskQuestionModal currentMainTheme={props.currentMainTheme} />
 
         <div className={classes.questionsList}>
-{urlParams.questionId ? renderAsidePanelItems(searchByURLId(urlParams.questionId, forumState.forumState)) : props.foundQuestions ? renderAsidePanelItems(props.foundQuestions) : props.currentMainTheme ? renderAsidePanelItems(forumState.forumState[props.currentMainTheme]) : null}
-          {/* {urlParams.questionTitle && renderAsidePanelItems(searchByURLTitle(urlParams.questionTitle, forumState.forumState))} */}
 
-          {/* {
-          props.foundQuestions ? renderAsidePanelItems(props.foundQuestions) : props.currentMainTheme ? renderAsidePanelItems(forumState.forumState[props.currentMainTheme]) : null
-        } */}
+  
+
+{/* { console.log(urlParams)} */}
+{urlParams.questionId && renderAsidePanelItems(forumState[urlMainPath(location)], urlId(location)) 
+// :  renderAsidePanelItems(forumState[props.currentMainTheme], null) 
+}
+
+
+
 
         </div>
 
@@ -156,7 +180,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
           <Link
             className={classes.goBackLink}
             onClick={() => {
-              navigate('/forum/mainList');
+              navigate('/forum/main');
             }}>
             Go back to main list
           </Link>

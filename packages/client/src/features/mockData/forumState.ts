@@ -1,7 +1,6 @@
 import { IForumState } from '../../service/types/forumPage/IForumState';
 
 export const forumState: IForumState = {
-  forumState: {
     discussionOfGameMoments: [
       {
         id: 100500,
@@ -75,7 +74,7 @@ export const forumState: IForumState = {
         ],
       },
       {
-        id: 2,
+        id: 9,
         name: 'Danil',
         title: 'discussionOfGameMoment 2F',
         time: '2020-01-02T14:22:22.000Z',
@@ -84,7 +83,7 @@ export const forumState: IForumState = {
           'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
         messages: [
           {
-            id: 1,
+            id: 10,
             isMyMessage: true,
             name: 'Danilth',
             time: '2020-01-02T14:22:22.000Z',
@@ -94,7 +93,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 2,
+            id: 11,
             isMyMessage: false,
             name: 'Daniltrhb5',
             time: '2020-01-02T14:22:22.000Z',
@@ -104,7 +103,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 3,
+            id: 12,
             isMyMessage: true,
             name: 'Danildfg345t',
             time: '2020-01-02T14:22:22.000Z',
@@ -119,7 +118,7 @@ export const forumState: IForumState = {
 
     technicalIssues: [
       {
-        id: 1,
+        id: 13,
         name: 'Danil',
         title: 'technicalIssue 1',
         time: '2020-01-02T14:22:22.000Z',
@@ -128,7 +127,7 @@ export const forumState: IForumState = {
           'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
         messages: [
           {
-            id: 1,
+            id: 14,
             isMyMessage: true,
             name: 'Danilth',
             time: '2020-01-02T14:22:22.000Z',
@@ -138,7 +137,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 2,
+            id: 15,
             isMyMessage: false,
             name: 'Daniltrhb5',
             time: '2020-01-02T14:22:22.000Z',
@@ -148,7 +147,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 3,
+            id: 16,
             isMyMessage: true,
             name: 'Danildfg345t',
             time: '2020-01-02T14:22:22.000Z',
@@ -158,7 +157,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 4,
+            id: 17,
             isMyMessage: true,
             name: 'Dreg45anil',
             time: '2020-01-02T14:22:22.000Z',
@@ -168,7 +167,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 5,
+            id: 18,
             isMyMessage: false,
             name: 'D54ganil',
             time: '2020-01-02T14:22:22.000Z',
@@ -178,7 +177,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 6,
+            id: 19,
             isMyMessage: true,
             name: 'Da54gnil',
             time: '2020-01-02T14:22:22.000Z',
@@ -188,7 +187,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 7,
+            id: 20,
             isMyMessage: true,
             name: 'D54anil',
             time: '2020-01-02T14:22:22.000Z',
@@ -198,7 +197,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 8,
+            id: 21,
             isMyMessage: true,
             name: 'Da5g4nil',
             time: '2020-01-02T14:22:22.000Z',
@@ -207,7 +206,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 9,
+            id: 22,
             isMyMessage: false,
             name: 'Da45gnil',
             time: '2020-01-02T14:22:22.000Z',
@@ -218,7 +217,7 @@ export const forumState: IForumState = {
         ],
       },
       {
-        id: 2,
+        id: 23,
         name: 'Danil',
         title: 'technicalIssue 2',
         time: '2020-01-02T14:22:22.000Z',
@@ -231,7 +230,7 @@ export const forumState: IForumState = {
 
     errorQuestions: [
       {
-        id: 1,
+        id: 24,
         name: 'Danil',
         title:
           'bError500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500Error500',
@@ -241,7 +240,7 @@ export const forumState: IForumState = {
           'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
         messages: [
           {
-            id: 1,
+            id: 25,
             isMyMessage: true,
             name: 'Danilth',
             time: '2020-01-02T14:22:22.000Z',
@@ -251,7 +250,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 2,
+            id: 26,
             isMyMessage: false,
             name: 'Daniltrhb5',
             time: '2020-01-02T14:22:22.000Z',
@@ -261,7 +260,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 3,
+            id: 27,
             isMyMessage: true,
             name: 'Danildfg345t',
             time: '2020-01-02T14:22:22.000Z',
@@ -271,7 +270,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 4,
+            id: 28,
             isMyMessage: true,
             name: 'Dreg45anil',
             time: '2020-01-02T14:22:22.000Z',
@@ -281,7 +280,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 5,
+            id: 29,
             isMyMessage: false,
             name: 'D54ganil',
             time: '2020-01-02T14:22:22.000Z',
@@ -291,7 +290,7 @@ export const forumState: IForumState = {
               'https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-76.jpg',
           },
           {
-            id: 6,
+            id: 30,
             isMyMessage: true,
             name: 'Da54gnil',
             time: '2020-01-02T14:22:22.000Z',
@@ -1671,5 +1670,5 @@ export const forumState: IForumState = {
         ],
       },
     ],
-  },
+  
 };

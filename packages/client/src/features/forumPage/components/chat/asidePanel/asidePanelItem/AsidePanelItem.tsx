@@ -5,20 +5,25 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import { IQuestion } from '../../../../../../service/types/forumPage/IQuestion';
 import classes from './asidePanelItem.module.css';
+import { useNavigate } from 'react-router-dom';
 
 interface IAsidePanelItemProps {
   isWideAsidePanel: boolean;
   question: IQuestion;
   color: string;
-  handleSelectedQuestion: () => void;
+  setSelectedQuestion: any;
 }
 
 export default function AsidePanelItem(props: IAsidePanelItemProps) {
+  const navigate = useNavigate();
   return (
     <>
       <ListItem
         style={{ backgroundColor: props.color }}
-        onClick={props.handleSelectedQuestion}
+        onClick={() => {
+          props.setSelectedQuestion(props.question);
+          navigate(`${props.question.id}`)
+        }}
         button>
         <ListItemAvatar>
           <Avatar alt={props.question.name} src={props.question.avatarURL} />

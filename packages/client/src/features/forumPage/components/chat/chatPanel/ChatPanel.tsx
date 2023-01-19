@@ -14,11 +14,7 @@ import classes from './chatPanel.module.css';
 
 interface IChatPanelProps {
   selectedQuestion: null | IQuestion;
-  currentMainTheme:
-    | 'discussionOfGameMoments'
-    | 'technicalIssues'
-    | 'errorQuestions'
-    | null;
+
 }
 
 export default function ChatPanel(props: IChatPanelProps) {

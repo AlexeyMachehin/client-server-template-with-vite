@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -7,6 +7,7 @@ import { forumState } from '../../../mockData/forumState';
 import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 import classes from './header.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import DashBoard from './dashBoard/DashBoard';
 
 const Search = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -24,6 +25,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface IHeaderProps {
+  setSelectedQuestion: (selectedQuestion: IQuestion | null) => void;
   foundQuestions: IQuestion[] | null;
   currentMainTheme:
     | 'discussionOfGameMoments'
@@ -65,23 +67,25 @@ export default function Header(props: IHeaderProps) {
   const searchInput = useRef<null | JSX.IntrinsicElements['input']>(null);
   const navigate = useNavigate();
   const searchInputValuef = searchInput.current?.value as string;
+  const [mainTheme, setMainTheme] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (window.location.pathname === '/forum/mainList') {
-      if (searchInput.current) {
-        props.setCurrentMainTheme(null);
-        searchInput.current.value = '';
-      }
-    }
-    if (
-      window.location.pathname === '/forum/foundQuestions' &&
-      props.foundQuestions === null &&
-      props.currentMainTheme === null
-    ) {
-      navigate('mainList');
-    }
-   
-  }, [window.location.pathname]);
+  // useEffect(() => {
+  //   if (window.location.pathname === '/forum/mainList') {
+  //     if (searchInput.current) {
+  //       props.setCurrentMainTheme(null);
+  //       searchInput.current.value = '';
+  //     }
+  //   }
+  //   if (
+  //     window.location.pathname === '/forum/foundQuestions' &&
+  //     props.foundQuestions === null &&
+  //     props.currentMainTheme === null
+  //   ) {
+  //     navigate('mainList');
+  //   }
+  // }, [window.location.pathname]);
+
+
 
   const searchQuestion = (inputValue: string, mainThemes: any) => {
     for (const mainTheme in mainThemes) {
@@ -90,6 +94,8 @@ export default function Header(props: IHeaderProps) {
         const regExp = new RegExp(`${inputValue.toLowerCase()}`);
         const value = question.title.toLowerCase();
         if (regExp.test(value)) {
+          // console.log(mainTheme, question);
+          setMainTheme(mainTheme);
           foundQuestionsArray.push(question);
           props.setFoundQuestions(foundQuestionsArray);
         }
@@ -115,22 +121,20 @@ export default function Header(props: IHeaderProps) {
 
   const handleOnChangeInput = () => {
     const searchInputValue = searchInput.current?.value as string;
-    searchQuestion(searchInputValue, forumState.forumState);
-    // searchQuestion(
-    //   searchInputValue,
-    //   forumState.forumState,
-    //   props.setFoundQuestions
-    // );
-    if (searchInputValue.length > 0) {
-      //
-      // props.setFoundQuestions(foundQuestionsArray);
-      //
-      navigate('foundQuestions');
-    } else {
+    searchQuestion(searchInputValue, forumState);
+
+    // if (searchInputValue.length > 0) {
+
+    //   navigate('foundQuestions');
+    // } else {
+    //   props.setFoundQuestions(null);
+    //   props.currentMainTheme
+    //     ? navigate(`${props.currentMainTheme?.toString()}`)
+    //     : navigate('mainList');
+    // }
+
+    if (searchInputValue.length === 0) {
       props.setFoundQuestions(null);
-      props.currentMainTheme
-        ? navigate(`${props.currentMainTheme?.toString()}`)
-        : navigate('mainList');
     }
   };
 
@@ -149,6 +153,16 @@ export default function Header(props: IHeaderProps) {
           inputProps={{ 'aria-label': 'search' }}
         />
       </Search>
+      {/* <DashBoard2 foundQuestions={props.foundQuestions}/> */}
+      {props.foundQuestions && (
+        <DashBoard
+          foundQuestions={props.foundQuestions}
+          mainTheme={mainTheme}
+          setFoundQuestions={props.setFoundQuestions}
+          setSelectedQuestion={props.setSelectedQuestion}
+        />
+      )}
+
       <div className={classes.titleWrapper}>
         <Typography variant="h6" className={classes.headerTitle}>
           Forum

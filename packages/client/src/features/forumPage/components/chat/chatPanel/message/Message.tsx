@@ -7,8 +7,7 @@ import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
 import classes from './message.module.css';
 
 interface IMessageProps {
-  setAnswerMessage: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
-  createAnswerTemplate: (message: IMessage) => JSX.Element;
+  createAnswer: (message: IMessage) => void;
   message: IMessage;
   answerMessage?: null | JSX.Element;
 }
@@ -41,8 +40,7 @@ export default function Message(props: IMessageProps) {
             />
           </div>
           <MessageDashboard
-            setAnswerMessage={props.setAnswerMessage}
-            createAnswerTemplate={props.createAnswerTemplate}
+            createAnswer={props.createAnswer}
             message={props.message}
           />
         </div>

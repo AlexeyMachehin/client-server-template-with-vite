@@ -1,18 +1,21 @@
-.asidePanelWrapper {
-  height: 100vh;
+.dashBoardWrapper {
+  position: fixed !important;
+  z-index: 9999;
+  top: 51px;
+  left: 8px;
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--forumPageBackground);
+  box-shadow: var(--searchQuestionDashboard);
+  overflow: auto;
+  max-height: 600px;
+  padding: 5px;
+  border: var(--asidePanelBorder);
+  border-radius: 4px;
 }
 
-.asidePanel {
-  height: 100%;
-  display: flex;
+.dashBoardItem {
+  display: flex !important;
   flex-direction: column;
-  padding-right: 5px;
-  border-right: var(--asidePanelBorder);
-}
-
-.questionsList {
-  overflow-y: auto;
-  overflow-x: hidden;
-  flex: 1 1 auto;
-  box-shadow: var(--forumPageShadow);
+  align-items: flex-start !important;
 }

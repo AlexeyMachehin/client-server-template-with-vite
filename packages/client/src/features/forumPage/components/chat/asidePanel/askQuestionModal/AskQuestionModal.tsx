@@ -17,13 +17,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { CURRENT_MAIN_THEME } from '../../../../../../service/types/forumPage/currentMainTheme';
 import classes from './askQuestionModal.module.css';
 
-export default function AskQuestionModal(props: {
-  currentMainTheme:
-    | 'discussionOfGameMoments'
-    | 'technicalIssues'
-    | 'errorQuestions'
-    | null;
-}) {
+export default function AskQuestionModal(props: { currentMainTheme: string }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -33,10 +27,8 @@ export default function AskQuestionModal(props: {
   const handleClose = () => {
     setOpen(false);
   };
-  const [titleInputValue, setTitleInputValue] = useState<string | undefined>(
+  const [titleInputValue, setTitleInputValue] = useState<string>(
     props.currentMainTheme
-      ? CURRENT_MAIN_THEME[props.currentMainTheme]
-      : undefined
   );
   const handleChange = (event: SelectChangeEvent) => {
     setTitleInputValue(event.target.value);
@@ -65,13 +57,13 @@ export default function AskQuestionModal(props: {
               renderValue={value => value ?? 'Choose main theme'}
               value={titleInputValue}
               onChange={handleChange}>
-              <MenuItem value={CURRENT_MAIN_THEME.discussionOfGameMoments}>
+              <MenuItem value={'discussionOfGameMoments'}>
                 {CURRENT_MAIN_THEME.discussionOfGameMoments}
               </MenuItem>
-              <MenuItem value={CURRENT_MAIN_THEME.technicalIssues}>
+              <MenuItem value={'technicalIssues'}>
                 {CURRENT_MAIN_THEME.technicalIssues}
               </MenuItem>
-              <MenuItem value={CURRENT_MAIN_THEME.errorQuestions}>
+              <MenuItem value={'errorQuestions'}>
                 {CURRENT_MAIN_THEME.errorQuestions}
               </MenuItem>
             </Select>

@@ -34,7 +34,6 @@
     "axios": "1.2.1",
     "react-confetti": "6.1.0",
     "react-spring": "9.6.1",
-    "react-window": "^1.8.8",
     "yarn": "1.22.19"
   }
 }

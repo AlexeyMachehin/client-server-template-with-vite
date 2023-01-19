@@ -14,7 +14,6 @@ import classes from './chatPanel.module.css';
 
 interface IChatPanelProps {
   selectedQuestion: null | IQuestion;
-
 }
 
 export default function ChatPanel(props: IChatPanelProps) {
@@ -22,7 +21,6 @@ export default function ChatPanel(props: IChatPanelProps) {
   const [answerMessage, setAnswerMessage] = useState<null | JSX.Element>(null);
   const [answerMessageComponent, setAnswerMessageComponent] =
     useState<null | JSX.Element>(null);
-
   const inputFooter = useRef<null | JSX.Element>(null);
   const messagesPanel = useRef<HTMLDivElement>(null);
 
@@ -50,6 +48,11 @@ export default function ChatPanel(props: IChatPanelProps) {
     );
   };
 
+  const createAnswer = (newMessage: IMessage) => {
+    const templateNewMessage = createAnswerTemplate(newMessage);
+    setAnswerMessage(templateNewMessage);
+  };
+
   const closeAnswerMessageBox = (): void => {
     setAnswerMessage(null);
   };
@@ -64,22 +67,20 @@ export default function ChatPanel(props: IChatPanelProps) {
             </div>
           ) : (
             <Typography className={classes.mainTitle}>
-              <WestIcon className={classes.mainTitleIcon} /> Choose or ask a
-              question
+              <WestIcon className={classes.mainTitleIcon} />
+              Choose or ask a question
             </Typography>
           )}
         </div>
 
         <div ref={messagesPanel} className={classes.chatPanelMain}>
-          {props.selectedQuestion &&
-            props.selectedQuestion.messages.map((message: IMessage) => (
-              <Message
-                setAnswerMessage={setAnswerMessage}
-                createAnswerTemplate={createAnswerTemplate}
-                key={message.id}
-                message={message}
-              />
-            ))}
+          {props.selectedQuestion?.messages.map((message: IMessage) => (
+            <Message
+              createAnswer={createAnswer}
+              key={message.id}
+              message={message}
+            />
+          ))}
 
           {/* test answer */}
           {answerMessageComponent}
@@ -125,9 +126,8 @@ export default function ChatPanel(props: IChatPanelProps) {
                       message: inputFooterValue,
                       avatarURL: myProfile.avatarURL,
                     }}
-                    setAnswerMessage={setAnswerMessage}
+                    createAnswer={createAnswer}
                     answerMessage={answerMessage}
-                    createAnswerTemplate={createAnswerTemplate}
                   />
                 );
               }}

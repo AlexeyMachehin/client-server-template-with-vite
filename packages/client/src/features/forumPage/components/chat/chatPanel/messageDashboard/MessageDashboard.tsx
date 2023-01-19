@@ -7,9 +7,8 @@ import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
 import classes from './messageDashboard.module.css';
 
 interface IMessageDashboardProps {
-  setAnswerMessage: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
   message: IMessage;
-  createAnswerTemplate: (message: IMessage) => JSX.Element;
+  createAnswer: (message: IMessage) => void;
 }
 
 export default function MessageDashboard(props: IMessageDashboardProps) {
@@ -43,7 +42,7 @@ export default function MessageDashboard(props: IMessageDashboardProps) {
         <MenuItem
           onClick={() => {
             handleClose();
-            props.setAnswerMessage(props.createAnswerTemplate(props.message));
+            props.createAnswer(props.message);
           }}>
           To answer
         </MenuItem>

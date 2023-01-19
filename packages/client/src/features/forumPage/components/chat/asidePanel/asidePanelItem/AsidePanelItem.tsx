@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -5,13 +6,11 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import { IQuestion } from '../../../../../../service/types/forumPage/IQuestion';
 import classes from './asidePanelItem.module.css';
-import { useNavigate } from 'react-router-dom';
 
 interface IAsidePanelItemProps {
   isWideAsidePanel: boolean;
   question: IQuestion;
   color: string;
-  setSelectedQuestion: any;
 }
 
 export default function AsidePanelItem(props: IAsidePanelItemProps) {
@@ -21,8 +20,7 @@ export default function AsidePanelItem(props: IAsidePanelItemProps) {
       <ListItem
         style={{ backgroundColor: props.color }}
         onClick={() => {
-          props.setSelectedQuestion(props.question);
-          navigate(`${props.question.id}`)
+          navigate(`${props.question.id}`);
         }}
         button>
         <ListItemAvatar>

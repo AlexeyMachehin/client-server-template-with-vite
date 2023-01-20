@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
-    // import the reducer function from the counter slice and add it
+    // import the reducer function from the slice and add it
   },
 });
 

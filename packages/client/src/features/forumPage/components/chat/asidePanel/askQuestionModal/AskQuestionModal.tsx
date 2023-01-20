@@ -14,7 +14,7 @@ import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { CURRENT_MAIN_THEME } from '../../../../../../service/types/forumPage/currentMainTheme';
+import { CURRENT_MAIN_TOPICS } from '../../../../../../service/types/forumPage/currentMainTopic';
 import classes from './askQuestionModal.module.css';
 
 export default function AskQuestionModal(props: { currentMainTheme: string }) {
@@ -55,16 +55,16 @@ export default function AskQuestionModal(props: { currentMainTheme: string }) {
             <Select
               displayEmpty={true}
               renderValue={value => value ?? 'Choose main theme'}
-              value={titleInputValue}
+              value={CURRENT_MAIN_TOPICS[titleInputValue as keyof typeof CURRENT_MAIN_TOPICS]}
               onChange={handleChange}>
               <MenuItem value={'discussionOfGameMoments'}>
-                {CURRENT_MAIN_THEME.discussionOfGameMoments}
+                {CURRENT_MAIN_TOPICS.discussionOfGameMoments}
               </MenuItem>
               <MenuItem value={'technicalIssues'}>
-                {CURRENT_MAIN_THEME.technicalIssues}
+                {CURRENT_MAIN_TOPICS.technicalIssues}
               </MenuItem>
               <MenuItem value={'errorQuestions'}>
-                {CURRENT_MAIN_THEME.errorQuestions}
+                {CURRENT_MAIN_TOPICS.errorQuestions}
               </MenuItem>
             </Select>
           </FormControl>

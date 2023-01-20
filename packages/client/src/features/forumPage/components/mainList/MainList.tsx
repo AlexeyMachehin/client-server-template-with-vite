@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ErrorIcon from '@mui/icons-material/Error';
 import ExtensionIcon from '@mui/icons-material/Extension';
-import { CURRENT_MAIN_THEME } from '../../../../service/types/forumPage/currentMainTheme';
+import { CURRENT_MAIN_TOPICS } from '../../../../service/types/forumPage/currentMainTopic';
 
 const style = {
   width: '100%',
@@ -29,7 +29,7 @@ export default function MainList() {
             <ExtensionIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={CURRENT_MAIN_THEME.discussionOfGameMoments} />
+        <ListItemText primary={CURRENT_MAIN_TOPICS.discussionOfGameMoments} />
       </ListItem>
       <Divider />
       <ListItem
@@ -43,7 +43,7 @@ export default function MainList() {
             <SettingsIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={CURRENT_MAIN_THEME.technicalIssues} />
+        <ListItemText primary={CURRENT_MAIN_TOPICS.technicalIssues} />
       </ListItem>
       <ListItem
         onClick={() => {
@@ -55,7 +55,7 @@ export default function MainList() {
             <ErrorIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={CURRENT_MAIN_THEME.errorQuestions} />
+        <ListItemText primary={CURRENT_MAIN_TOPICS.errorQuestions} />
       </ListItem>
       <Divider light />
     </List>

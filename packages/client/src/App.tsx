@@ -1,8 +1,10 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import StartPage from './Pages/startPage/StartPage';
+import StartPage from './pages/startPage/StartPage';
+import Login from './pages/Login/index';
+import Signup from './pages/Signup';
+
 import './styles/App.css';
-import Login from './Pages/Login';
-import Signup from './Pages/Signup';
+
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function App() {

@@ -11,4 +11,7 @@
   /* end page colors */
   --userCardBackground: #bdbdbd;
   --nextLevelButton: #4caf50;
+  /* leaderBoard page colors */
+  --leaderBoardPageTitle: white;
+  --leaderBoardBorder: white;
 }

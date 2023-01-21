@@ -8,6 +8,7 @@ import { IForumState } from '../../../../service/types/forumPage/IForumState';
 import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 import { forumState } from '../../../mockData/forumState';
 import classes from './header.module.css';
+import { QuestionWithTopic } from '../../../../service/types/forumPage/questionWithTopic';
 
 const Search = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -25,21 +26,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
-  const [mainTheme, setMainTheme] = useState<string | null>(null);
-  const [foundQuestions, setFoundQuestions] = useState<IQuestion[]>([]);
+  const [foundedQuestions, setFoundedQuestions] = useState<QuestionWithTopic[]>(
+    []
+  );
 
-  const searchQuestion = (
+  const searchQuestions = (
     inputValue: string,
     mainThemes: IForumState
-  ): IQuestion[] => {
-    const foundQuestionsArray: IQuestion[] = [];
+  ): QuestionWithTopic[] => {
+    const foundQuestionsArray: QuestionWithTopic[] = [];
     for (const mainTheme in mainThemes) {
       mainThemes[mainTheme].forEach((question: IQuestion) => {
         const regExp = new RegExp(`${inputValue.toLowerCase()}`);
         const value = question.title.toLowerCase();
         if (regExp.test(value)) {
-          setMainTheme(mainTheme);
-          foundQuestionsArray.push(question);
+          foundQuestionsArray.push({ ...question, topic: mainTheme });
         }
       });
     }
@@ -48,11 +49,11 @@ export default function Header() {
 
   const handleOnChangeInput = (event: FormEvent<HTMLInputElement>) => {
     const searchInputValue = (event.target as HTMLInputElement).value;
-    const foundQuestions =
+    const foundedQuestions =
       searchInputValue !== ''
-        ? searchQuestion(searchInputValue, forumState)
+        ? searchQuestions(searchInputValue, forumState)
         : [];
-    setFoundQuestions(foundQuestions);
+    setFoundedQuestions(foundedQuestions);
   };
 
   return (
@@ -68,8 +69,8 @@ export default function Header() {
           inputProps={{ 'aria-label': 'search' }}
         />
       </Search>
-      {foundQuestions.length && (
-        <DashBoard foundQuestions={foundQuestions} mainTheme={mainTheme} />
+      {foundedQuestions.length && (
+        <DashBoard foundedQuestions={foundedQuestions} />
       )}
 
       <div className={classes.titleWrapper}>

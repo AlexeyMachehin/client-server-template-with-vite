@@ -8,17 +8,17 @@ import classes from './chat.module.css';
 
 export default function Chat() {
   const { mainTheme, id } = useParams();
-  const [foundedQuestion, setFoundQuestions] = useState<IQuestion[]>([]);
+  const [foundedQuestions, setFoundedQuestions] = useState<IQuestion[]>([]);
   const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(
     null
   );
 
   useEffect(() => {
     if (mainTheme) {
-      setFoundQuestions(forumState[mainTheme]);
+      setFoundedQuestions(forumState[mainTheme]);
       if (id) {
         const selectedQuestion =
-          foundedQuestion.find(question => question.id === Number(id)) ?? null;
+          foundedQuestions.find(question => question.id === Number(id)) ?? null;
         setSelectedQuestion(selectedQuestion);
       }
     }
@@ -27,7 +27,7 @@ export default function Chat() {
   return (
     <div className={classes.chatWrapper}>
       <AsidePanel
-        foundQuestions={foundedQuestion}
+        foundedQuestions={foundedQuestions}
         selectedQuestion={selectedQuestion}
       />
       <ChatPanel selectedQuestion={selectedQuestion} />

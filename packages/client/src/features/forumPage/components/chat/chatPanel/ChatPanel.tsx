@@ -17,16 +17,15 @@ interface IChatPanelProps {
 }
 
 export default function ChatPanel(props: IChatPanelProps) {
-  const [inputFooterValue, setInputFooterValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
   const [answerMessage, setAnswerMessage] = useState<null | JSX.Element>(null);
   const [answerMessageComponent, setAnswerMessageComponent] =
     useState<null | JSX.Element>(null);
-  const inputFooter = useRef<null | JSX.Element>(null);
-  const messagesPanel = useRef<HTMLDivElement>(null);
+  const messagesPanelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (messagesPanel.current) {
-      messagesPanel.current.scrollTo(0, messagesPanel.current.scrollHeight);
+    if (messagesPanelRef.current) {
+      messagesPanelRef.current.scrollTo(0, messagesPanelRef.current.scrollHeight);
     }
   }, [props.selectedQuestion]);
 
@@ -73,7 +72,7 @@ export default function ChatPanel(props: IChatPanelProps) {
           )}
         </div>
 
-        <div ref={messagesPanel} className={classes.chatPanelMain}>
+        <div ref={messagesPanelRef} className={classes.chatPanelMain}>
           {props.selectedQuestion?.messages.map((message: IMessage) => (
             <Message
               createAnswer={createAnswer}
@@ -101,10 +100,9 @@ export default function ChatPanel(props: IChatPanelProps) {
           <div className={classes.chatPanelFooter}>
             <TextField
               className={classes.chatPanelInput}
-              inputRef={inputFooter}
-              value={inputFooterValue}
+              value={inputValue}
               onChange={event => {
-                setInputFooterValue(event.target.value);
+                setInputValue(event.target.value);
               }}
               label="message"
               multiline
@@ -115,7 +113,7 @@ export default function ChatPanel(props: IChatPanelProps) {
               component="button"
               onClick={() => {
                 closeAnswerMessageBox();
-                setInputFooterValue('');
+                setInputValue('');
                 setAnswerMessageComponent(
                   <Message
                     message={{
@@ -123,7 +121,7 @@ export default function ChatPanel(props: IChatPanelProps) {
                       id: myProfile.id,
                       isMyMessage: true,
                       time: new Date().toDateString(),
-                      message: inputFooterValue,
+                      message: inputValue,
                       avatarURL: myProfile.avatarURL,
                     }}
                     createAnswer={createAnswer}

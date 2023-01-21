@@ -3,23 +3,22 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { Divider } from '@mui/material';
-import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
 import classes from './dashBoard.module.css';
+import { QuestionWithTopic } from '../../../../../service/types/forumPage/questionWithTopic';
 
 export default function DashBoard(props: {
-  mainTheme: string | null;
-  foundQuestions: IQuestion[];
+  foundedQuestions: QuestionWithTopic[];
 }) {
   const navigate = useNavigate();
   return (
     <List className={classes.dashBoardWrapper}>
-      {props.foundQuestions.map((question: IQuestion) => (
+      {props.foundedQuestions.map(question => (
         <>
           <ListItem
             className={classes.dashBoardItem}
             button
             onClick={() => {
-              navigate(`/forum/${props.mainTheme}/${question.id}`);
+              navigate(`/forum/${question.topic}/${question.id}`);
             }}
             key={question.id}>
             <ListItemText primary={question.title} secondary={question.name} />

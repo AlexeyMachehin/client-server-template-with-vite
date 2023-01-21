@@ -12,13 +12,16 @@ import classes from './asidePanel.module.css';
 
 interface IAsidePanelProps {
   selectedQuestion: IQuestion | null;
-  foundQuestions: IQuestion[];
+  foundedQuestions: IQuestion[];
 }
 
 const SELECTED_QUESTION_COLOR = '#4caf4f2f';
 const DEFAULT_ASIDE_PANEL_WIDTH = 310;
 
-export default function AsidePanel(props: IAsidePanelProps) {
+export default function AsidePanel({
+  selectedQuestion,
+  foundedQuestions,
+}: IAsidePanelProps) {
   const { mainTheme } = useParams();
   const [asidePanelWidth, setAsidePanelWidth] = useState<number>(
     DEFAULT_ASIDE_PANEL_WIDTH
@@ -30,7 +33,22 @@ export default function AsidePanel(props: IAsidePanelProps) {
   );
   const navigate = useNavigate();
 
-  const handleButtonProperties = () => {
+  useEffect(() => {
+    if (selectedQuestion) {
+      navigate(`${selectedQuestion.id}`);
+    }
+  }, []);
+
+  const changeWidth = () => {
+    if (asidePanelWidth === DEFAULT_ASIDE_PANEL_WIDTH) {
+      setAsidePanelWidth(document.documentElement.clientWidth * 0.7);
+    } else {
+      setAsidePanelWidth(DEFAULT_ASIDE_PANEL_WIDTH);
+    }
+  };
+
+  const handleOnClickExpandButton = () => {
+    changeWidth();
     if (isWideAsidePanel === true) {
       setIsWideAsidePanel(false);
       setWidthButtonTitle('Narrow');
@@ -49,10 +67,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
   useEffect(() => {
     if (asidePanelWidth !== DEFAULT_ASIDE_PANEL_WIDTH) {
       window.addEventListener('resize', onResize);
-      setAsidePanelWidth(
-        document.documentElement.clientWidth -
-          document.documentElement.clientWidth * 0.3
-      );
+      setAsidePanelWidth(document.documentElement.clientWidth * 0.7);
     }
 
     return () => {
@@ -60,27 +75,16 @@ export default function AsidePanel(props: IAsidePanelProps) {
     };
   }, [asidePanelWidth]);
 
-  const handleWidth = () => {
-    if (asidePanelWidth === DEFAULT_ASIDE_PANEL_WIDTH) {
-      setAsidePanelWidth(
-        document.documentElement.clientWidth -
-          document.documentElement.clientWidth * 0.3
-      );
-    } else {
-      setAsidePanelWidth(DEFAULT_ASIDE_PANEL_WIDTH);
-    }
-  };
-
   const style = {
     width: asidePanelWidth + 'px',
     bgcolor: 'background.paper',
   };
 
   const renderAsidePanelItems = (
-    arrayOfItems: IQuestion[],
+    items: IQuestion[],
     selectedQuestionId: number
   ) => {
-    return arrayOfItems
+    return items
       .sort((a: IQuestion, b: IQuestion) => a.title.localeCompare(b.title))
       .map((question: IQuestion) => {
         return (
@@ -105,10 +109,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
         aria-label="mailbox folders">
         <AskQuestionModal currentMainTheme={mainTheme ?? ''} />
         <div className={classes.questionsList}>
-          {renderAsidePanelItems(
-            props.foundQuestions,
-            props.selectedQuestion?.id ?? 0
-          )}
+          {renderAsidePanelItems(foundedQuestions, selectedQuestion?.id ?? 0)}
         </div>
 
         <div className={classes.asidePanelFooter}>
@@ -121,10 +122,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
           </Link>
 
           <Button
-            onClick={() => {
-              handleWidth();
-              handleButtonProperties();
-            }}
+            onClick={handleOnClickExpandButton}
             variant="outlined"
             endIcon={widthButtonArrow}>
             {widthButtonTitle}

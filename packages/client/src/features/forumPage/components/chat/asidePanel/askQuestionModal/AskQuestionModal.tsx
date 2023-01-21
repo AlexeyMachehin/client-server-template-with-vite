@@ -27,7 +27,7 @@ export default function AskQuestionModal(props: { currentMainTheme: string }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const [titleInputValue, setTitleInputValue] = useState<string>(
+  const [selectedValue, setTitleInputValue] = useState<string>(
     props.currentMainTheme
   );
   const handleChange = (event: SelectChangeEvent) => {
@@ -55,7 +55,7 @@ export default function AskQuestionModal(props: { currentMainTheme: string }) {
             <Select
               displayEmpty={true}
               renderValue={value => value ?? 'Choose main theme'}
-              value={CURRENT_MAIN_TOPICS[titleInputValue as keyof typeof CURRENT_MAIN_TOPICS]}
+              value={CURRENT_MAIN_TOPICS[selectedValue as keyof typeof CURRENT_MAIN_TOPICS]}
               onChange={handleChange}>
               <MenuItem value={'discussionOfGameMoments'}>
                 {CURRENT_MAIN_TOPICS.discussionOfGameMoments}

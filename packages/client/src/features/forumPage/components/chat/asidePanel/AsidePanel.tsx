@@ -17,31 +17,31 @@ interface IAsidePanelProps {
 
 const SELECTED_QUESTION_COLOR = '#4caf4f2f';
 const DEFAULT_ASIDE_PANEL_WIDTH = 310;
+const WIDTH_RATIO = 0.7;
 
-export default function AsidePanel({
-  selectedQuestion,
-  foundedQuestions,
-}: IAsidePanelProps) {
+export default function AsidePanel(props: IAsidePanelProps) {
   const { mainTheme } = useParams();
   const [asidePanelWidth, setAsidePanelWidth] = useState<number>(
     DEFAULT_ASIDE_PANEL_WIDTH
   );
   const [isWideAsidePanel, setIsWideAsidePanel] = useState<boolean>(true);
-  const [widthButtonTitle, setWidthButtonTitle] = useState<string>('Wide');
+  const [widthButtonTitle, setWidthButtonTitle] = useState<'Wide' | 'Narrow'>(
+    'Wide'
+  );
   const [widthButtonArrow, setWidthButtonArrow] = useState<JSX.Element>(
     <ArrowForwardIosIcon />
   );
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (selectedQuestion) {
-      navigate(`${selectedQuestion.id}`);
+    if (props.selectedQuestion) {
+      navigate(`${props.selectedQuestion.id}`);
     }
   }, []);
 
   const changeWidth = () => {
     if (asidePanelWidth === DEFAULT_ASIDE_PANEL_WIDTH) {
-      setAsidePanelWidth(document.documentElement.clientWidth * 0.7);
+      setAsidePanelWidth(document.documentElement.clientWidth * WIDTH_RATIO);
     } else {
       setAsidePanelWidth(DEFAULT_ASIDE_PANEL_WIDTH);
     }
@@ -67,7 +67,7 @@ export default function AsidePanel({
   useEffect(() => {
     if (asidePanelWidth !== DEFAULT_ASIDE_PANEL_WIDTH) {
       window.addEventListener('resize', onResize);
-      setAsidePanelWidth(document.documentElement.clientWidth * 0.7);
+      setAsidePanelWidth(document.documentElement.clientWidth * WIDTH_RATIO);
     }
 
     return () => {
@@ -109,7 +109,10 @@ export default function AsidePanel({
         aria-label="mailbox folders">
         <AskQuestionModal currentMainTheme={mainTheme ?? ''} />
         <div className={classes.questionsList}>
-          {renderAsidePanelItems(foundedQuestions, selectedQuestion?.id ?? 0)}
+          {renderAsidePanelItems(
+            props.foundedQuestions,
+            props.selectedQuestion?.id ?? 0
+          )}
         </div>
 
         <div className={classes.asidePanelFooter}>

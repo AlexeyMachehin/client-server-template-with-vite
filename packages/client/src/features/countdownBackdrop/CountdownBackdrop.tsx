@@ -11,14 +11,14 @@ export default function CountdownBackdrop() {
     setOpen(false);
   };
 
-  const id = useRef<null | number>(null);
+  const idRef = useRef<null | number>(null);
   const clear = () => {
-    window.clearInterval(id.current ?? 0);
+    window.clearInterval(idRef.current ?? 0);
   };
   useEffect(() => {
     setOpen(!isBackdropOpen);
-    if (id != null) {
-      id.current = window.setInterval(() => {
+    if (idRef != null) {
+      idRef.current = window.setInterval(() => {
         setTimer(time => time - 1);
       }, 1000);
     }

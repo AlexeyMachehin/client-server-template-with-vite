@@ -20,7 +20,7 @@ const DEFAULT_ASIDE_PANEL_WIDTH = 310;
 const WIDTH_RATIO = 0.7;
 
 export default function AsidePanel(props: IAsidePanelProps) {
-  const { mainTheme } = useParams();
+  const { mainTopic } = useParams();
   const [asidePanelWidth, setAsidePanelWidth] = useState<number>(
     DEFAULT_ASIDE_PANEL_WIDTH
   );
@@ -107,7 +107,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
         sx={style}
         component="aside"
         aria-label="mailbox folders">
-        <AskQuestionModal currentMainTheme={mainTheme ?? ''} />
+        <AskQuestionModal currentMainTheme={mainTopic ?? ''} />
         <div className={classes.questionsList}>
           {renderAsidePanelItems(
             props.foundedQuestions,

@@ -35,12 +35,12 @@ export default function Header() {
     mainThemes: IForumState
   ): QuestionWithTopic[] => {
     const foundQuestionsArray: QuestionWithTopic[] = [];
-    for (const mainTheme in mainThemes) {
-      mainThemes[mainTheme].forEach((question: IQuestion) => {
+    for (const mainTopic in mainThemes) {
+      mainThemes[mainTopic].forEach((question: IQuestion) => {
         const regExp = new RegExp(`${inputValue.toLowerCase()}`);
         const value = question.title.toLowerCase();
         if (regExp.test(value)) {
-          foundQuestionsArray.push({ ...question, topic: mainTheme });
+          foundQuestionsArray.push({ ...question, topic: mainTopic });
         }
       });
     }

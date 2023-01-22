@@ -7,15 +7,15 @@ import { forumState } from '../../../mockData/forumState';
 import classes from './chat.module.css';
 
 export default function Chat() {
-  const { mainTheme, id } = useParams();
+  const { mainTopic, id } = useParams();
   const [foundedQuestions, setFoundedQuestions] = useState<IQuestion[]>([]);
   const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(
     null
   );
 
   useEffect(() => {
-    if (mainTheme) {
-      setFoundedQuestions(forumState[mainTheme]);
+    if (mainTopic) {
+      setFoundedQuestions(forumState[mainTopic]);
       if (id) {
         const selectedQuestion =
           foundedQuestions.find(question => question.id === Number(id)) ?? null;

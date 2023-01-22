@@ -6,3 +6,9 @@
   align-items: flex-start;
   justify-content: center;
 }
+
+.errorWrapper {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+}

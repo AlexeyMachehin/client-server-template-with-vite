@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -7,8 +8,10 @@ import DashBoard from './dashBoard/DashBoard';
 import { IForumState } from '../../../../service/types/forumPage/IForumState';
 import { IQuestion } from '../../../../service/types/forumPage/IQuestion';
 import { forumState } from '../../../mockData/forumState';
-import classes from './header.module.css';
 import { QuestionWithTopic } from '../../../../service/types/forumPage/questionWithTopic';
+import { Button } from '@mui/material';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import classes from './header.module.css';
 
 const Search = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -29,6 +32,12 @@ export default function Header() {
   const [foundedQuestions, setFoundedQuestions] = useState<QuestionWithTopic[]>(
     []
   );
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/');
+  };
 
   const searchQuestions = (
     inputValue: string,
@@ -78,6 +87,13 @@ export default function Header() {
           Forum
         </Typography>
       </div>
+      <Button
+        className={classes.startPageButton}
+        onClick={handleClick}
+        variant="outlined"
+        startIcon={<FirstPageIcon />}>
+        start page
+      </Button>
     </div>
   );
 }

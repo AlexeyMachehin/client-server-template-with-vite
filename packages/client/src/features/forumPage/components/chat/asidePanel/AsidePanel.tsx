@@ -19,7 +19,10 @@ const SELECTED_QUESTION_COLOR = '#4caf4f2f';
 const DEFAULT_ASIDE_PANEL_WIDTH = 310;
 const WIDTH_RATIO = 0.7;
 
-export default function AsidePanel(props: IAsidePanelProps) {
+export default function AsidePanel({
+  selectedQuestion,
+  foundedQuestions,
+}: IAsidePanelProps) {
   const { mainTopic } = useParams();
   const [asidePanelWidth, setAsidePanelWidth] = useState<number>(
     DEFAULT_ASIDE_PANEL_WIDTH
@@ -34,8 +37,8 @@ export default function AsidePanel(props: IAsidePanelProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.selectedQuestion) {
-      navigate(`${props.selectedQuestion.id}`);
+    if (selectedQuestion) {
+      navigate(`${selectedQuestion.id}`);
     }
   }, []);
 
@@ -109,10 +112,7 @@ export default function AsidePanel(props: IAsidePanelProps) {
         aria-label="mailbox folders">
         <AskQuestionModal currentMainTheme={mainTopic ?? ''} />
         <div className={classes.questionsList}>
-          {renderAsidePanelItems(
-            props.foundedQuestions,
-            props.selectedQuestion?.id ?? 0
-          )}
+          {renderAsidePanelItems(foundedQuestions, selectedQuestion?.id ?? 0)}
         </div>
 
         <div className={classes.asidePanelFooter}>

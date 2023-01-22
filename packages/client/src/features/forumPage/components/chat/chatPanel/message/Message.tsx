@@ -12,7 +12,11 @@ interface IMessageProps {
   answerMessage?: null | JSX.Element;
 }
 
-export default function Message(props: IMessageProps) {
+export default function Message({
+  createAnswer,
+  message,
+  answerMessage,
+}: IMessageProps) {
   const myMessageColor = {
     backgroundColor: 'var(--myMessageColor)',
   };
@@ -20,35 +24,26 @@ export default function Message(props: IMessageProps) {
   return (
     <ListItem
       className={classes.message}
-      sx={props.message.isMyMessage ? myMessageColor : {}}>
+      sx={message.isMyMessage ? myMessageColor : {}}>
       <ListItemAvatar>
-        <Avatar alt={props.message.name} src={props.message.avatarURL} />
+        <Avatar alt={message.name} src={message.avatarURL} />
       </ListItemAvatar>
 
       <div className={classes.messageContent}>
         <div className={classes.messageHeader}>
           <div>
-            <ListItemText
-              className={classes.name}
-              secondary={props.message.name}
-            />
+            <ListItemText className={classes.name} secondary={message.name} />
           </div>
           <div>
             <ListItemText
               className={classes.date}
-              secondary={new Date(props.message.time).toDateString()}
+              secondary={new Date(message.time).toDateString()}
             />
           </div>
-          <MessageDashboard
-            createAnswer={props.createAnswer}
-            message={props.message}
-          />
+          <MessageDashboard createAnswer={createAnswer} message={message} />
         </div>
-        {props.answerMessage}
-        <ListItemText
-          className={classes.message}
-          primary={props.message.message}
-        />
+        {answerMessage}
+        <ListItemText className={classes.message} primary={message.message} />
       </div>
     </ListItem>
   );

@@ -6,13 +6,15 @@ import { Divider } from '@mui/material';
 import classes from './dashBoard.module.css';
 import { QuestionWithTopic } from '../../../../../service/types/forumPage/questionWithTopic';
 
-export default function DashBoard(props: {
+interface IDashBoard {
   foundedQuestions: QuestionWithTopic[];
-}) {
+}
+
+export default function DashBoard({ foundedQuestions }: IDashBoard) {
   const navigate = useNavigate();
   return (
     <List className={classes.dashBoardWrapper}>
-      {props.foundedQuestions.map(question => (
+      {foundedQuestions.map(question => (
         <>
           <ListItem
             className={classes.dashBoardItem}

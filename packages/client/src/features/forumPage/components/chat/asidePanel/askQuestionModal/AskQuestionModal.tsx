@@ -17,7 +17,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { CURRENT_MAIN_TOPICS } from '../../../../../../service/types/forumPage/currentMainTopic';
 import classes from './askQuestionModal.module.css';
 
-export default function AskQuestionModal(props: { currentMainTheme: string }) {
+interface IAskQuestionModal {
+  currentMainTheme: string;
+}
+
+export default function AskQuestionModal({
+  currentMainTheme,
+}: IAskQuestionModal) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -27,9 +33,8 @@ export default function AskQuestionModal(props: { currentMainTheme: string }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const [selectedValue, setTitleInputValue] = useState<string>(
-    props.currentMainTheme
-  );
+  const [selectedValue, setTitleInputValue] =
+    useState<string>(currentMainTheme);
   const handleChange = (event: SelectChangeEvent) => {
     setTitleInputValue(event.target.value);
   };
@@ -55,7 +60,11 @@ export default function AskQuestionModal(props: { currentMainTheme: string }) {
             <Select
               displayEmpty={true}
               renderValue={value => value ?? 'Choose main theme'}
-              value={CURRENT_MAIN_TOPICS[selectedValue as keyof typeof CURRENT_MAIN_TOPICS]}
+              value={
+                CURRENT_MAIN_TOPICS[
+                  selectedValue as keyof typeof CURRENT_MAIN_TOPICS
+                ]
+              }
               onChange={handleChange}>
               <MenuItem value={'discussionOfGameMoments'}>
                 {CURRENT_MAIN_TOPICS.discussionOfGameMoments}

@@ -13,24 +13,28 @@ interface IAsidePanelItemProps {
   color: string;
 }
 
-export default function AsidePanelItem(props: IAsidePanelItemProps) {
+export default function AsidePanelItem({
+  isWideAsidePanel,
+  question,
+  color,
+}: IAsidePanelItemProps) {
   const navigate = useNavigate();
   return (
     <>
       <ListItem
-        style={{ backgroundColor: props.color }}
+        style={{ backgroundColor: color }}
         onClick={() => {
-          navigate(`${props.question.id}`);
+          navigate(`${question.id}`);
         }}
         button>
         <ListItemAvatar>
-          <Avatar alt={props.question.name} src={props.question.avatarURL} />
+          <Avatar alt={question.name} src={question.avatarURL} />
         </ListItemAvatar>
 
         <div className={classes.AsidePanelItemContent}>
           <ListItemText
             sx={
-              props.isWideAsidePanel
+              isWideAsidePanel
                 ? {}
                 : {
                     overflow: 'visible',
@@ -39,17 +43,14 @@ export default function AsidePanelItem(props: IAsidePanelItemProps) {
                   }
             }
             className={classes.title}
-            primary={props.question.title}
+            primary={question.title}
           />
 
           <div className={classes.AsidePanelItemFooter}>
-            <ListItemText
-              className={classes.name}
-              secondary={props.question.name}
-            />
+            <ListItemText className={classes.name} secondary={question.name} />
             <ListItemText
               className={classes.time}
-              secondary={new Date(props.question.time).toDateString()}
+              secondary={new Date(question.time).toDateString()}
             />
           </div>
         </div>

@@ -16,7 +16,7 @@ interface IChatPanelProps {
   selectedQuestion: null | IQuestion;
 }
 
-export default function ChatPanel(props: IChatPanelProps) {
+export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
   const [inputValue, setInputValue] = useState<string>('');
   const [answerMessage, setAnswerMessage] = useState<null | JSX.Element>(null);
   const [answerMessageComponent, setAnswerMessageComponent] =
@@ -25,9 +25,12 @@ export default function ChatPanel(props: IChatPanelProps) {
 
   useEffect(() => {
     if (messagesPanelRef.current) {
-      messagesPanelRef.current.scrollTo(0, messagesPanelRef.current.scrollHeight);
+      messagesPanelRef.current.scrollTo(
+        0,
+        messagesPanelRef.current.scrollHeight
+      );
     }
-  }, [props.selectedQuestion]);
+  }, [selectedQuestion]);
 
   const createAnswerTemplate = (message: IMessage): JSX.Element => {
     return (
@@ -60,9 +63,9 @@ export default function ChatPanel(props: IChatPanelProps) {
     <>
       <div className={classes.chatPanel}>
         <div className={classes.chatPanelHeader}>
-          {props.selectedQuestion ? (
+          {selectedQuestion ? (
             <div className={classes.selectionQuestionTitle}>
-              {props.selectedQuestion.title}
+              {selectedQuestion.title}
             </div>
           ) : (
             <Typography className={classes.mainTitle}>
@@ -73,7 +76,7 @@ export default function ChatPanel(props: IChatPanelProps) {
         </div>
 
         <div ref={messagesPanelRef} className={classes.chatPanelMain}>
-          {props.selectedQuestion?.messages.map((message: IMessage) => (
+          {selectedQuestion?.messages.map((message: IMessage) => (
             <Message
               createAnswer={createAnswer}
               key={message.id}

@@ -11,7 +11,10 @@ interface IMessageDashboardProps {
   createAnswer: (message: IMessage) => void;
 }
 
-export default function MessageDashboard(props: IMessageDashboardProps) {
+export default function MessageDashboard({
+  message,
+  createAnswer,
+}: IMessageDashboardProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,7 +44,7 @@ export default function MessageDashboard(props: IMessageDashboardProps) {
         <MenuItem
           onClick={() => {
             setAnchorEl(null);
-            props.createAnswer(props.message);
+            createAnswer(message);
           }}>
           To answer
         </MenuItem>

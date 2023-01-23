@@ -1,5 +1,5 @@
 import { useState, forwardRef } from 'react';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';

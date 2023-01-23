@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import HowToPlayModal from '../howToPlayModal/HowToPlayModal';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';

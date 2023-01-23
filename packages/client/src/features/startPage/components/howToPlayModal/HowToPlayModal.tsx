@@ -40,20 +40,18 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>(function Fade(props, ref) {
 
 export default function HowToPlayModal() {
   const [isModalOpen, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <>
       <Tooltip title="Open guide">
-        <Button onClick={handleOpen}>How to play</Button>
+        <Button onClick={() => setOpen(true)}>How to play</Button>
       </Tooltip>
       <Modal
         className={classes.modalWrapper}
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
         open={isModalOpen}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         closeAfterTransition>
         <Fade in={isModalOpen}>
           <Box className={classes.textModal}>

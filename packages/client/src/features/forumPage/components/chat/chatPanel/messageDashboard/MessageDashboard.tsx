@@ -13,35 +13,34 @@ interface IMessageDashboardProps {
 
 export default function MessageDashboard(props: IMessageDashboardProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const isOpen = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-  };
-  const handleClose = (): void => {
-    setAnchorEl(null);
   };
 
   return (
     <div>
       <IconButton
         className={classes.button}
-        aria-controls={open ? 'basic-menu' : undefined}
+        aria-controls={isOpen ? 'basic-menu' : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={isOpen ? 'true' : undefined}
         onClick={handleClick}>
         <MenuIcon className={classes.buttonIcon} />
       </IconButton>
 
       <Menu
         anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
+        open={isOpen}
+        onClose={() => {
+          setAnchorEl(null);
+        }}
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}>
         <MenuItem
           onClick={() => {
-            handleClose();
+            setAnchorEl(null);
             props.createAnswer(props.message);
           }}>
           To answer

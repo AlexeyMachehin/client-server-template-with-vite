@@ -35,25 +35,24 @@ export default function Header() {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/');
-  };
-
   const searchQuestions = (
     inputValue: string,
     mainThemes: IForumState
   ): QuestionWithTopic[] => {
-    const foundQuestionsArray: QuestionWithTopic[] = [];
-    for (const mainTopic in mainThemes) {
-      mainThemes[mainTopic].forEach((question: IQuestion) => {
-        const regExp = new RegExp(`${inputValue.toLowerCase()}`);
-        const value = question.title.toLowerCase();
-        if (regExp.test(value)) {
-          foundQuestionsArray.push({ ...question, topic: mainTopic });
-        }
-      });
-    }
-    return foundQuestionsArray;
+    const regExp = new RegExp(inputValue.toLowerCase());
+    return Object.entries(mainThemes).reduce(
+      (foundQuestions: QuestionWithTopic[], [mainTopic, questions]) => {
+        questions
+          .filter((question: IQuestion) =>
+            regExp.test(question.title.toLowerCase())
+          )
+          .map(question =>
+            foundQuestions.push({ ...question, topic: mainTopic })
+          );
+        return foundQuestions;
+      },
+      []
+    );
   };
 
   const handleOnChangeInput = (event: FormEvent<HTMLInputElement>) => {
@@ -89,7 +88,7 @@ export default function Header() {
       </div>
       <Button
         className={classes.startPageButton}
-        onClick={handleClick}
+        onClick={() => navigate('/')}
         variant="outlined"
         startIcon={<FirstPageIcon />}>
         start page

@@ -26,13 +26,6 @@ export default function AskQuestionModal({
 }: IAskQuestionModal) {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const [selectedValue, setTitleInputValue] =
     useState<string>(currentMainTheme);
   const handleChange = (event: SelectChangeEvent) => {
@@ -43,7 +36,7 @@ export default function AskQuestionModal({
     <div>
       <ListItem
         className={classes.askQuestionButton}
-        onClick={handleClickOpen}
+        onClick={() => setOpen(true)}
         button>
         <ListItemAvatar>
           <Avatar className={classes.askQuestionAvatar}>
@@ -54,7 +47,7 @@ export default function AskQuestionModal({
       </ListItem>
       <Divider />
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle className={classes.title}>
           <FormControl variant="standard" sx={{ m: 1 }}>
             <Select
@@ -90,8 +83,8 @@ export default function AskQuestionModal({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Send</Button>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button onClick={() => setOpen(false)}>Send</Button>
         </DialogActions>
       </Dialog>
     </div>

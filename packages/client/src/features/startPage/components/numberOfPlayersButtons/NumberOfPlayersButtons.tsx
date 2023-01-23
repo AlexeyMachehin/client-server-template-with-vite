@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import '@fontsource/orbitron/400.css';

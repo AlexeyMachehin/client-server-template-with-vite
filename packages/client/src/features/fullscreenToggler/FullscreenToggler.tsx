@@ -13,6 +13,13 @@ export default function FullscreenToggler(props: { elementId: string }) {
         setIsFullScreen(false);
       }
     });
+    return () => {
+      document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+          setIsFullScreen(false);
+        }
+      });
+    };
   }, []);
 
   const toggleFullScreen = (elementId: string) => {

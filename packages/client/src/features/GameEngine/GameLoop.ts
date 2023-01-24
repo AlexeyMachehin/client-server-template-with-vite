@@ -1,3 +1,6 @@
+import { Scene } from './Scene';
+import { GameLevel } from './scenes/GameLevel';
+import { Loading } from './scenes/Loading';
 import { Screen } from './Screen';
 
 export type GameLoopPropsType = {
@@ -13,6 +16,8 @@ export class GameLoop {
   dt: number;
   now: number;
   screen: Screen;
+  scenes: Record<string, Scene>;
+  currentScene: Scene;
 
   constructor({ width, height, canvas }: GameLoopPropsType) {
     this.screen = new Screen(width, height, canvas);
@@ -21,6 +26,24 @@ export class GameLoop {
     this.step = 1 / this.fps;
     this.dt = 0;
     this.now = 0;
+    this.scenes = {
+      loading: new Loading(this),
+      gameLevel: new GameLevel(this),
+    };
+    this.currentScene = this.scenes.loading;
+    this.currentScene.init();
+  }
+
+  changeScene(status: string) {
+    switch (status) {
+      case Scene.LOADED:
+        return this.scenes.gameLevel;
+        break;
+
+      default:
+        return this.scenes.loading;
+        break;
+    }
   }
 
   tick = () => {
@@ -31,9 +54,15 @@ export class GameLoop {
     this.dt = this.dt + (this.now - this.last) / 1000;
     while (this.dt > this.step) {
       this.dt = this.dt - this.step;
+      this.currentScene.update(this.step);
     }
     this.last = this.now;
 
+    if (this.currentScene.status !== Scene.WORKING) {
+      this.currentScene = this.changeScene(this.currentScene.status);
+      this.currentScene.init();
+    }
+    this.currentScene.render(this.dt);
     requestAnimationFrame(this.tick);
   };
 

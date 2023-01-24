@@ -33,7 +33,7 @@ export class GameLoop {
     }
     this.last = this.now;
 
-    this.render(this.dt * this.fps);
+    this.render(this.dt);
     requestAnimationFrame(this.tick);
   };
 

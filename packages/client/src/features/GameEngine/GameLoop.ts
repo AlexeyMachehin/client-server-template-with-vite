@@ -29,11 +29,11 @@ export class GameLoop {
     this.dt = this.dt + (this.now - this.last) / 1000;
     while (this.dt > this.step) {
       this.dt = this.dt - this.step;
-      this.update(this.step);
+      this.update(this.step); //
     }
     this.last = this.now;
 
-    this.render(this.dt);
+    this.render(this.dt * this.fps);
     requestAnimationFrame(this.tick);
   };
 

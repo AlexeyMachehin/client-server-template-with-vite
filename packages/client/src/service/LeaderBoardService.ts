@@ -1,4 +1,4 @@
-import { AxiosService } from './AxiosService';
+import { AxiosService, IBasePayload } from './AxiosService';
 import { ApiEndpoint } from './types/api/enums/ApiEndpoint';
 import { IPlayer, IPlayerPayload } from './types/liderBoard/IPlayer';
 
@@ -6,11 +6,11 @@ class LeaderBoardService extends AxiosService {
   private readonly TEAM_NAME = 'bombers';
   private readonly RATING_FIELD_NAME = 'score';
 
-  constructor() {
+  public constructor() {
     super();
   }
 
-  public addPlayer(player: IPlayer) {
+  public addPlayer(player: IPlayer): Promise<IBasePayload> {
     const requestData = {
       data: player,
       ratingFieldName: this.RATING_FIELD_NAME,

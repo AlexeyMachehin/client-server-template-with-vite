@@ -7,6 +7,7 @@ import classes from './navigateLinks.module.css';
 import Alert from '@mui/material/Alert';
 import { useState } from 'react';
 import { authService } from '../../../../service/AuthService';
+import FullscreenToggler from '../../../fullscreenToggler/FullscreenToggler';
 
 const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 
@@ -27,6 +28,7 @@ export default function NavigateLinks() {
 
   return (
     <Box
+      id="fullScreenElement"
       className={classes.navigateLinksWrapper}
       sx={{
         typography: 'body1',
@@ -52,6 +54,7 @@ export default function NavigateLinks() {
           {logoutError}
         </Alert>
       )}
+      <FullscreenToggler elementId={'fullScreenElement'} />
     </Box>
   );
 }

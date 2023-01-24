@@ -1,11 +1,9 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import StartPage from './pages/startPage/StartPage';
 import Login from './pages/Login/index';
 import Signup from './pages/Signup';
-
 import './styles/App.css';
-
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function App() {
   const theme = createTheme();

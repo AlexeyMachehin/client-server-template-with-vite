@@ -802,12 +802,16 @@
     "@babel/types" "^7.18.10"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@babel/plugin-transform-regenerator@^7.18.6":
   "integrity" "sha512-kW/oO7HPBtntbsahzQ0qSE3tFvkFwnbozz3NWFhLGqH75vLEg+sCGngLlhVkePlCs3Jv0dBBHDzCHxNiFAQKCQ=="
   "resolved" "https://registry.npmjs.org/@babel/plugin-transform-regenerator/-/plugin-transform-regenerator-7.20.5.tgz"
   "version" "7.20.5"
 =======
 "@babel/runtime@^7.12.1", "@babel/runtime@^7.9.2":
+=======
+"@babel/runtime@^7.12.1", "@babel/runtime@^7.15.4", "@babel/runtime@^7.9.2":
+>>>>>>> feature/bo-62-подключить-api-fullscreen
   version "7.20.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.7.tgz#fcb41a5a70550e04a7b708037c7c32f7f356d8fd"
   integrity sha512-UF0tvkUtxwAgZ5W/KrkHf0Rn0fdnLDU9ScxBrEVNUprE/MzirjK4MJUX1/BVDv00Sv8cljtukVK1aky++X1SjQ==
@@ -823,6 +827,7 @@
     "@babel/helper-plugin-utils" "^7.20.2"
     "regenerator-transform" "^0.15.1"
 
+<<<<<<< HEAD
 "@babel/plugin-transform-reserved-words@^7.18.6":
   "integrity" "sha512-oX/4MyMoypzHjFrT1CdivfKZ+XvIPMFXwwxHp/r0Ddy2Vuomt4HDFGmft1TAY2yiTKiNSsh3kjBAzcM8kSdsjA=="
   "resolved" "https://registry.npmjs.org/@babel/plugin-transform-reserved-words/-/plugin-transform-reserved-words-7.18.6.tgz"
@@ -1034,6 +1039,12 @@
   "integrity" "sha512-8SegXApWe6VoNw0r9JHpSteLKTpTiLZ4rMlGIm9JQ18KiCtyQiAMEazujAHrUS5flrcqYZa75ukev3P6QmUwUw=="
   "resolved" "https://registry.npmjs.org/@babel/template/-/template-7.20.7.tgz"
   "version" "7.20.7"
+=======
+"@babel/template@^7.18.10", "@babel/template@^7.20.7", "@babel/template@^7.3.3":
+  version "7.20.7"
+  resolved "https://registry.npmjs.org/@babel/template/-/template-7.20.7.tgz"
+  integrity sha512-8SegXApWe6VoNw0r9JHpSteLKTpTiLZ4rMlGIm9JQ18KiCtyQiAMEazujAHrUS5flrcqYZa75ukev3P6QmUwUw==
+>>>>>>> feature/bo-62-подключить-api-fullscreen
   dependencies:
     "@babel/code-frame" "^7.18.6"
     "@babel/parser" "^7.20.7"
@@ -1122,10 +1133,17 @@
   "resolved" "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.8.0.tgz"
   "version" "0.8.0"
 
+<<<<<<< HEAD
 "@emotion/react@^11.0.0-rc.0", "@emotion/react@^11.10.5", "@emotion/react@^11.4.1", "@emotion/react@^11.5.0", "@emotion/react@11.10.5":
   "integrity" "sha512-TZs6235tCJ/7iF6/rvTaOH4oxQg2gMAcdHemjwLKIjKz4rRuYe1HJ2TQJKnAcRAfOUDdU8XoDadCe1rl72iv8A=="
   "resolved" "https://registry.npmjs.org/@emotion/react/-/react-11.10.5.tgz"
   "version" "11.10.5"
+=======
+"@emotion/react@11.10.5":
+  version "11.10.5"
+  resolved "https://registry.npmjs.org/@emotion/react/-/react-11.10.5.tgz"
+  integrity sha512-TZs6235tCJ/7iF6/rvTaOH4oxQg2gMAcdHemjwLKIjKz4rRuYe1HJ2TQJKnAcRAfOUDdU8XoDadCe1rl72iv8A==
+>>>>>>> feature/bo-62-подключить-api-fullscreen
   dependencies:
     "@babel/runtime" "^7.18.3"
     "@emotion/babel-plugin" "^11.10.5"
@@ -1152,10 +1170,17 @@
   "resolved" "https://registry.npmjs.org/@emotion/sheet/-/sheet-1.2.1.tgz"
   "version" "1.2.1"
 
+<<<<<<< HEAD
 "@emotion/styled@^11.10.5", "@emotion/styled@^11.3.0", "@emotion/styled@11.10.5":
   "integrity" "sha512-8EP6dD7dMkdku2foLoruPCNkRevzdcBaY6q0l0OsbyJK+x8D9HWjX27ARiSIKNF634hY9Zdoedh8bJCiva8yZw=="
   "resolved" "https://registry.npmjs.org/@emotion/styled/-/styled-11.10.5.tgz"
   "version" "11.10.5"
+=======
+"@emotion/styled@11.10.5":
+  version "11.10.5"
+  resolved "https://registry.npmjs.org/@emotion/styled/-/styled-11.10.5.tgz"
+  integrity sha512-8EP6dD7dMkdku2foLoruPCNkRevzdcBaY6q0l0OsbyJK+x8D9HWjX27ARiSIKNF634hY9Zdoedh8bJCiva8yZw==
+>>>>>>> feature/bo-62-подключить-api-fullscreen
   dependencies:
     "@babel/runtime" "^7.18.3"
     "@emotion/babel-plugin" "^11.10.5"
@@ -2305,6 +2330,7 @@
     "prop-types" "^15.8.1"
     "react-is" "^18.2.0"
 
+<<<<<<< HEAD
 "@mui/base@5.0.0-alpha.114":
   "integrity" "sha512-ZpsG2I+zTOAnVTj3Un7TxD2zKRA2OhEPGMcWs/9ylPlS6VuGQSXowPooZiqarjT7TZ0+1bOe8titk/t8dLFiGw=="
   "resolved" "https://registry.npmjs.org/@mui/base/-/base-5.0.0-alpha.114.tgz"
@@ -2323,6 +2349,12 @@
   "integrity" "sha512-MIuWGjitOsugpRhp64CQY3ZEVMIu9M/L9ioql6QLSkz73+bGIlC9FEhfi670/GZ8pQIIGmtiGGwofYzlwEWjig=="
   "resolved" "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.11.5.tgz"
   "version" "5.11.5"
+=======
+"@mui/core-downloads-tracker@^5.11.1":
+  version "5.11.1"
+  resolved "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.11.1.tgz"
+  integrity sha512-QVqVNlZ2K+LqUDE5kFgYd0r4KekR/dv2cNYbAutQWbfOA8VPVUVrDz0ELrEcoe8TjM/CwnsmGvaDh/YSNl/ALA==
+>>>>>>> feature/bo-62-подключить-api-fullscreen
 
 "@mui/icons-material@5.11.0":
   "integrity" "sha512-I2LaOKqO8a0xcLGtIozC9xoXjZAto5G5gh0FYUMAlbsIHNHIjn4Xrw9rvjY20vZonyiGrZNMAlAXYkY6JvhF6A=="
@@ -2349,6 +2381,7 @@
     "react-is" "^18.2.0"
     "react-transition-group" "^4.4.5"
 
+<<<<<<< HEAD
 "@mui/material@5.11.5":
   "integrity" "sha512-5fzjBbRYaB5MoEpvA32oalAWltOZ3/kSyuovuVmPc6UF6AG42lTtbdMLpdCygurFSGUMZYTg4Cjij52fKlDDgg=="
   "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.11.5.tgz"
@@ -2376,6 +2409,17 @@
     "@mui/utils" "^5.11.2"
     "prop-types" "^15.8.1"
 
+=======
+"@mui/private-theming@^5.11.1":
+  version "5.11.1"
+  resolved "https://registry.npmjs.org/@mui/private-theming/-/private-theming-5.11.1.tgz"
+  integrity sha512-nnHg7kA5RwFRhy0wiDYe59sLCVGORpPypL1JcEdhv0+N0Zbmc2E/y4z2zqMRZ62MAEscpro7cQbvv244ThA84A==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
+    "@mui/utils" "^5.11.1"
+    prop-types "^15.8.1"
+
+>>>>>>> feature/bo-62-подключить-api-fullscreen
 "@mui/styled-engine@^5.11.0":
   "integrity" "sha512-AF06K60Zc58qf0f7X+Y/QjaHaZq16znliLnGc9iVrV/+s8Ln/FCoeNuFvhlCbZZQ5WQcJvcy59zp0nXrklGGPQ=="
   "resolved" "https://registry.npmjs.org/@mui/styled-engine/-/styled-engine-5.11.0.tgz"
@@ -2386,6 +2430,7 @@
     "csstype" "^3.1.1"
     "prop-types" "^15.8.1"
 
+<<<<<<< HEAD
 "@mui/system@^5.11.1", "@mui/system@^5.11.5":
   "integrity" "sha512-KNVsJ0sgRRp2XBqhh4wPS5aacteqjwxgiYTVwVnll2fgkgunZKo3DsDiGMrFlCg25ZHA3Ax58txWGE9w58zp0w=="
   "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.11.5.tgz"
@@ -2399,12 +2444,28 @@
     "clsx" "^1.2.1"
     "csstype" "^3.1.1"
     "prop-types" "^15.8.1"
+=======
+"@mui/system@^5.11.1":
+  version "5.11.1"
+  resolved "https://registry.npmjs.org/@mui/system/-/system-5.11.1.tgz"
+  integrity sha512-BEA2S0hay8n8CcZftkeAVsi0nsb5ZjdnZRCahv5lX7QJYwDjO4ucJ6lnvxHe2v/9Te1LLjTO7ojxu/qM6CE5Cg==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
+    "@mui/private-theming" "^5.11.1"
+    "@mui/styled-engine" "^5.11.0"
+    "@mui/types" "^7.2.3"
+    "@mui/utils" "^5.11.1"
+    clsx "^1.2.1"
+    csstype "^3.1.1"
+    prop-types "^15.8.1"
+>>>>>>> feature/bo-62-подключить-api-fullscreen
 
 "@mui/types@^7.2.3":
   "integrity" "sha512-tZ+CQggbe9Ol7e/Fs5RcKwg/woU+o8DCtOnccX6KmbBc7YrfqMYEYuaIcXHuhpT880QwNkZZ3wQwvtlDFA2yOw=="
   "resolved" "https://registry.npmjs.org/@mui/types/-/types-7.2.3.tgz"
   "version" "7.2.3"
 
+<<<<<<< HEAD
 "@mui/utils@^5.11.1", "@mui/utils@^5.11.2":
   "integrity" "sha512-AyizuHHlGdAtH5hOOXBW3kriuIwUIKUIgg0P7LzMvzf6jPhoQbENYqY6zJqfoZ7fAWMNNYT8mgN5EftNGzwE2w=="
   "resolved" "https://registry.npmjs.org/@mui/utils/-/utils-5.11.2.tgz"
@@ -2415,6 +2476,18 @@
     "@types/react-is" "^16.7.1 || ^17.0.0"
     "prop-types" "^15.8.1"
     "react-is" "^18.2.0"
+=======
+"@mui/utils@^5.11.1":
+  version "5.11.1"
+  resolved "https://registry.npmjs.org/@mui/utils/-/utils-5.11.1.tgz"
+  integrity sha512-lMAPgIJoil8V9ZxsMbEflMsvZmWcHbRVMc4JDY9jPO9V4welpF43h/O267b1RqlcRnC5MEbVQV605GYkTZY29Q==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
+    "@types/prop-types" "^15.7.5"
+    "@types/react-is" "^16.7.1 || ^17.0.0"
+    prop-types "^15.8.1"
+    react-is "^18.2.0"
+>>>>>>> feature/bo-62-подключить-api-fullscreen
 
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
@@ -6278,10 +6351,17 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-
   "resolved" "https://registry.npmjs.org/ieee754/-/ieee754-1.2.1.tgz"
   "version" "1.2.1"
 
+<<<<<<< HEAD
 "ignore-by-default@^1.0.1":
   "integrity" "sha512-Ius2VYcGNk7T90CppJqcIkS5ooHUZyIQK+ClZfMfMNFEF9VSE73Fq+906u/CWu92x4gzZMWOwfFYckPObzdEbA=="
   "resolved" "https://registry.npmjs.org/ignore-by-default/-/ignore-by-default-1.0.1.tgz"
   "version" "1.0.1"
+=======
+immer@9.0.18, immer@^9.0.16:
+  version "9.0.18"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.18.tgz#d2faee58fd0e34f017f329b98cdab37826fa31b8"
+  integrity sha512-eAPNpsj7Ax1q6Y/3lm2PmlwRcFzpON7HSNQ3ru5WQH1/PSpnyed/HpNOELl2CxLKoj4r+bAHgdyKqW5gc2Se1A==
+>>>>>>> feature/bo-62-подключить-api-fullscreen
 
 "ignore-walk@^5.0.1":
   "integrity" "sha512-yemi4pMf51WKT7khInJqAvsIGzoqYXblnsz0ql8tM+yi1EKYTY1evX4NAbJrLL/Aanr2HyZeluqU+Oi7MGHokw=="
@@ -9614,12 +9694,21 @@ react-router-dom@6.6.2:
 >>>>>>> develop
   dependencies:
     "@remix-run/router" "1.2.1"
+<<<<<<< HEAD
     "react-router" "6.6.1"
 
 "react-router@6.6.1":
   "integrity" "sha512-YkvlYRusnI/IN0kDtosUCgxqHeulN5je+ew8W+iA1VvFhf86kA+JEI/X/8NqYcr11hCDDp906S+SGMpBheNeYQ=="
   "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.6.1.tgz"
   "version" "6.6.1"
+=======
+    react-router "6.6.2"
+
+react-router@6.6.2:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.6.2.tgz#556f7b56cff7fe32c5c02429fef3fcb2ecd08111"
+  integrity sha512-uJPG55Pek3orClbURDvfljhqFvMgJRo59Pktywkk8hUUkTY2aRfza8Yhl/vZQXs+TNQyr6tu+uqz/fLxPICOGQ==
+>>>>>>> feature/bo-62-подключить-api-fullscreen
   dependencies:
     "@remix-run/router" "1.2.1"
 

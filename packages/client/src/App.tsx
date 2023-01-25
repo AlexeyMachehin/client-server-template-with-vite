@@ -1,13 +1,11 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import ForumPage from './pages/forumPage/ForumPage';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import StartPage from './pages/startPage/StartPage';
 import Chat from './features/forumPage/components/chat/Chat';
 import Login from './pages/Login/index';
 import Signup from './pages/Signup';
-
 import './styles/App.css';
-
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function App() {
   const theme = createTheme();

@@ -7,12 +7,12 @@ import classes from './numberOfPlayersButtons.module.css';
 
 const images = [
   {
-    url: 'https://segaretro.org/images/a/a5/Bmo_bomberman3.png',
+    url: '../../../../../static/img/oneBomber.jpg',
     title: 'ONE PLAYER',
     width: '50%',
   },
   {
-    url: 'https://kit168.com/wp-content/uploads/2015/06/white-bomberman-bomberman-1-kit168.com_.jpg',
+    url: '../../../../../static/img/twoBombers.jpg',
     title: 'TWO PLAYERS',
     width: '50%',
   },

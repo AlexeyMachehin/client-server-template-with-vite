@@ -1,5 +1,7 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import ForumPage from './pages/forumPage/ForumPage';
 import StartPage from './pages/startPage/StartPage';
+import Chat from './features/forumPage/components/chat/Chat';
 import Login from './pages/Login/index';
 import Signup from './pages/Signup';
 
@@ -17,6 +19,10 @@ function App() {
             <Route path="/" element={<StartPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="forum" element={<ForumPage />} />
+            <Route path="forum/:mainTopic" element={<Chat />}>
+              <Route path=":id" element={<Chat />} />
+            </Route>
           </Routes>
         </div>
       </ThemeProvider>

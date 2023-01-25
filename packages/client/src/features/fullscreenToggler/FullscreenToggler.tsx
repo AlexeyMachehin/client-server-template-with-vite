@@ -4,7 +4,13 @@ import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import classes from './fullscreenToggler.module.css';
 
-export default function FullscreenToggler(props: { elementId: string }) {
+interface IFullscreenTogglerProps {
+  elementId: string;
+}
+
+export default function FullscreenToggler({
+  elementId,
+}: IFullscreenTogglerProps) {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
@@ -14,7 +20,7 @@ export default function FullscreenToggler(props: { elementId: string }) {
       }
     });
     return () => {
-      document.addEventListener('fullscreenchange', () => {
+      document.removeEventListener('fullscreenchange', () => {
         if (!document.fullscreenElement) {
           setIsFullScreen(false);
         }
@@ -38,7 +44,7 @@ export default function FullscreenToggler(props: { elementId: string }) {
     <Button
       className={classes.toggleButtonIcon}
       onClick={() => {
-        toggleFullScreen(props.elementId);
+        toggleFullScreen(elementId);
       }}>
       {isFullScreen ? (
         <FullscreenExitIcon className={classes.toggleButtonIcon} />

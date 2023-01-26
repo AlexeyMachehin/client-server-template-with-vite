@@ -46,8 +46,6 @@ function GoogleAuth() {
   }, []);
 
   function handleCredentialResponse(response: { credential: string }) {
-    console.log('Encoded JWT ID token: ' + jwtDecode(response.credential));
-
     dispatch(setUser(jwtDecode(response.credential)));
 
     navigate('/');

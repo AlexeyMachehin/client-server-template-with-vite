@@ -23,7 +23,7 @@ export class GameLoop {
   control: ControlState;
 
   constructor({ width = 500, height = 500, canvas }: GameLoopPropsType) {
-    this.last = performance.now();
+    this.last = 0;
     this.fps = 60;
     this.step = 1 / this.fps;
     this.dt = 0;
@@ -59,7 +59,7 @@ export class GameLoop {
 
     this.now = performance.now();
 
-    this.dt = this.dt + (this.now - this.last) / 1000;
+    this.dt = this.dt + Math.min(1, (this.now - this.last) / 1000);
     while (this.dt > this.step) {
       this.dt = this.dt - this.step;
       this.currentScene.update(this.step);

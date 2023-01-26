@@ -16,9 +16,12 @@ import {
   useLoginFormik,
 } from '../../features/Login/hooks/useLoginFormik';
 import Alert from '@mui/material/Alert';
+import GoogleAuth from './components/GoogleAuth';
+import { useNavigate } from 'react-router-dom';
 
 const Login: FC = () => {
   const [loginError, setLoginError] = useState<null | string>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (values: ILoginFormValues) => {
     try {
@@ -26,6 +29,8 @@ const Login: FC = () => {
         login: values.login,
         password: values.password,
       });
+
+      navigate('/');
       setLoginError(null);
     } catch (e) {
       if (typeof e === 'string') {
@@ -89,6 +94,8 @@ const Login: FC = () => {
           <Link href="#" variant="body2">
             "Don't have an account? Sign Up"
           </Link>
+          <h3>or</h3>
+          <GoogleAuth />
         </form>
       </div>
     </div>

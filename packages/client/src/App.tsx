@@ -6,20 +6,30 @@ import Signup from './pages/Signup';
 import './styles/App.css';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Provider } from 'react-redux';
+import { store, useSelector } from './store/store';
+import RequireAuth from './utils/Route/ProtectedRoute';
 
 function App() {
   const theme = createTheme();
+
+  const user = useSelector(state => state['common'].user);
+
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <div id="App" className="App">
-          <Routes>
-            <Route path="/" element={<StartPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </div>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <div id="App" className="App">
+            <Routes>
+              <Route element={<RequireAuth isAuthorized={!!user} />}>
+                <Route path="/" element={<StartPage />} />
+              </Route>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </div>
+        </ThemeProvider>
+      </Provider>
     </BrowserRouter>
   );
 }

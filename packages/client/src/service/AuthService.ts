@@ -8,16 +8,38 @@ class AuthService extends AxiosService {
     super();
   }
 
-  public login(dto: ILoginRequestDto) {
-    return this.post(ApiEndpoint.SIGN_IN, dto);
+  public async login(dto: ILoginRequestDto) {
+    return this.post(ApiEndpoint.SIGN_IN, dto)
+      .then(() => {
+        return this.fetchUser();
+      })
+      .catch(error => {
+        throw new Error(error);
+      });
   }
 
   public signup(dto: ISignupRequestDto): Promise<IBasePayload> {
-    return this.post(ApiEndpoint.SIGN_UP, dto);
+    return this.post(ApiEndpoint.SIGN_UP, dto)
+      .then(() => {
+        return this.fetchUser();
+      })
+      .catch(error => {
+        throw new Error(error);
+      });
   }
 
   public logout(): Promise<IBasePayload> {
     return this.post(ApiEndpoint.LOGOUT);
+  }
+
+  public fetchUser(): Promise<IBasePayload> {
+    return this.get(ApiEndpoint.FETCH_USER)
+      .then(data => {
+        return JSON.parse(`${data}`);
+      })
+      .catch(error => {
+        throw new Error(error);
+      }) as Promise<ISignupRequestDto>;
   }
 }
 

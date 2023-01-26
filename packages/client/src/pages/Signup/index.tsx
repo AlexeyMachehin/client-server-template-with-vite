@@ -8,8 +8,11 @@ import {
   useSignupFormik,
 } from '../../features/Signup/hooks/useSignupFormik';
 import { authService } from '../../service/AuthService';
+import { useNavigate } from 'react-router-dom';
 
 const Signup: FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: ISignupFormValues) => {
     await authService.signup({
       first_name: values.firstName,
@@ -19,6 +22,8 @@ const Signup: FC = () => {
       login: values.login,
       password: values.password,
     });
+
+    navigate('/');
   };
 
   const formik = useSignupFormik({ onSubmit: handleSubmit });

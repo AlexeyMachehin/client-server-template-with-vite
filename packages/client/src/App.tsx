@@ -2,6 +2,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import StartPage from './pages/startPage/StartPage';
 import Login from './pages/Login/index';
 import Signup from './pages/Signup';
+import LeaderBoard from './pages/leaderBoardPage/LeaderBoardPage';
 
 import './styles/App.css';
 
@@ -26,6 +27,7 @@ function App() {
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/leaderboard" element={<LeaderBoard />} />
             </Routes>
           </div>
         </ThemeProvider>

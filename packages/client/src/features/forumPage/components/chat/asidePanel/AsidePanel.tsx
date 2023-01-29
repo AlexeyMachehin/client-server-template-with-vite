@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import List from '@mui/material/List';
 import AsidePanelItem from './asidePanelItem/AsidePanelItem';
@@ -83,25 +83,16 @@ export default function AsidePanel({
     bgcolor: 'background.paper',
   };
 
-  const renderAsidePanelItems = (
-    items: IQuestion[],
-    selectedQuestionId: number
-  ) => {
-    return items
-      .sort((a: IQuestion, b: IQuestion) => a.title.localeCompare(b.title))
-      .map((question: IQuestion) => {
-        return (
-          <AsidePanelItem
-            isWideAsidePanel={isWideAsidePanel}
-            key={question.id}
-            question={question}
-            color={
-              question.id === selectedQuestionId ? SELECTED_QUESTION_COLOR : ''
-            }
-          />
-        );
-      });
+  const sortAsidePanelItems = (items: IQuestion[]) => {
+    return items.sort((a: IQuestion, b: IQuestion) =>
+      a.title.localeCompare(b.title)
+    );
   };
+
+  const asidePanelItems = useMemo(
+    () => sortAsidePanelItems(foundedQuestions),
+    [foundedQuestions]
+  );
 
   return (
     <div className={classes.asidePanelWrapper}>
@@ -112,7 +103,20 @@ export default function AsidePanel({
         aria-label="mailbox folders">
         <AskQuestionModal currentMainTheme={mainTopic ?? ''} />
         <div className={classes.questionsList}>
-          {renderAsidePanelItems(foundedQuestions, selectedQuestion?.id ?? 0)}
+          {asidePanelItems.map((question: IQuestion) => {
+            return (
+              <AsidePanelItem
+                isWideAsidePanel={isWideAsidePanel}
+                key={`${question.title}${question.id}`}
+                question={question}
+                color={
+                  question.id === selectedQuestion?.id
+                    ? SELECTED_QUESTION_COLOR
+                    : ''
+                }
+              />
+            );
+          })}
         </div>
 
         <div className={classes.asidePanelFooter}>

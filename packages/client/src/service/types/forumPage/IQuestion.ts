@@ -7,5 +7,5 @@ export interface IQuestion {
   time: string;
   content: string;
   avatarURL: string;
-  messages: IMessage[] | [];
+  messages: IMessage[];
 }

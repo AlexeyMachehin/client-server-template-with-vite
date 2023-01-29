@@ -35,21 +35,21 @@ export default function Header() {
 
   const navigate = useNavigate();
 
-  const searchQuestions = (
+  const getFilteredQuestions = (
     inputValue: string,
-    mainThemes: IForumState
+    mainTopics: IForumState
   ): QuestionWithTopic[] => {
     const regExp = new RegExp(inputValue.toLowerCase());
-    return Object.entries(mainThemes).reduce(
-      (foundQuestions: QuestionWithTopic[], [mainTopic, questions]) => {
-        questions
-          .filter((question: IQuestion) =>
-            regExp.test(question.title.toLowerCase())
-          )
-          .map(question =>
-            foundQuestions.push({ ...question, topic: mainTopic })
-          );
-        return foundQuestions;
+
+    return Object.entries(mainTopics).reduce<QuestionWithTopic[]>(
+      (foundQuestions, [mainTopic, questions]) => {
+        return foundQuestions.concat(
+          questions
+            .filter((question: IQuestion) =>
+              regExp.test(question.title.toLowerCase())
+            )
+            .map(question => ({ ...question, topic: mainTopic }))
+        );
       },
       []
     );
@@ -59,7 +59,7 @@ export default function Header() {
     const searchInputValue = (event.target as HTMLInputElement).value;
     const foundedQuestions =
       searchInputValue !== ''
-        ? searchQuestions(searchInputValue, forumState)
+        ? getFilteredQuestions(searchInputValue, forumState)
         : [];
     setFoundedQuestions(foundedQuestions);
   };

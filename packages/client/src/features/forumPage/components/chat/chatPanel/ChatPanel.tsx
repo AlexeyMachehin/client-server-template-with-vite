@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import WestIcon from '@mui/icons-material/West';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -59,6 +59,21 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
     setAnswerMessage(null);
   };
 
+  const renderMessages = (messages: any) => {
+    return messages.map((message: IMessage) => (
+      <Message
+        createAnswer={createAnswer}
+        key={`${message.name}${message.id}`}
+        message={message}
+      />
+    ));
+  };
+
+  const messages = useMemo(
+    () => renderMessages(selectedQuestion?.messages ?? []),
+    [selectedQuestion]
+  );
+
   return (
     <>
       <div className={classes.chatPanel}>
@@ -76,16 +91,12 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
         </div>
 
         <div ref={messagesPanelRef} className={classes.chatPanelMain}>
-          {selectedQuestion?.messages.map((message: IMessage) => (
-            <Message
-              createAnswer={createAnswer}
-              key={message.id}
-              message={message}
-            />
-          ))}
+          <>
+            {messages}
 
-          {/* test answer */}
-          {answerMessageComponent}
+            {/* test answer */}
+            {answerMessageComponent}
+          </>
         </div>
 
         <div className={classes.chatPanelFooterWrapper}>

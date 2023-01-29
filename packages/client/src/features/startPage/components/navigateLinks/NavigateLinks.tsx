@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 import HowToPlayModal from '../howToPlayModal/HowToPlayModal';
 import Button from '@mui/material/Button';
@@ -11,6 +12,7 @@ import { authService } from '../../../../service/AuthService';
 const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 
 export default function NavigateLinks() {
+  const navigate = useNavigate();
   const [logoutError, setLogoutError] = useState<null | string>(null);
 
   const handleLogout = async () => {
@@ -33,6 +35,9 @@ export default function NavigateLinks() {
         '& > :not(style) + :not(style)': {
           ml: 4,
         },
+        '& > :not(style)': {
+          fontSize: '20px',
+        },
       }}
       onClick={preventDefault}>
       <Tooltip title="Logout from system">
@@ -41,10 +46,10 @@ export default function NavigateLinks() {
         </Button>
       </Tooltip>
       <Tooltip title="Go to Forum">
-        <Button href="#text-buttons">Forum</Button>
+        <Button onClick={() => navigate('/forum')}>Forum</Button>
       </Tooltip>
       <Tooltip title="Go to Leaderboard">
-        <Button href="#text-buttons">Leaderboard</Button>
+        <Button>Leaderboard</Button>
       </Tooltip>
       <HowToPlayModal />
       {logoutError && (

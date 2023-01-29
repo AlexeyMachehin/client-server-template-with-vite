@@ -1,13 +1,25 @@
 import NavigateLinks from '../../features/startPage/components/navigateLinks/NavigateLinks';
 import NumberOfPlayersButtons from '../../features/startPage/components/numberOfPlayersButtons/NumberOfPlayersButtons';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 import classes from './startPage.module.css';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Orbitron',
+  },
+});
 
 export default function StartPage() {
   return (
-    <div className={classes.startPageWrapper}>
-      <h1 className={classes.startPageTitle}>BOMBERMAN</h1>
-      <NumberOfPlayersButtons />
-      <NavigateLinks />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={classes.startPageWrapper}>
+        <Typography variant="h2" className={classes.startPageTitle}>
+          BOMBERMAN
+        </Typography>
+        <NumberOfPlayersButtons />
+        <NavigateLinks />
+      </div>
+    </ThemeProvider>
   );
 }

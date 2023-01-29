@@ -1,8 +1,5 @@
-* {
-  font-size: 20px;
-}
-
 .navigateLinksWrapper {
+ 
   display: flex;
   margin-top: 10px;
   flex-wrap: wrap;

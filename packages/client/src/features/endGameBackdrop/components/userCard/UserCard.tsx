@@ -2,10 +2,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { IUser } from '../../../../service/types/endGameBackdrop/IUser';
+import { IPlayerProfile } from '../../../../service/types/game/IPlayerProfile';
 import classes from './userCard.module.css';
 
-export default function UserCard(props: { user: IUser }) {
+export default function UserCard(props: { user: IPlayerProfile }) {
   return (
     <Card className={classes.userCard}>
       <CardMedia
@@ -20,7 +20,7 @@ export default function UserCard(props: { user: IUser }) {
           Score: {props.user.score}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Time: {props.user.time}
+          Time to dead: {props.user.timeToDead}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Kills: {props.user.kills}

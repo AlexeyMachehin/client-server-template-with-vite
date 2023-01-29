@@ -11,22 +11,13 @@ interface IFullscreenTogglerProps {
 export default function FullscreenToggler({
   elementId,
 }: IFullscreenTogglerProps) {
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
 
-  useEffect(() => {
-    document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement) {
-        setIsFullScreen(false);
-      }
-    });
-    return () => {
-      document.removeEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement) {
-          setIsFullScreen(false);
-        }
-      });
-    };
-  }, []);
+  const disableFullScreen = () => {
+    if (!document.fullscreenElement) {
+      setIsFullScreen(false);
+    }
+  };
 
   const toggleFullScreen = (elementId: string) => {
     const HTMLelement = document.querySelector(`#${elementId}`);
@@ -39,6 +30,17 @@ export default function FullscreenToggler({
       setIsFullScreen(false);
     }
   };
+
+  useEffect(() => {
+    document.addEventListener('fullscreenchange', () => {
+      disableFullScreen();
+    });
+    return () => {
+      document.removeEventListener('fullscreenchange', () => {
+        disableFullScreen();
+      });
+    };
+  }, []);
 
   return (
     <Button

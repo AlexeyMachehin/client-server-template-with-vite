@@ -4,6 +4,7 @@ import StartPage from './pages/startPage/StartPage';
 import Chat from './features/forumPage/components/chat/Chat';
 import Login from './pages/Login/index';
 import Signup from './pages/Signup';
+import LeaderBoard from './pages/leaderBoardPage/LeaderBoardPage';
 
 import './styles/App.css';
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="forum/:mainTopic" element={<Chat />}>
               <Route path=":id" element={<Chat />} />
             </Route>
+            <Route path="/leaderboard" element={<LeaderBoard />} />
           </Routes>
         </div>
       </ThemeProvider>

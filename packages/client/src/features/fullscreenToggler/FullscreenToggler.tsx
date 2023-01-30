@@ -32,13 +32,9 @@ export default function FullscreenToggler({
   };
 
   useEffect(() => {
-    document.addEventListener('fullscreenchange', () => {
-      disableFullScreen();
-    });
+    document.addEventListener('fullscreenchange', disableFullScreen);
     return () => {
-      document.removeEventListener('fullscreenchange', () => {
-        disableFullScreen();
-      });
+      document.removeEventListener('fullscreenchange', disableFullScreen);
     };
   }, []);
 

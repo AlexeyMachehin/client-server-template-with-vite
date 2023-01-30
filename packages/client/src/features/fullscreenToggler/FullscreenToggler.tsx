@@ -11,7 +11,7 @@ interface IFullscreenTogglerProps {
 export default function FullscreenToggler({
   elementId,
 }: IFullscreenTogglerProps) {
-  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const disableFullScreen = () => {
     if (!document.fullscreenElement) {

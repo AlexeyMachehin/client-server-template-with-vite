@@ -24,8 +24,6 @@ export class GameLoop {
   }
 
   tick = () => {
-    // console.log('tick');
-
     this.now = performance.now();
 
     this.dt = this.dt + Math.min(1, (this.now - this.last) / 1000);

@@ -6,14 +6,9 @@ import Chat from './features/forumPage/components/chat/Chat';
 import Login from './pages/Login/index';
 import Signup from './pages/Signup';
 import LeaderBoard from './pages/leaderBoardPage/LeaderBoardPage';
-
+import GamePage from './pages/GamePage/GamePage';
 
 import './styles/App.css';
-
-import StartPage from './pages/startPage/StartPage';
-import Login from './pages/Login/index';
-import Signup from './pages/Signup';
-import GamePage from './pages/GamePage/GamePage';
 
 function App() {
   const theme = createTheme();

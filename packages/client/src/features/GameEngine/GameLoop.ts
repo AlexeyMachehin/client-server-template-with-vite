@@ -28,7 +28,7 @@ export class GameLoop {
 
     this.now = performance.now();
 
-    this.dt = this.dt + (this.now - this.last) / 1000;
+    this.dt = this.dt + Math.min(1, (this.now - this.last) / 1000);
     while (this.dt > this.step) {
       this.dt = this.dt - this.step;
     }

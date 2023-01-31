@@ -1,11 +1,11 @@
 import { SyntheticEvent } from 'react';
 import Button from '@mui/material/Button';
-import classes from './navigateLinks.module.css';
 import { Box } from '@mui/material';
+import classes from './navigateLinks.module.css';
 
 const preventDefault = (event: SyntheticEvent) => event.preventDefault();
 
-export default function NavigateLinks(props: any) {
+export default function NavigateLinks(props: { isWin: boolean }) {
   return (
     <Box
       className={classes.navigateLinksWrapper}

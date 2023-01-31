@@ -1,10 +1,10 @@
+import { useState, useEffect } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import NavigateLinks from './components/navigateLinks/NavigateLinks';
-import classes from './endGameBackdrop.module.css';
 import UserCard from './components/userCard/UserCard';
 import Confetti from 'react-confetti';
-import { useState, useEffect } from 'react';
-import { IUser } from '../../service/types/endGameBackdrop/IUser';
+import { IPlayerProfile } from '../../service/types/game/IPlayerProfile';
+import classes from './endGameBackdrop.module.css';
 
 export default function EndGameBackdrop() {
   const [width, setWidth] = useState(document.documentElement.clientWidth);
@@ -25,26 +25,26 @@ export default function EndGameBackdrop() {
   const isWin = true;
   const stage = 1;
 
-  const users: IUser[] = [
+  const users: IPlayerProfile[] = [
     {
       name: 'Danil',
       score: 12345,
-      time: 4,
+      timeToDead: 4,
       kills: 5,
       damage: 435,
       avatarURL:
         'https://pixelbox.ru/wp-content/uploads/2021/05/ava-vk-animal-91.jpg',
       id: 1,
     },
-    // {
-    //   name: 'Anton',
-    //   score: 54321,
-    //   time: 3,
-    //   kills: 7,
-    //   damage: 445335,
-    //   avatarURL: 'https://avatarko.ru/img/kartinka/1/pozitiv_smailik.jpg',
-    //   id: 2,
-    // },
+    {
+      name: 'Anton',
+      score: 54321,
+      timeToDead: 3,
+      kills: 7,
+      damage: 445335,
+      avatarURL: 'https://avatarko.ru/img/kartinka/1/pozitiv_smailik.jpg',
+      id: 2,
+    },
   ];
 
   return (
@@ -65,7 +65,7 @@ export default function EndGameBackdrop() {
           )}
           <div className={classes.stageTitle}>Stage {stage}</div>
           <div className={classes.cardsWrapper}>
-            {users.map((user: IUser) => (
+            {users.map((user: IPlayerProfile) => (
               <UserCard key={user.id} user={user} />
             ))}
           </div>

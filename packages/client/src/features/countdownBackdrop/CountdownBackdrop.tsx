@@ -7,18 +7,14 @@ import classes from './countdownBackdrop.module.css';
 export default function CountdownBackdrop() {
   const [isBackdropOpen, setOpen] = useState(false);
   const [timer, setTimer] = useState(3);
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const id = useRef<null | number>(null);
+  const idRef = useRef<null | number>(null);
   const clear = () => {
-    window.clearInterval(id.current ?? 0);
+    window.clearInterval(idRef.current ?? 0);
   };
   useEffect(() => {
     setOpen(!isBackdropOpen);
-    if (id != null) {
-      id.current = window.setInterval(() => {
+    if (idRef != null) {
+      idRef.current = window.setInterval(() => {
         setTimer(time => time - 1);
       }, 1000);
     }
@@ -28,7 +24,7 @@ export default function CountdownBackdrop() {
   useEffect(() => {
     if (timer === 0) {
       clear();
-      handleClose();
+      setOpen(false);
     }
   }, [timer]);
 

@@ -1,12 +1,14 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-import './styles/App.css';
-
+import ForumPage from './pages/forumPage/ForumPage';
 import StartPage from './pages/startPage/StartPage';
+import Chat from './features/forumPage/components/chat/Chat';
 import Login from './pages/Login/index';
 import Signup from './pages/Signup';
+import LeaderBoard from './pages/leaderBoardPage/LeaderBoardPage';
 import GamePage from './pages/GamePage/GamePage';
+
+import './styles/App.css';
 
 function App() {
   const theme = createTheme();
@@ -19,6 +21,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/game" element={<GamePage />} />
+            <Route path="forum" element={<ForumPage />} />
+            <Route path="forum/:mainTopic" element={<Chat />}>
+              <Route path=":id" element={<Chat />} />
+            </Route>
+            <Route path="/leaderboard" element={<LeaderBoard />} />
           </Routes>
         </div>
       </ThemeProvider>

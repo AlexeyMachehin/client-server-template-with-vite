@@ -1,11 +1,11 @@
 const CACHE_NAME = 'my-site-cache-v1';
 
 const URLS = [
-  './src/pages/startPage/StartPage.tsx',
-  './src/pages/startPage/startPage.module.css',
-  './src/pages/Login/index.tsx',
-  './src/pages/Login/Login.module.css',
-  './static/img/oneBomber.jpg',
+  // './src/pages/startPage/StartPage.tsx',
+  // './src/pages/startPage/startPage.module.css',
+  // './src/pages/Login/index.tsx',
+  // './src/pages/Login/Login.module.css',
+  // './static/img/oneBomber.jpg',
 ];
 
 this.addEventListener('install', event => {
@@ -81,3 +81,4 @@ this.addEventListener('fetch', event => {
     })
   );
 });
+

@@ -53,6 +53,7 @@ export class GameLoop {
       this.deltaTime + Math.min(1, (this.now - this.last) / 1000);
     while (this.deltaTime > this.step) {
       this.deltaTime = this.deltaTime - this.step;
+      this.currentScene.update(this.step);
     }
     this.last = this.now;
 

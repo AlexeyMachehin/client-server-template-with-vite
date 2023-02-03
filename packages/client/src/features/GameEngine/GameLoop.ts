@@ -13,7 +13,7 @@ export class GameLoop {
   last: number;
   fps: number;
   step: number;
-  dt: number;
+  deltaTime: number;
   now: number;
   screen: Screen;
   scenes: Record<string, Scene>;
@@ -24,7 +24,7 @@ export class GameLoop {
     this.last = performance.now();
     this.fps = 60;
     this.step = 1 / this.fps;
-    this.dt = 0;
+    this.deltaTime = 0;
     this.now = 0;
     this.scenes = {
       loading: new Loading(this),
@@ -47,14 +47,12 @@ export class GameLoop {
   }
 
   tick = () => {
-    // console.log('tick');
-
     this.now = performance.now();
 
-    this.dt = this.dt + (this.now - this.last) / 1000;
-    while (this.dt > this.step) {
-      this.dt = this.dt - this.step;
-      this.currentScene.update(this.step);
+    this.deltaTime =
+      this.deltaTime + Math.min(1, (this.now - this.last) / 1000);
+    while (this.deltaTime > this.step) {
+      this.deltaTime = this.deltaTime - this.step;
     }
     this.last = this.now;
 
@@ -62,7 +60,7 @@ export class GameLoop {
       this.currentScene = this.changeScene(this.currentScene.status);
       this.currentScene.init();
     }
-    this.currentScene.render(this.dt);
+    this.currentScene.render(this.deltaTime);
     requestAnimationFrame(this.tick);
   };
 

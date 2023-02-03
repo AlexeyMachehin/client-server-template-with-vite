@@ -45,5 +45,5 @@ export class Scene {
   update(step: number): void {}
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  render(dt: number): void {}
+  render(deltaTime: number): void {}
 }

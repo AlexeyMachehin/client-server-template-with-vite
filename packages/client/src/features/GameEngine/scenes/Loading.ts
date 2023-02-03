@@ -15,7 +15,7 @@ export class Loading extends Scene {
   }
 
   update(step: number) {
-    //TODO поставить проверку прогрузки ресурсов
+    //TODO возможно поставить проверку прогрузки ресурсов или просто обратный отсчет или выбросить совсем
     if (this.loadedAt < 2) {
       this.loadedAt += step;
     } else {
@@ -23,9 +23,9 @@ export class Loading extends Scene {
     }
   }
 
-  render(dt: number) {
+  render(deltaTime: number) {
     this.gameLoop.screen.fill('#000');
     this.gameLoop.screen.print(50, 70, 'Loading...');
-    super.render(dt);
+    super.render(deltaTime);
   }
 }

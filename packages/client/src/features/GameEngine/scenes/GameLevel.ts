@@ -14,9 +14,9 @@ export class GameLevel extends Scene {
     super.update(step);
   }
 
-  render(dt: number): void {
+  render(deltaTime: number): void {
     this.gameLoop.screen.fill('#7CFC00');
     this.gameLoop.screen.print(50, 70, 'Игра началась');
-    super.render(dt);
+    super.render(deltaTime);
   }
 }

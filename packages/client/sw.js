@@ -1,84 +1,59 @@
-const CACHE_NAME = 'my-site-cache-v1';
+const staticAssets = ['index.html', 'static/offline.html'];
 
-const URLS = [
-  // './src/pages/startPage/StartPage.tsx',
-  // './src/pages/startPage/startPage.module.css',
-  // './src/pages/Login/index.tsx',
-  // './src/pages/Login/Login.module.css',
-  // './static/img/oneBomber.jpg',
-];
+const ONLINE_URL = ['/forum', '/login', '/signup', '/leaderboard'];
 
-this.addEventListener('install', event => {
+const CACHE = 'static-data';
+const DYNAMIC_CACHE_NAME = 'dynamic-data';
+
+// При установке воркера мы должны закешировать часть данных (статику).
+self.addEventListener('install', event => {
   event.waitUntil(
     caches
-      .open(CACHE_NAME)
-      .then(cache => {
-        console.log('Opened cache');
-        return cache.addAll(URLS);
-      })
-      .catch(err => {
-        console.log(err);
-        throw err;
-      })
+      .open(CACHE)
+      .then(cache => cache.addAll(staticAssets))
+      // `skipWaiting()` необходим, потому что мы хотим активировать SW
+      // и контролировать его сразу, а не после перезагрузки.
+      .then(() => self.skipWaiting())
   );
 });
 
-this.addEventListener('activate', function (event) {
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames
-          .filter(name => {
-            /* Нужно вернуть true, если хотите удалить этот файл из кеша совсем */
-          })
-          .map(name => caches.delete(name))
-      );
-    })
-  );
-});
-
-this.addEventListener('fetch', event => {
+// при событии fetch, мы используем кэш, и только потом обновляем его данным с сервера
+self.addEventListener('fetch', function (event) {
+  // Мы используем `respondWith()`, чтобы мгновенно ответить без ожидания ответа с сервера.
   event.respondWith(
-    // Пытаемся найти ответ на такой запрос в кеше
-    caches.match(event.request).then(response => {
-      // Если ответ найден, выдаём его
-      if (response) {
-        return response;
-      }
-
-      const fetchRequest = event.request.clone();
-      // В противном случае делаем запрос на сервер
-      return (
-        fetch(fetchRequest)
-          // Можно задавать дополнительные параметры запроса, если ответ вернулся некорректный.
-          .then(response => {
-            // Если что-то пошло не так, выдаём в основной поток результат, но не кладём его в кеш
-            if (
-              !response ||
-              response.status !== 200 ||
-              response.type !== 'basic'
-            ) {
-              return response;
-            }
-
-            const responseToCache = response.clone();
-
-            if (event.request.url.indexOf('chrome-extension') === -1) {
-              // Получаем доступ к кешу по CACHE_NAME
-              caches.open(CACHE_NAME).then(cache => {
-                // Записываем в кеш ответ, используя в качестве ключа запрос
-                cache.put(event.request, responseToCache);
-              });
-              // Отдаём в основной поток ответ
-
-              return response;
-            } else {
-              console.log('not caching : ', event.request.url);
-              return response;
-            }
-          })
-      );
-    })
+    networkOrCache(event.request).catch(() => useFallback(event.request))
   );
 });
 
+// Он никогда не упадет, т.к мы всегда отдаем заранее подготовленные данные.
+function useFallback(request) {
+  if (ONLINE_URL.some(url => request.referrer.includes(url))) {
+    return caches.match('/static/offline.html');
+  }
+  return caches.match('/index.html');
+}
+
+function networkOrCache(request) {
+  return fetch(request)
+    .then(response =>
+      response.ok ? networkFirst(request, response) : fromCache(request)
+    )
+    .catch(() => fromCache(request));
+}
+
+function fromCache(request) {
+  return caches
+    .open(DYNAMIC_CACHE_NAME)
+    .then(cache =>
+      cache
+        .match(request)
+        .then(matching => matching || Promise.reject('no-match'))
+    );
+}
+
+function networkFirst(request, response) {
+  return caches.open(DYNAMIC_CACHE_NAME).then(cache => {
+    cache.put(request, response.clone());
+    return response;
+  });
+}

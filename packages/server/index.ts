@@ -7,10 +7,7 @@ import { createClientAndConnect } from './db';
 
 const app = express();
 
-// app.use(cors())
-
-app.use(express.static('../client/static'));
-app.all(/.*/, (req, res) => res.sendFile('../client/index.html'));
+app.use(cors())
 
 const port = Number(process.env.SERVER_PORT) || 3001;
 

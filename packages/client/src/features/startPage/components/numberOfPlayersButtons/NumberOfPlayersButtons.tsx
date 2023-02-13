@@ -6,12 +6,12 @@ import classes from './numberOfPlayersButtons.module.css';
 
 const images = [
   {
-    url: '../../../../../static/img/oneBomber.jpg',
+    url: '@/../static/img/oneBomber.jpg',
     title: 'ONE PLAYER',
     width: '50%',
   },
   {
-    url: '../../../../../static/img/twoBombers.jpg',
+    url: '@/../static/img/twoBombers.jpg',
     title: 'TWO PLAYERS',
     width: '50%',
   },

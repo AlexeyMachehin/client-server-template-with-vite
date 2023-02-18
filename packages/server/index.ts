@@ -7,7 +7,7 @@ import { createClientAndConnect } from './db';
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 const port = Number(process.env.SERVER_PORT) || 3001;
 

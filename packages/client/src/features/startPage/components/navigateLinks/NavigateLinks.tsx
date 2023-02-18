@@ -49,7 +49,7 @@ export default function NavigateLinks() {
         <Button onClick={() => navigate('/forum')}>Forum</Button>
       </Tooltip>
       <Tooltip title="Go to Leaderboard">
-        <Button onClick={() => navigate('/leaderboard')}>Leaderboard</Button>
+        <Button>Leaderboard</Button>
       </Tooltip>
       <HowToPlayModal />
       {logoutError && (

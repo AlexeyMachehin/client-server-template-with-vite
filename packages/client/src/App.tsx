@@ -7,6 +7,7 @@ import Login from './pages/Login/index';
 import Signup from './pages/Signup';
 import LeaderBoard from './pages/leaderBoardPage/LeaderBoardPage';
 import GamePage from './pages/GamePage/GamePage';
+import GamePage2 from './pages/GamePage2/GamePage2';
 
 import './styles/App.css';
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/game" element={<GamePage />} />
+            <Route path="/game2" element={<GamePage2 />} />
             <Route path="forum" element={<ForumPage />} />
             <Route path="forum/:mainTopic" element={<Chat />}>
               <Route path=":id" element={<Chat />} />

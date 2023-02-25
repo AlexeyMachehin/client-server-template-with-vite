@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ForumPage from './pages/forumPage/ForumPage';
 import StartPage from './pages/startPage/StartPage';
@@ -13,23 +13,19 @@ import './styles/App.css';
 function App() {
   const theme = createTheme();
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <div id="App" className="App">
-          <Routes>
-            <Route path="/" element={<StartPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/game" element={<GamePage />} />
-            <Route path="forum" element={<ForumPage />} />
-            <Route path="forum/:mainTopic" element={<Chat />}>
-              <Route path=":id" element={<Chat />} />
-            </Route>
-            <Route path="/leaderboard" element={<LeaderBoard />} />
-          </Routes>
-        </div>
-      </ThemeProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/game" element={<GamePage />} />
+        <Route path="forum" element={<ForumPage />} />
+        <Route path="forum/:mainTopic" element={<Chat />}>
+          <Route path=":id" element={<Chat />} />
+        </Route>
+        <Route path="/leaderboard" element={<LeaderBoard />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 

@@ -35,9 +35,7 @@ async function startServer() {
     res.json('👋 Howdy from the server :)');
   });
 
-  if (!isDev()) {
-    app.use('/assets', express.static(path.resolve(distPath, 'assets')));
-  }
+  app.use('/assets', express.static(path.resolve(distPath, 'assets')));
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
@@ -55,7 +53,6 @@ async function startServer() {
 
         template = await vite!.transformIndexHtml(url, template);
 
-        console.log(template);
 
       } else {
         template = fs.readFileSync(
@@ -64,7 +61,7 @@ async function startServer() {
         );
       }
 
-      let render: () => Promise<string>;
+      let render: ({ path }: { path: string; }) => Promise<string>;
 
       if (!isDev()) {
         render = (await import(ssrClientPath)).render;
@@ -73,7 +70,7 @@ async function startServer() {
           .render;
       }
 
-      const appHtml = await render();
+      const appHtml = await render({ path: url });
 
       const html = template.replace(`<!--ssr-outlet-->`, appHtml);
 

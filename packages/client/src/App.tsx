@@ -1,14 +1,16 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import ForumPage from './pages/forumPage/ForumPage';
 import StartPage from './pages/startPage/StartPage';
+import Chat from './features/forumPage/components/chat/Chat';
 import Login from './pages/Login/index';
 import Signup from './pages/Signup';
 import LeaderBoard from './pages/leaderBoardPage/LeaderBoardPage';
+import GamePage from './pages/GamePage/GamePage';
 
 import './styles/App.css';
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Provider } from 'react-redux';
-import { store, useSelector } from './store/store';
+import { useSelector } from './store/store';
 import RequireAuth from './utils/Route/ProtectedRoute';
 
 function App() {
@@ -18,20 +20,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <div id="App" className="App">
-            <Routes>
-              <Route element={<RequireAuth isAuthorized={!!user} />}>
-                <Route path="/" element={<StartPage />} />
-              </Route>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/leaderboard" element={<LeaderBoard />} />
-            </Routes>
-          </div>
-        </ThemeProvider>
-      </Provider>
+      <ThemeProvider theme={theme}>
+        <div id="App" className="App">
+          <Routes>
+            <Route element={<RequireAuth isAuthorized={!!user} />}>
+              <Route path="/" element={<StartPage />} />
+            </Route>            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/game" element={<GamePage />} />
+            <Route path="forum" element={<ForumPage />} />
+            <Route path="forum/:mainTopic" element={<Chat />}>
+              <Route path=":id" element={<Chat />} />
+            </Route>
+            <Route path="/leaderboard" element={<LeaderBoard />} />
+          </Routes>
+        </div>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

@@ -2,17 +2,16 @@ import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
-import '@fontsource/orbitron/400.css';
 import classes from './numberOfPlayersButtons.module.css';
 
 const images = [
   {
-    url: 'https://segaretro.org/images/a/a5/Bmo_bomberman3.png',
+    url: '@/../static/img/oneBomber.jpg',
     title: 'ONE PLAYER',
     width: '50%',
   },
   {
-    url: 'https://kit168.com/wp-content/uploads/2015/06/white-bomberman-bomberman-1-kit168.com_.jpg',
+    url: '@/../static/img/twoBombers.jpg',
     title: 'TWO PLAYERS',
     width: '50%',
   },
@@ -35,7 +34,7 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
       opacity: 0,
     },
     '& .MuiTypography-root': {
-      fontSize: '1.7rem',
+      fontSize: '1.8rem',
       border: '4px solid currentColor',
     },
   },
@@ -62,6 +61,7 @@ export default function NumberOfPlayersButtons() {
               color="inherit"
               className={classes.buttonTitle}
               sx={{
+                fontSize: '20px',
                 pb: theme => `calc(${theme.spacing(1)} + 6px)`,
               }}>
               {image.title}

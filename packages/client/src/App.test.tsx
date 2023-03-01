@@ -1,7 +1,8 @@
 import App from './App';
 import { render, screen } from '@testing-library/react';
-
-const appContent = 'Вот тут будет жить ваше приложение :)';
+import { StrictMode } from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 // @ts-ignore
 global.fetch = jest.fn(() =>
@@ -9,6 +10,12 @@ global.fetch = jest.fn(() =>
 );
 
 test('Example test', async () => {
-  render(<App />);
+  render(
+    <StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </StrictMode>
+  );
   expect(screen.findAllByDisplayValue('App')).toBeDefined();
 });

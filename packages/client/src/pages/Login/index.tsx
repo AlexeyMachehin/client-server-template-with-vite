@@ -5,7 +5,7 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  Link,
+  // Link,
   TextField,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -16,9 +16,12 @@ import {
   useLoginFormik,
 } from '../../features/Login/hooks/useLoginFormik';
 import Alert from '@mui/material/Alert';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login: FC = () => {
   const [loginError, setLoginError] = useState<null | string>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (values: ILoginFormValues) => {
     try {
@@ -27,6 +30,7 @@ const Login: FC = () => {
         password: values.password,
       });
       setLoginError(null);
+      navigate('/');
     } catch (e) {
       if (typeof e === 'string') {
         setLoginError(e);
@@ -86,9 +90,10 @@ const Login: FC = () => {
             sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
-          <Link href="#" variant="body2">
+          <Link to="/forum" >
             "Don't have an account? Sign Up"
           </Link>
+          {/* <Button onClick={() => navigate('/forum')}>Forum</Button> */}
         </form>
       </div>
     </div>

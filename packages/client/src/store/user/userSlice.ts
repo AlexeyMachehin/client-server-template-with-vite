@@ -8,11 +8,11 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(getUser.rejected, state => {
-      state.isLoading = true;
+      state.isLoaded = true;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.isLoading = true;
+      state.isLoaded = true;
     });
     builder.addCase(logout.fulfilled, state => {
       state.user = null;

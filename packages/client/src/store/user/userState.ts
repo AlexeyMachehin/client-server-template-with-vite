@@ -1,6 +1,6 @@
 import { UserDto } from './userDto';
 
-export const userState: { user: UserDto | null; isLoading: boolean } = {
+export const userState: { user: UserDto | null; isLoaded: boolean } = {
   user: null,
-  isLoading: false,
+  isLoaded: false,
 };

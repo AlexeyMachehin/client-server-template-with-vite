@@ -10,5 +10,5 @@ export const selectorUser = createSelector(
 
 export const selectorIsLoading = createSelector(
   [select],
-  store => store.userReducer.isLoading
+  store => store.userReducer.isLoaded
 );

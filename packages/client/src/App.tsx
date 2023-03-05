@@ -16,14 +16,14 @@ import './styles/App.css';
 
 function App() {
   const theme = createTheme();
-  const isLoading = useAppSelector(selectorIsLoading);
+  const isLoaded = useAppSelector(selectorIsLoading);
 
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Layout>
           <div id="App" className="App">
-            {isLoading && (
+            {isLoaded && (
               <Routes>
                 <Route path="*" element={<Navigate to="/" />} />
                 <Route element={<UnAuthGuard />}>

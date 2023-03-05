@@ -9,7 +9,7 @@ import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const isDev = () => process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development';
 
 async function startServer() {
   const app = express();
@@ -21,7 +21,7 @@ async function startServer() {
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
   const srcPath = path.dirname(require.resolve('client'));
 
-  if (isDev()) {
+  if (isDev) {
     vite = await createViteServer({
       server: { middlewareMode: true },
       root: srcPath,
@@ -43,7 +43,7 @@ async function startServer() {
     try {
       let template: string;
 
-      if (!isDev()) {
+      if (!isDev) {
         template = fs.readFileSync(
           path.resolve(srcPath, 'index.html'),
           'utf-8'
@@ -63,7 +63,7 @@ async function startServer() {
 
       let render: ({ path }: { path: string; }) => Promise<string>;
 
-      if (!isDev()) {
+      if (!isDev) {
         render = (await import(ssrClientPath)).render;
       } else {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
@@ -76,7 +76,7 @@ async function startServer() {
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
-      if (isDev()) {
+      if (isDev) {
         vite!.ssrFixStacktrace(e as Error);
       }
       next(e);

@@ -7,3 +7,8 @@ export const selectorUser = createSelector(
   [select],
   store => store.userReducer.user
 );
+
+export const selectorIsLoading = createSelector(
+  [select],
+  store => store.userReducer.isLoading
+);

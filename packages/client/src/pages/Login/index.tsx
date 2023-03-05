@@ -5,7 +5,6 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  // Link,
   TextField,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -18,10 +17,13 @@ import {
 import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '@/utils/hooks';
+import { getUser } from '@/store/user/thunk';
 
 const Login: FC = () => {
   const [loginError, setLoginError] = useState<null | string>(null);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (values: ILoginFormValues) => {
     try {
@@ -29,8 +31,9 @@ const Login: FC = () => {
         login: values.login,
         password: values.password,
       });
+      dispatch(getUser()).then(() => navigate('/'));
+
       setLoginError(null);
-      navigate('/');
     } catch (e) {
       if (typeof e === 'string') {
         setLoginError(e);
@@ -90,10 +93,7 @@ const Login: FC = () => {
             sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
-          <Link to="/forum" >
-            "Don't have an account? Sign Up"
-          </Link>
-          {/* <Button onClick={() => navigate('/forum')}>Forum</Button> */}
+          <Link to="/signup">"Don't have an account? Sign Up"</Link>
         </form>
       </div>
     </div>

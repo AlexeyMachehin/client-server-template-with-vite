@@ -1,4 +1,4 @@
-import { setUser } from './thunk';
+import { getUser, logout } from './thunk';
 import { createSlice } from '@reduxjs/toolkit';
 import { userState } from './userState';
 
@@ -7,8 +7,15 @@ export const userSlice = createSlice({
   initialState: userState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(setUser.fulfilled, (state, action) => {
+    builder.addCase(getUser.rejected, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload;
+      state.isLoading = true;
+    });
+    builder.addCase(logout.fulfilled, state => {
+      state.user = null;
     });
   },
 });

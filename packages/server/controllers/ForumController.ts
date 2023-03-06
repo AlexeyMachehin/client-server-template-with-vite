@@ -32,8 +32,9 @@ class ForumController {
 
   async addQuestion(req: any, res: any, next: any) {
     try {
-      const { payload } = req.body;
-      const result = await forumService.addQuestion(payload);
+      const payload = req.body;
+
+      const result = await forumService.addQuestion({ ...payload });
       return res.json(result);
     } catch (error) {
       next(error);
@@ -42,8 +43,8 @@ class ForumController {
 
   async addMessage(req: any, res: any, next: any) {
     try {
-      const { payload } = req.body;
-      const result = await forumService.addMessage(payload);
+      const payload = req.body;
+      const result = await forumService.addMessage({ ...payload });
       return res.json(result);
     } catch (error) {
       next(error);

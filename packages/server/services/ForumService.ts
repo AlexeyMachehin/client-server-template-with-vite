@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { Message } from '../models/Message';
 import { Question } from '../models/Question';
 import { Section } from '../models/Section';
@@ -39,7 +40,9 @@ class ForumService {
   async findQuestionsByTitle(text: string) {
     const result = Question.findAll({
       where: {
-        title: `%${text}%`,
+        title: {
+          [Op.like]: `%${text}%`,
+        },
       },
     });
     return result;

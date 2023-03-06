@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './store/store';
-import { register } from '../serviceWorkerBase'
+import { register } from '../serviceWorkerBase';
 import './index.css';
 
 // Регистрация Service Worker.
@@ -17,3 +17,12 @@ ReactDOM.hydrateRoot(
     </Provider>
   </BrowserRouter>
 );
+
+// Для client
+// ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+//   <BrowserRouter>
+//     <Provider store={store}>
+//       <App />
+//     </Provider>
+//   </BrowserRouter>
+// );

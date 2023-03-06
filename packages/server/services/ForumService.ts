@@ -15,23 +15,23 @@ class ForumService {
     return sections;
   }
 
-  async addQuestion(props: any) {
+  async addQuestion(payload: any) {
     const newQuestion = await Question.create({
-      title: props.title,
-      time: props.time,
-      userId: props.userId,
-      content: props.content,
-      sectionId: props.sectionId,
+      title: payload.title,
+      time: payload.time,
+      userId: payload.userId,
+      content: payload.content,
+      sectionId: payload.sectionId,
     });
     return newQuestion;
   }
 
-  async addMessage(props: any) {
+  async addMessage(payload: any) {
     const newMessage = await Message.create({
-      userId: props.userId,
-      message: props.message,
-      time: props.time,
-      questionId: props.questionId,
+      userId: payload.userId,
+      message: payload.message,
+      time: payload.time,
+      questionId: payload.questionId,
     });
     return newMessage;
   }

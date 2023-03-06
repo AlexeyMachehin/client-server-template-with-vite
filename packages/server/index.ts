@@ -1,22 +1,30 @@
-import dotenv from 'dotenv';
 import cors from 'cors';
-dotenv.config();
 
 import express from 'express';
-import { createClientAndConnect } from './db';
 
+import { db } from './models';
+import { router } from './routes/index';
+import { errorMiddleware } from './middlewares/errorMiddleware';
+
+const PORT = Number(process.env.SERVER_PORT) || 3001;
 const app = express();
 
-app.use(cors())
+app.use(cors());
+app.use(express.json()); // parse requests of content-type - application/json
+app.use(express.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
+app.use('/bomberapi', router);
+app.use(errorMiddleware);
 
-const port = Number(process.env.SERVER_PORT) || 3001;
+db.sequelize.sync();
 
-createClientAndConnect();
+const start = async () => {
+  try {
+    app.listen(PORT, () =>
+      console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-app.get('/', (_, res) => {
-  res.json('👋 Howdy from the server :)');
-});
-
-app.listen(port, () => {
-  console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
-});
+start();

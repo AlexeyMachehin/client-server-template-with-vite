@@ -2,6 +2,7 @@ import { AxiosService, IBasePayload } from './AxiosService';
 import { ISignupRequestDto } from './types/Signup/request/ISignupRequestDto';
 import { ILoginRequestDto } from './types/Login/request/ILoginRequestDto';
 import { ApiEndpoint } from './types/api/enums/ApiEndpoint';
+import { UserDto } from '@/store/user/userDto';
 
 class AuthService extends AxiosService {
   public constructor() {
@@ -40,6 +41,10 @@ class AuthService extends AxiosService {
       .catch(error => {
         throw new Error(error);
       }) as Promise<ISignupRequestDto>;
+  }
+  
+  public getUser(): Promise<UserDto> {
+    return this.get<UserDto>(ApiEndpoint.GET_USER);
   }
 }
 

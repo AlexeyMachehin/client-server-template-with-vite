@@ -4,4 +4,5 @@ export enum ApiEndpoint {
   LOGOUT = '/auth/logout',
   FETCH_USER = '/auth/user',
   LEADERBOARD = '/leaderboard',
+  GET_USER = '/auth/user',
 }

@@ -7,12 +7,8 @@ export const userSlice = createSlice({
   initialState: userState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(getUser.rejected, state => {
-      state.isLoaded = true;
-    });
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.isLoaded = true;
     });
     builder.addCase(logout.fulfilled, state => {
       state.user = null;

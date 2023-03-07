@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { useAppDispatch } from '../../../store/store';
 import { setUser } from '../../../common/slice/slice';
 import { useNavigate } from 'react-router-dom';
+import classes from './googleAuth.module.css';
 
 const loadScript = (src: string) =>
   new Promise<void>((resolve, reject) => {
@@ -51,7 +52,7 @@ function GoogleAuth() {
     navigate('/');
   }
 
-  return <div ref={googleButton} />;
+  return <div className={classes.googleButton} ref={googleButton} />;
 }
 
 export default GoogleAuth;

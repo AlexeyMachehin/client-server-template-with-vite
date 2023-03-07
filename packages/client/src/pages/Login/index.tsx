@@ -94,7 +94,6 @@ const Login: FC = () => {
           <Link href="#" variant="body2">
             "Don't have an account? Sign Up"
           </Link>
-          <p>or</p>
           <GoogleAuth />
         </form>
       </div>

@@ -21,7 +21,7 @@ const Signup: FC = () => {
       phone: values.phone,
       login: values.login,
       password: values.password,
-    });
+    }).catch((e)=>{console.log(e)});
 
     navigate('/');
   };

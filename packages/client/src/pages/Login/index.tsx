@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styles from './Login.module.css';
 import {
   Avatar,
@@ -9,37 +9,29 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { authService } from '../../service/AuthService';
 import {
   ILoginFormValues,
   useLoginFormik,
 } from '../../features/Login/hooks/useLoginFormik';
-import Alert from '@mui/material/Alert';
 import GoogleAuth from './components/GoogleAuth';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../utils/hooks';
-import { getUser } from '../../store/user/thunk';
+import { getUser, login } from '../../store/user/thunk';
 
 const Login: FC = () => {
-  const [loginError, setLoginError] = useState<null | string>(null);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (values: ILoginFormValues) => {
-    try {
-      await authService.login({
+    dispatch(
+      login({
         login: values.login,
         password: values.password,
-      });
-      dispatch(getUser()).then(() => navigate('/'));
-
-      setLoginError(null);
-    } catch (e) {
-      if (typeof e === 'string') {
-        setLoginError(e);
-      }
-    }
+      })
+    )
+      .then(() => dispatch(getUser()))
+      .then(() => navigate('/'));
   };
   const formik = useLoginFormik({ onSubmit: handleSubmit });
 
@@ -82,7 +74,6 @@ const Login: FC = () => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          {loginError && <Alert severity="error">{loginError}</Alert>}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

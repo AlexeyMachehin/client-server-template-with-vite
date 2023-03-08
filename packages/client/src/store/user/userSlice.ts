@@ -1,4 +1,4 @@
-import { getUser, logout } from './thunk';
+import { getUser, logout, login } from './thunk';
 import { createSlice } from '@reduxjs/toolkit';
 import { userState } from './userState';
 

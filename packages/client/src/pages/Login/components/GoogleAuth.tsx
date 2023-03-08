@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { clientId } from '../../../common/consts/google';
 import jwtDecode from 'jwt-decode';
-import { useAppDispatch } from '../../../store/store';
 import { setUser } from '../../../common/slice/slice';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../utils/hooks';
 import classes from './googleAuth.module.css';
 
 const loadScript = (src: string) =>

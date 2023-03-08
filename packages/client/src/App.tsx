@@ -16,30 +16,28 @@ function App() {
   const theme = createTheme();
 
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <div id="App" className="App">
-            <Routes>
-              <Route path="*" element={<Navigate to="/" />} />
-              <Route element={<UnAuthGuard />}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <div id="App" className="App">
+          <Routes>
+            <Route path="*" element={<Navigate to="/" />} />
+            <Route element={<UnAuthGuard />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Route>
+            <Route element={<AuthGuard />}>
+              <Route path="/" element={<StartPage />} />
+              <Route path="/game" element={<GamePage />} />
+              <Route path="forum" element={<ForumPage />} />
+              <Route path="forum/:mainTopic" element={<Chat />}>
+                <Route path=":id" element={<Chat />} />
               </Route>
-              <Route element={<AuthGuard />}>
-                <Route path="/" element={<StartPage />} />
-                <Route path="/game" element={<GamePage />} />
-                <Route path="forum" element={<ForumPage />} />
-                <Route path="forum/:mainTopic" element={<Chat />}>
-                  <Route path=":id" element={<Chat />} />
-                </Route>
-                <Route path="/leaderboard" element={<LeaderBoard />} />
-              </Route>
-            </Routes>
-          </div>
-        </Layout>
-      </ThemeProvider>
-    </BrowserRouter>
+              <Route path="/leaderboard" element={<LeaderBoard />} />
+            </Route>
+          </Routes>
+        </div>
+      </Layout>
+    </ThemeProvider>
   );
 }
 

@@ -8,8 +8,9 @@ import {
   useSignupFormik,
 } from '../../features/Signup/hooks/useSignupFormik';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '@/utils/hooks';
-import { getUser, signup } from '@/store/user/thunk';
+
+import { getUser, signup } from '../../store/user/thunk';
+import { useAppDispatch } from '../../utils/hooks';
 
 const Signup: FC = () => {
   const dispatch = useAppDispatch();

@@ -17,8 +17,8 @@ import {
 import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '@/utils/hooks';
-import { getUser } from '@/store/user/thunk';
+import { useAppDispatch } from '../../utils/hooks';
+import { getUser } from '../../store/user/thunk';
 
 const Login: FC = () => {
   const [loginError, setLoginError] = useState<null | string>(null);

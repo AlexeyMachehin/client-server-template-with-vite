@@ -1,5 +1,5 @@
-import { getUser } from '@/store/user/thunk';
-import { useAppDispatch } from '@/utils/hooks';
+import { getUser } from '../../../src/store/user/thunk';
+import { useAppDispatch } from '../../../src/utils/hooks';
 import { useEffect } from 'react';
 
 export function Layout({ children }: { children: JSX.Element }) {

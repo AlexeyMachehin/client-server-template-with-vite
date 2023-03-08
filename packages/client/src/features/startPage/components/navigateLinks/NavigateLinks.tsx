@@ -7,8 +7,8 @@ import Tooltip from '@mui/material/Tooltip';
 import classes from './navigateLinks.module.css';
 import Alert from '@mui/material/Alert';
 import { useState } from 'react';
-import { useAppDispatch } from '@/utils/hooks';
-import { logout } from '@/store/user/thunk';
+import { useAppDispatch } from '../../../../utils/hooks';
+import { logout } from '../../../../store/user/thunk';
 
 const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 

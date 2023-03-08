@@ -1,7 +1,7 @@
 import App from './App';
 import { render, screen } from '@testing-library/react';
-import { StrictMode } from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { store } from './store/store';
 
 // @ts-ignore
@@ -11,11 +11,11 @@ global.fetch = jest.fn(() =>
 
 test('Example test', async () => {
   render(
-    <StrictMode>
+    <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </StrictMode>
+    </BrowserRouter>
   );
   expect(screen.findAllByDisplayValue('App')).toBeDefined();
 });

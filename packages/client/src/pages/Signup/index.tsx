@@ -7,18 +7,27 @@ import {
   ISignupFormValues,
   useSignupFormik,
 } from '../../features/Signup/hooks/useSignupFormik';
-import { authService } from '../../service/AuthService';
+import { useNavigate } from 'react-router-dom';
+
+import { getUser, signup } from '../../store/user/thunk';
+import { useAppDispatch } from '../../utils/hooks';
 
 const Signup: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const handleSubmit = async (values: ISignupFormValues) => {
-    await authService.signup({
-      first_name: values.firstName,
-      second_name: values.surname,
-      email: values.email,
-      phone: values.phone,
-      login: values.login,
-      password: values.password,
-    });
+    dispatch(
+      signup({
+        first_name: values.firstName,
+        second_name: values.surname,
+        email: values.email,
+        phone: values.phone,
+        login: values.login,
+        password: values.password,
+      })
+    )
+      .then(() => dispatch(getUser()))
+      .then(() => navigate('/'));
   };
 
   const formik = useSignupFormik({ onSubmit: handleSubmit });
@@ -144,7 +153,7 @@ const Signup: FC = () => {
             size="large">
             Sign Up
           </Button>
-          <Button fullWidth size="large">
+          <Button onClick={() => navigate('/login')} fullWidth size="large">
             Login
           </Button>
         </form>

@@ -12,7 +12,6 @@ class AuthService extends AxiosService {
   public async login(dto: ILoginRequestDto) {
     return this.post(ApiEndpoint.SIGN_IN, dto).catch(error => {
       if (error.response?.status === 401) {
-        alert(error.stack);
         throw error.response.data.reason;
       }
     });

@@ -10,35 +10,22 @@ class AuthService extends AxiosService {
   }
 
   public async login(dto: ILoginRequestDto) {
-    return this.post(ApiEndpoint.SIGN_IN, dto)
-      .then(() => {
-        return this.fetchUser();
-      })
-      .catch(error => {
-        if (error.response?.status === 401) {
-          throw error.response.data.reason;
-        }
-      });
+    return this.post(ApiEndpoint.SIGN_IN, dto).catch(error => {
+      if (error.response?.status === 401) {
+        alert(error.stack);
+        throw error.response.data.reason;
+      }
+    });
   }
 
   public signup(dto: ISignupRequestDto): Promise<IBasePayload> {
-    return this.post(ApiEndpoint.SIGN_UP, dto)
-      .then(() => {
-        return this.fetchUser();
-      })
-      .catch(error => {
-        throw error;
-      });
+    return this.post(ApiEndpoint.SIGN_UP, dto).catch(error => {
+      throw error;
+    });
   }
 
   public logout(): Promise<IBasePayload> {
     return this.post(ApiEndpoint.LOGOUT);
-  }
-
-  public fetchUser(): Promise<IBasePayload> {
-    return this.get(ApiEndpoint.FETCH_USER).then(data => {
-      return JSON.parse(`${data}`);
-    }) as Promise<ISignupRequestDto>;
   }
 
   public getUser(): Promise<UserDto> {

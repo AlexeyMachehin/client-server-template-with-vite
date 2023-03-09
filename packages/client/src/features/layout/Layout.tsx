@@ -12,8 +12,9 @@ export function Layout({ children }: { children: JSX.Element }) {
     if (location.search) {
       const code = new RegExp('code=(.*)').exec(location.search);
       if (code) {
+        const codeNumbers = code[1];
         dispatch(
-          signInYandex({ code: code[1], redirect_uri: REDIRECT_URI })
+          signInYandex({ code: codeNumbers, redirect_uri: REDIRECT_URI })
         ).then(() => dispatch(getUser()));
       }
     }

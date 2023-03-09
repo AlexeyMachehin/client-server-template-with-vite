@@ -1,23 +1,17 @@
 import { FC } from 'react';
-import styles from './Login.module.css';
-import {
-  Avatar,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  TextField,
-} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../utils/hooks';
+import { getUser, login } from '../../store/user/thunk';
+import { Avatar, Button, TextField } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import {
   ILoginFormValues,
   useLoginFormik,
 } from '../../features/Login/hooks/useLoginFormik';
-import GoogleAuth from './components/GoogleAuth';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../utils/hooks';
-import { getUser, login } from '../../store/user/thunk';
+import YandexAuth from './components/YandexAuth';
+import Link from '@mui/material/Link';
+import styles from './Login.module.css';
 
 const Login: FC = () => {
   const navigate = useNavigate();
@@ -74,10 +68,6 @@ const Login: FC = () => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -85,8 +75,10 @@ const Login: FC = () => {
             sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
-          <GoogleAuth />
-          <Link to="/signup">"Don't have an account? Sign Up"</Link>
+          <YandexAuth />
+          <Link href="#" onClick={() => navigate('/signup')}>
+            "Don't have an account? Sign Up"
+          </Link>
         </form>
       </div>
     </div>

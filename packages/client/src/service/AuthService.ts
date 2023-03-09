@@ -15,7 +15,9 @@ class AuthService extends AxiosService {
         return this.fetchUser();
       })
       .catch(error => {
-        throw new Error(error);
+        if (error.response?.status === 401) {
+          throw new Error(error.response.data.reason);
+        }
       });
   }
 
@@ -34,15 +36,11 @@ class AuthService extends AxiosService {
   }
 
   public fetchUser(): Promise<IBasePayload> {
-    return this.get(ApiEndpoint.FETCH_USER)
-      .then(data => {
-        return JSON.parse(`${data}`);
-      })
-      .catch(error => {
-        throw new Error(error);
-      }) as Promise<ISignupRequestDto>;
+    return this.get(ApiEndpoint.FETCH_USER).then(data => {
+      return JSON.parse(`${data}`);
+    }) as Promise<ISignupRequestDto>;
   }
-  
+
   public getUser(): Promise<UserDto> {
     return this.get<UserDto>(ApiEndpoint.GET_USER);
   }

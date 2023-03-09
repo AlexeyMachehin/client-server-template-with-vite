@@ -2,7 +2,7 @@ import { AxiosService, IBasePayload } from './AxiosService';
 import { ISignupRequestDto } from './types/Signup/request/ISignupRequestDto';
 import { ILoginRequestDto } from './types/Login/request/ILoginRequestDto';
 import { ApiEndpoint } from './types/api/enums/ApiEndpoint';
-import { UserDto } from '@/store/user/userDto';
+import { UserDto } from '../store/user/userDto';
 
 class AuthService extends AxiosService {
   public constructor() {
@@ -16,7 +16,7 @@ class AuthService extends AxiosService {
       })
       .catch(error => {
         if (error.response?.status === 401) {
-          throw new Error(error.response.data.reason);
+          throw error.response.data.reason;
         }
       });
   }
@@ -27,7 +27,7 @@ class AuthService extends AxiosService {
         return this.fetchUser();
       })
       .catch(error => {
-        throw new Error(error);
+        throw error;
       });
   }
 

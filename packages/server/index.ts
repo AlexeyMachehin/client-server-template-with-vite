@@ -17,14 +17,6 @@ app.use(errorMiddleware);
 
 db.sequelize.sync();
 
-const start = async () => {
-  try {
-    app.listen(PORT, () =>
-      console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`)
-    );
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-start();
+app.listen(PORT, () =>
+  console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`)
+);

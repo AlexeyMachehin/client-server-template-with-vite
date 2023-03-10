@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { errorSnackbarSlice } from './errorSnackbar/errorSnackbarSlice';
 import { userSlice } from './user/userSlice';
 
 export const store = configureStore({
   reducer: {
     userReducer: userSlice.reducer,
+    errorSnackbarReducer: errorSnackbarSlice.reducer,
   },
 });
 

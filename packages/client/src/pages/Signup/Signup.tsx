@@ -1,16 +1,15 @@
 import { FC } from 'react';
-import styles from './Signup.module.css';
 import { Avatar, Button, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { getUser, signup } from '../../store/user/thunk';
+import { useAppDispatch } from '../../utils/hooks';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Typography from '@mui/material/Typography';
 import {
   ISignupFormValues,
   useSignupFormik,
 } from '../../features/Signup/hooks/useSignupFormik';
-import { useNavigate } from 'react-router-dom';
-
-import { getUser, signup } from '../../store/user/thunk';
-import { useAppDispatch } from '../../utils/hooks';
+import styles from './Signup.module.css';
 
 const Signup: FC = () => {
   const dispatch = useAppDispatch();
@@ -66,7 +65,6 @@ const Signup: FC = () => {
             label="Login"
             name="login"
             autoComplete="login"
-            autoFocus
             error={formik.touched.login && Boolean(formik.errors.login)}
             helperText={formik.touched.login && formik.errors.login}
           />
@@ -80,7 +78,6 @@ const Signup: FC = () => {
             label="Name"
             name="firstName"
             autoComplete="name"
-            autoFocus
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
             helperText={formik.touched.firstName && formik.errors.firstName}
           />
@@ -94,7 +91,6 @@ const Signup: FC = () => {
             label="Surname"
             name="surname"
             autoComplete="surname"
-            autoFocus
             error={formik.touched.surname && Boolean(formik.errors.surname)}
             helperText={formik.touched.surname && formik.errors.surname}
           />
@@ -108,7 +104,6 @@ const Signup: FC = () => {
             label="Phone"
             name="phone"
             autoComplete="phone"
-            autoFocus
             error={formik.touched.phone && Boolean(formik.errors.phone)}
             helperText={formik.touched.phone && formik.errors.phone}
           />

@@ -9,6 +9,10 @@ import Alert from '@mui/material/Alert';
 import { useState } from 'react';
 import { useAppDispatch } from '../../../../utils/hooks';
 import { logout } from '../../../../store/user/thunk';
+import {
+  setError,
+  isOpenErrorSnackbar,
+} from '../../../../store/errorSnackbar/errorSnackbarSlice';
 
 const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 
@@ -19,7 +23,12 @@ export default function NavigateLinks() {
 
   const handleLogout = async () => {
     try {
-      dispatch(logout()).then(() => navigate('/login'));
+      dispatch(logout())
+        .catch(error => {
+          dispatch(isOpenErrorSnackbar(true));
+          dispatch(setError(error));
+        })
+        .then(() => navigate('/login'));
       setLogoutError(null);
     } catch (e) {
       if (typeof e === 'string') {

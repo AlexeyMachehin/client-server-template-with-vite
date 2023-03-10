@@ -1,44 +1,31 @@
-import { FC, useState } from 'react';
-import styles from './Login.module.css';
-import {
-  Avatar,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  TextField,
-} from '@mui/material';
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../utils/hooks';
+import { getUser, login } from '../../store/user/thunk';
+import { Avatar, Button, TextField } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { authService } from '../../service/AuthService';
 import {
   ILoginFormValues,
   useLoginFormik,
 } from '../../features/Login/hooks/useLoginFormik';
-import Alert from '@mui/material/Alert';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../utils/hooks';
-import { getUser } from '../../store/user/thunk';
+import YandexAuth from './components/YandexAuth';
+import Link from '@mui/material/Link';
+import styles from './Login.module.css';
 
 const Login: FC = () => {
-  const [loginError, setLoginError] = useState<null | string>(null);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (values: ILoginFormValues) => {
-    try {
-      await authService.login({
+    dispatch(
+      login({
         login: values.login,
         password: values.password,
-      });
-      dispatch(getUser()).then(() => navigate('/'));
-
-      setLoginError(null);
-    } catch (e) {
-      if (typeof e === 'string') {
-        setLoginError(e);
-      }
-    }
+      })
+    )
+      .then(() => dispatch(getUser()))
+      .then(() => navigate('/'));
   };
   const formik = useLoginFormik({ onSubmit: handleSubmit });
 
@@ -81,11 +68,6 @@ const Login: FC = () => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          {loginError && <Alert severity="error">{loginError}</Alert>}
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -93,7 +75,10 @@ const Login: FC = () => {
             sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
-          <Link to="/signup">"Don't have an account? Sign Up"</Link>
+          <YandexAuth />
+          <Link href="#" onClick={() => navigate('/signup')}>
+            "Don't have an account? Sign Up"
+          </Link>
         </form>
       </div>
     </div>

@@ -1,22 +1,29 @@
-import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ForumPage from './pages/forumPage/ForumPage';
 import StartPage from './pages/startPage/StartPage';
 import Chat from './features/forumPage/components/chat/Chat';
-import Login from './pages/Login/index';
-import Signup from './pages/Signup';
+import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
 import LeaderBoard from './pages/leaderBoardPage/LeaderBoardPage';
 import GamePage from './pages/GamePage/GamePage';
 import AuthGuard from './features/authGuard/AuthGuard';
 import UnAuthGuard from './features/unAuthGuard/UnAuthGuard';
 import { Layout } from './features/layout/Layout';
+import ErrorSnackbar from './features/alerts/ErrorSnackbar';
 import './styles/App.css';
+import { useAppSelector } from './utils/hooks';
+import { selectorIsLoaderOn } from './store/user/selectors';
+import Loader from './features/loader/Loader';
 
 function App() {
   const theme = createTheme();
+  const isLoaderOn = useAppSelector(selectorIsLoaderOn);
 
   return (
     <ThemeProvider theme={theme}>
+      <ErrorSnackbar />
+      {isLoaderOn && <Loader />}
       <Layout>
         <div id="App" className="App">
           <Routes>

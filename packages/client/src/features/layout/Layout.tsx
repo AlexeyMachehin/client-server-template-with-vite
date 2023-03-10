@@ -17,7 +17,9 @@ export function Layout({ children }: { children: JSX.Element }) {
           signInYandex({ code: codeNumbers, redirect_uri: REDIRECT_URI })
         ).then(() => dispatch(getUser()));
       }
+      return;
     }
+    dispatch(getUser());
   };
 
   useEffect(() => {

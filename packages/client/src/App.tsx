@@ -16,6 +16,27 @@ import { useAppSelector } from './utils/hooks';
 import { selectorIsLoaderOn } from './store/user/selectors';
 import Loader from './features/loader/Loader';
 
+export const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="*" element={<Navigate to="/" />} />
+      <Route element={<UnAuthGuard />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Route>
+      <Route element={<AuthGuard />}>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/game" element={<GamePage />} />
+        <Route path="forum" element={<ForumPage />} />
+        <Route path="forum/:mainTopic" element={<Chat />}>
+          <Route path=":id" element={<Chat />} />
+        </Route>
+        <Route path="/leaderboard" element={<LeaderBoard />} />
+      </Route>
+    </Routes>
+  );
+};
+
 function App() {
   const theme = createTheme();
   const isLoaderOn = useAppSelector(selectorIsLoaderOn);
@@ -26,22 +47,7 @@ function App() {
       {isLoaderOn && <Loader />}
       <Layout>
         <div id="App" className="App">
-          <Routes>
-            <Route path="*" element={<Navigate to="/" />} />
-            <Route element={<UnAuthGuard />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-            </Route>
-            <Route element={<AuthGuard />}>
-              <Route path="/" element={<StartPage />} />
-              <Route path="/game" element={<GamePage />} />
-              <Route path="forum" element={<ForumPage />} />
-              <Route path="forum/:mainTopic" element={<Chat />}>
-                <Route path=":id" element={<Chat />} />
-              </Route>
-              <Route path="/leaderboard" element={<LeaderBoard />} />
-            </Route>
-          </Routes>
+          <AppRoutes />
         </div>
       </Layout>
     </ThemeProvider>

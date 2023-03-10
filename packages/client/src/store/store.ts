@@ -1,10 +1,7 @@
-import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { userSlice } from './user/userSlice';
-import { IUserState } from './user/userState';
 
-export const createStore = (): EnhancedStore<{
-  userReducer: IUserState;
-}> => {
+export const createStore = () => {
   return configureStore({
     reducer: {
       userReducer: userSlice.reducer,

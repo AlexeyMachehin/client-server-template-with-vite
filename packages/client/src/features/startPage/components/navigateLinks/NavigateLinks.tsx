@@ -7,18 +7,28 @@ import Tooltip from '@mui/material/Tooltip';
 import classes from './navigateLinks.module.css';
 import Alert from '@mui/material/Alert';
 import { useState } from 'react';
-import { authService } from '../../../../service/AuthService';
+import { useAppDispatch } from '../../../../utils/hooks';
+import { logout } from '../../../../store/user/thunk';
+import {
+  setError,
+  isOpenErrorSnackbar,
+} from '../../../../store/errorSnackbar/errorSnackbarSlice';
 
 const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 
 export default function NavigateLinks() {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [logoutError, setLogoutError] = useState<null | string>(null);
 
   const handleLogout = async () => {
     try {
-      await authService.logout();
-
+      dispatch(logout())
+        .catch(error => {
+          dispatch(isOpenErrorSnackbar(true));
+          dispatch(setError(error));
+        })
+        .then(() => navigate('/login'));
       setLogoutError(null);
     } catch (e) {
       if (typeof e === 'string') {
@@ -49,7 +59,7 @@ export default function NavigateLinks() {
         <Button onClick={() => navigate('/forum')}>Forum</Button>
       </Tooltip>
       <Tooltip title="Go to Leaderboard">
-        <Button>Leaderboard</Button>
+        <Button onClick={() => navigate('/leaderboard')}>Leaderboard</Button>
       </Tooltip>
       <HowToPlayModal />
       {logoutError && (

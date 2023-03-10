@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { errorSnackbarSlice } from './errorSnackbar/errorSnackbarSlice';
+import { userSlice } from './user/userSlice';
 
 export const store = configureStore({
   reducer: {
-    // import the reducer function from the slice and add it
+    userReducer: userSlice.reducer,
+    errorSnackbarReducer: errorSnackbarSlice.reducer,
   },
 });
 

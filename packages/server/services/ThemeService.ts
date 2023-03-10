@@ -12,7 +12,7 @@ interface CreateRequest {
   description: string;
 }
 
-export class ThemeService implements BaseRESTService {
+class ThemeService implements BaseRESTService {
   public find = ({ id, title }: FindRequest) => {
     if (id) {
       return SiteTheme.findByPk(id);
@@ -27,3 +27,5 @@ export class ThemeService implements BaseRESTService {
     return SiteTheme.create({ ...data });
   };
 }
+
+export default new ThemeService();

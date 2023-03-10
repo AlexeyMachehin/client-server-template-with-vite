@@ -1,13 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { errorSnackbarSlice } from './errorSnackbar/errorSnackbarSlice';
+import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import { userSlice } from './user/userSlice';
+import { IUserState } from './user/userState';
 
-export const store = configureStore({
-  reducer: {
-    userReducer: userSlice.reducer,
-    errorSnackbarReducer: errorSnackbarSlice.reducer,
-  },
-});
+export const createStore = (): EnhancedStore<{
+  userReducer: IUserState;
+}> => {
+  return configureStore({
+    reducer: {
+      userReducer: userSlice.reducer,
+    },
+  });
+};
+
+export const store = createStore();
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

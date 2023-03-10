@@ -61,16 +61,21 @@ async function startServer() {
         );
       }
 
-      let render: ({ path }: { path: string; }) => Promise<string>;
+      let render: ({ store, path }: { store: any, path: string; }) => Promise<string>;
+      let createStore: () => any
 
       if (!isDev) {
         render = (await import(ssrClientPath)).render;
+        createStore = (await import(ssrClientPath)).createStoreForSSR
       } else {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
           .render;
-      }
+        createStore = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'))).createStoreForSSR
+        }
+        
+      const store = createStore()
 
-      const appHtml = await render({ path: url });
+      const appHtml = await render({ store, path: url });
 
       const html = template.replace(`<!--ssr-outlet-->`, appHtml);
 

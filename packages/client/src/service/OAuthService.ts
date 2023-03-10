@@ -1,4 +1,4 @@
-import { REDIRECT_URI } from '@/common/consts/consts';
+import { REDIRECT_URI } from '../common/consts/consts';
 import { AxiosService } from './AxiosService';
 import { ApiEndpoint } from './types/api/enums/ApiEndpoint';
 

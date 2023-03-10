@@ -1,4 +1,4 @@
-import Axios, { AxiosInstance } from 'axios';
+import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 const SERVER_API = 'https://ya-praktikum.tech/api/v2';
 
@@ -18,13 +18,12 @@ export abstract class AxiosService {
 
   protected constructor() {
     this.axios.interceptors.response.use(undefined, error => {
-      return Promise.reject(error?.response?.data?.reason);
+      return Promise.reject(error);
     });
   }
 
-  public async get<T>(url: string): Promise<T> {
-    const result = await this.axios.get<T>(url);
-    return result.data;
+  public async get<T>(url: string, payload?: AxiosRequestConfig): Promise<T> {
+    return await this.axios.get<T>(url, payload).then(result => result.data);
   }
 
   public async post<Request, Payload extends IBasePayload>(

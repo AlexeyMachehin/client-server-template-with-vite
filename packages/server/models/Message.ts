@@ -31,6 +31,8 @@ export class Message extends Model {
     field: 'user_id',
   })
   userId: string;
+  @BelongsTo(() => User)
+  user: User;
 
   @Column(DataType.STRING(10000))
   message: string;

@@ -11,6 +11,7 @@ import { IMessage } from '../../../../../service/types/forumPage/IMessage';
 import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
 import { myProfile } from '../../../../mockData/myProfile';
 import classes from './chatPanel.module.css';
+import { useAppDispatch, useAppSelector } from '@/utils/hooks';
 
 interface IChatPanelProps {
   selectedQuestion: null | IQuestion;
@@ -22,6 +23,10 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
   const [answerMessageComponent, setAnswerMessageComponent] =
     useState<null | JSX.Element>(null);
   const messagesPanelRef = useRef<HTMLDivElement>(null);
+
+  const currentUser = useAppSelector(state => state.userReducer.user);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (messagesPanelRef.current) {
@@ -59,7 +64,7 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
     setAnswerMessage(null);
   };
 
-  const renderMessages = (messages: any) => {
+  const renderMessages = (messages: IMessage[]) => {
     return messages.map((message: IMessage) => (
       <Message
         createAnswer={createAnswer}
@@ -131,8 +136,8 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
                 setAnswerMessageComponent(
                   <Message
                     message={{
-                      name: myProfile.name,
-                      id: myProfile.id,
+                      name: currentUser?.first_name,
+                      userId: currentUser?.id,
                       isMyMessage: true,
                       time: new Date().toDateString(),
                       message: inputValue,

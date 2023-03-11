@@ -7,9 +7,10 @@ const Router = require('express').Router;
 export const router = new Router();
 
 // routes for forum
-router.get('/sections', forumController.getSections);
+router.get('/topics', forumController.getSections);
 router.get('/allstate', forumController.getAllState);
 router.post('/findquestions', forumController.findQuestionsByTitle);
+router.post('/getsection', forumController.getSection);
 router.post('/questions', forumController.addQuestion);
 router.post('/messages', forumController.addMessage);
 // routes for theme

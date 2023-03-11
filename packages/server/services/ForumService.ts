@@ -2,6 +2,7 @@ import { Op } from 'sequelize';
 import { Message } from '../models/Message';
 import { Question } from '../models/Question';
 import { Section } from '../models/Section';
+import { User } from '../models/User';
 
 class ForumService {
   async getSections() {
@@ -16,13 +17,13 @@ class ForumService {
     return sections;
   }
 
-  async addQuestion(payload: any) {
+  async addQuestion(question: any) {
     const newQuestion = await Question.create({
-      title: payload.title,
-      time: payload.time,
-      userId: payload.userId,
-      content: payload.content,
-      sectionId: payload.sectionId,
+      title: question.title,
+      time: question.time,
+      userId: question.userId,
+      content: question.content,
+      sectionId: question.sectionId,
     });
     return newQuestion;
   }
@@ -38,12 +39,29 @@ class ForumService {
   }
 
   async findQuestionsByTitle(text: string) {
+    if (text === '') return [];
     const result = Question.findAll({
+      attributes: ['id', 'title', 'content', 'time'],
       where: {
         title: {
           [Op.like]: `%${text}%`,
         },
       },
+      include: [
+        { model: User, attributes: ['name'] },
+        { model: Section, attributes: ['title'] },
+      ],
+      order: ['title'],
+    });
+    return result;
+  }
+
+  async getSection(section: string) {
+    const result = Section.findAll({
+      where: {
+        title: section,
+      },
+      include: [{ model: Question, include: [{ model: Message }] }],
     });
     return result;
   }

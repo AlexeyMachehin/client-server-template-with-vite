@@ -52,8 +52,6 @@ async function startServer() {
         console.log(template);
 
         template = await vite!.transformIndexHtml(url, template);
-
-
       } else {
         template = fs.readFileSync(
           path.resolve(distPath, 'index.html'),
@@ -61,7 +59,7 @@ async function startServer() {
         );
       }
 
-      let render: ({ path }: { path: string; }) => Promise<string>;
+      let render: ({ path }: { path: string }) => Promise<string>;
 
       if (!isDev) {
         render = (await import(ssrClientPath)).render;

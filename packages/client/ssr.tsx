@@ -1,5 +1,5 @@
-import App from './src/App'
-import { renderToString } from 'react-dom/server'
+import App from './src/App';
+import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import React from 'react';
 
@@ -12,5 +12,5 @@ export const render = ({ path }: IRenderProps) => {
     <StaticRouter location={path}>
       <App />
     </StaticRouter>
-  )
-}
+  );
+};

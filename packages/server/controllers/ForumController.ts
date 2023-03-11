@@ -60,6 +60,16 @@ class ForumController {
       next(error);
     }
   }
+
+  async addReaction(req: any, res: any, next: any) {
+    try {
+      const payload = req.body;
+      const result = await forumService.addReaction({ ...payload });
+      return res.json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new ForumController();

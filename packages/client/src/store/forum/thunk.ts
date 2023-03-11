@@ -30,3 +30,11 @@ export const getTopics = createAsyncThunk('gettopics', async () => {
   const response = await forumService.getTopics();
   return response;
 });
+
+export const addMessageReaction = createAsyncThunk(
+  'addmessagereaction',
+  async (payload: any) => {
+    const response = await forumService.addMessageReaction(payload);
+    return response;
+  }
+);

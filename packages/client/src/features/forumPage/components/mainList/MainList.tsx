@@ -29,6 +29,7 @@ export default function MainList() {
     <List sx={style} component="nav" aria-label="mailbox folders">
       {topics.map(topic => (
         <ListItem
+          key={topic.id}
           onClick={() => {
             navigate(`/forum/${topic.title}`);
           }}

@@ -7,6 +7,7 @@ import { User } from '../models/User';
 class ForumService {
   async getSections() {
     const sections = await Section.findAll();
+
     return sections;
   }
 
@@ -14,6 +15,7 @@ class ForumService {
     const sections = await Section.findAll({
       include: { all: true, nested: true },
     });
+
     return sections;
   }
 
@@ -25,6 +27,7 @@ class ForumService {
       content: question.content,
       sectionId: question.sectionId,
     });
+
     return newQuestion;
   }
 
@@ -35,12 +38,13 @@ class ForumService {
       time: payload.time,
       questionId: payload.questionId,
     });
+
     return newMessage;
   }
 
   async findQuestionsByTitle(text: string) {
     if (text === '') return [];
-    const result = Question.findAll({
+    const result = await Question.findAll({
       attributes: ['id', 'title', 'content', 'time'],
       where: {
         title: {
@@ -53,16 +57,35 @@ class ForumService {
       ],
       order: ['title'],
     });
+
     return result;
   }
 
   async getSection(section: string) {
-    const result = Section.findAll({
+    const result = await Section.findAll({
       where: {
         title: section,
       },
       include: [{ model: Question, include: [{ model: Message }] }],
     });
+
+    return result;
+  }
+
+  async addReaction(payload: { reaction: string; messageId: number }) {
+    const result = await Message.update(
+      {
+        reactions: Message.sequelize?.fn(
+          'array_append',
+          Message.sequelize?.col('reactions'),
+          payload.reaction
+        ),
+      },
+      {
+        where: { id: payload.messageId },
+      }
+    );
+
     return result;
   }
 }

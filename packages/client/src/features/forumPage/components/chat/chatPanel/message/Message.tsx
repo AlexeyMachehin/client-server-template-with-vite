@@ -5,6 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import MessageDashboard from '../messageDashboard/MessageDashboard';
 import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
 import classes from './message.module.css';
+import MessageReaction from '../messageReaction/MessageReaction';
 
 interface IMessageProps {
   createAnswer: (message: IMessage) => void;
@@ -41,6 +42,7 @@ export default function Message({
             />
           </div>
           <MessageDashboard createAnswer={createAnswer} message={message} />
+          <MessageReaction message={message} />
         </div>
         {answerMessage}
         <ListItemText className={classes.message} primary={message.message} />

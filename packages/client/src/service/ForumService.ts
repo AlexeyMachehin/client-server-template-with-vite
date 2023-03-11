@@ -29,6 +29,11 @@ class ForumService {
     const response = await this.axios.get('/topics');
     return response.data;
   }
+
+  public async addMessageReaction(payload: any) {
+    const response = await this.axios.post('/reactions', payload);
+    return response.data;
+  }
 }
 
 export const forumService = new ForumService();

@@ -24,6 +24,5 @@ export const createClientAndConnect = async (): Promise<Client | null> => {
     console.error(e);
   }
 
-  return null
-}
-
+  return null;
+};

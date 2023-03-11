@@ -9,19 +9,20 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { IMessage } from '../../../../../service/types/forumPage/IMessage';
 import { IQuestion } from '../../../../../service/types/forumPage/IQuestion';
-import { myProfile } from '../../../../mockData/myProfile';
 import classes from './chatPanel.module.css';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks';
+import { loadSection, sendMessage } from '@/store/forum/thunk';
+import { useParams } from 'react-router-dom';
 
 interface IChatPanelProps {
   selectedQuestion: null | IQuestion;
 }
 
 export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
+  const { mainTopic } = useParams();
   const [inputValue, setInputValue] = useState<string>('');
   const [answerMessage, setAnswerMessage] = useState<null | JSX.Element>(null);
-  const [answerMessageComponent, setAnswerMessageComponent] =
-    useState<null | JSX.Element>(null);
+  const [answerMessageId, setAnswerMessageId] = useState<number | null>();
   const messagesPanelRef = useRef<HTMLDivElement>(null);
 
   const currentUser = useAppSelector(state => state.userReducer.user);
@@ -58,6 +59,7 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
   const createAnswer = (newMessage: IMessage) => {
     const templateNewMessage = createAnswerTemplate(newMessage);
     setAnswerMessage(templateNewMessage);
+    setAnswerMessageId(newMessage.id);
   };
 
   const closeAnswerMessageBox = (): void => {
@@ -65,13 +67,22 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
   };
 
   const renderMessages = (messages: IMessage[]) => {
-    return messages.map((message: IMessage) => (
-      <Message
-        createAnswer={createAnswer}
-        key={`${message.name}${message.id}`}
-        message={message}
-      />
-    ));
+    return messages.map((message: IMessage) => {
+      const answerMessage = message.answeredId
+        ? messages.find(item => item.id === message.answeredId)
+        : null;
+
+      return (
+        <Message
+          createAnswer={createAnswer}
+          key={`${message.name}${message.id}`}
+          message={message}
+          answerMessage={
+            answerMessage ? createAnswerTemplate(answerMessage) : null
+          }
+        />
+      );
+    });
   };
 
   const messages = useMemo(
@@ -96,12 +107,7 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
         </div>
 
         <div ref={messagesPanelRef} className={classes.chatPanelMain}>
-          <>
-            {messages}
-
-            {/* test answer */}
-            {answerMessageComponent}
-          </>
+          <>{messages}</>
         </div>
 
         <div className={classes.chatPanelFooterWrapper}>
@@ -131,22 +137,19 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
               className={classes.sendButton}
               component="button"
               onClick={() => {
+                if (inputValue === '') return;
                 closeAnswerMessageBox();
                 setInputValue('');
-                setAnswerMessageComponent(
-                  <Message
-                    message={{
-                      name: currentUser?.first_name,
-                      userId: currentUser?.id,
-                      isMyMessage: true,
-                      time: new Date().toDateString(),
-                      message: inputValue,
-                      avatarURL: myProfile.avatarURL,
-                    }}
-                    createAnswer={createAnswer}
-                    answerMessage={answerMessage}
-                  />
+                dispatch(
+                  sendMessage({
+                    userId: currentUser?.id,
+                    message: inputValue,
+                    time: new Date().toDateString(),
+                    questionId: selectedQuestion?.id,
+                    answeredId: answerMessageId,
+                  })
                 );
+                if (mainTopic) dispatch(loadSection(mainTopic));
               }}
               variant="outlined"
               endIcon={<SendIcon />}>

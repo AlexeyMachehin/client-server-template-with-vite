@@ -38,3 +38,11 @@ export const addMessageReaction = createAsyncThunk(
     return response;
   }
 );
+
+export const sendMessage = createAsyncThunk(
+  'sendmessage',
+  async (payload: any) => {
+    const response = await forumService.sendMessage(payload);
+    return response;
+  }
+);

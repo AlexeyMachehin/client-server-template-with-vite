@@ -6,13 +6,15 @@ import classes from './messageReaction.module.css';
 import EmojiPicker, { Categories, EmojiClickData } from 'emoji-picker-react';
 import { AddReactionOutlined } from '@mui/icons-material';
 import { useAppDispatch } from '@/utils/hooks';
-import { addMessageReaction } from '@/store/forum/thunk';
+import { addMessageReaction, loadSection } from '@/store/forum/thunk';
+import { useParams } from 'react-router-dom';
 
 interface IMessageReactionProps {
   message: IMessage;
 }
 
 export default function MessageDashboard({ message }: IMessageReactionProps) {
+  const { mainTopic } = useParams();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,6 +28,9 @@ export default function MessageDashboard({ message }: IMessageReactionProps) {
     dispatch(
       addMessageReaction({ reaction: emojiData.unified, messageId: message.id })
     );
+    if (mainTopic) {
+      dispatch(loadSection(mainTopic));
+    }
   };
 
   return (

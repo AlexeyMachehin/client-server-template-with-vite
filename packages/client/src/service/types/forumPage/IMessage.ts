@@ -7,4 +7,6 @@ export interface IMessage {
   time: string;
   message: string;
   avatarURL: string;
+  reactions?: string[];
+  answeredId?: number;
 }

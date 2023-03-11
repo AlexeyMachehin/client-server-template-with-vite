@@ -37,6 +37,7 @@ class ForumService {
       message: payload.message,
       time: payload.time,
       questionId: payload.questionId,
+      answeredId: payload.answeredId,
     });
 
     return newMessage;

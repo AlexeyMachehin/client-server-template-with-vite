@@ -34,6 +34,11 @@ class ForumService {
     const response = await this.axios.post('/reactions', payload);
     return response.data;
   }
+
+  public async sendMessage(payload: any) {
+    const response = await this.axios.post('/messages', payload);
+    return response.data;
+  }
 }
 
 export const forumService = new ForumService();

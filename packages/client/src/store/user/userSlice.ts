@@ -18,8 +18,7 @@ export const userSlice = createSlice({
       state.user = action.payload;
       state.isLoaderOn = false;
     });
-    builder.addCase(getUser.rejected, (state, action) => {
-      state.error = action.error.message ?? null;
+    builder.addCase(getUser.rejected, state => {
       state.isLoaderOn = false;
     });
     builder.addCase(logout.fulfilled, state => {

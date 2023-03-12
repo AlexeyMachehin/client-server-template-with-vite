@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { themeState } from './themeState';
+import { getUserTheme } from './thunk';
 
 export const themeSlice = createSlice({
   name: 'theme',
@@ -8,6 +9,11 @@ export const themeSlice = createSlice({
     setTheme: (state, action) => {
       state.theme = action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(getUserTheme.fulfilled, (state, action) => {
+      state.theme = action.payload.theme;
+    });
   },
 });
 

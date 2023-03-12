@@ -8,8 +8,13 @@ const apiAxiosInstance = Axios.create({
 class ThemeService {
   private readonly axios: AxiosInstance = apiAxiosInstance;
 
-  public async saveTheme(theme: string) {
-    const response = await this.axios.post('/theme', theme);
+  public async saveUserTheme(payload: { userId: number; theme: string }) {
+    const response = await this.axios.post('/theme', payload);
+    return response.data;
+  }
+
+  public async getUserTheme(userId: number) {
+    const response = await this.axios.get('/theme', { params: { userId } });
     return response.data;
   }
 }

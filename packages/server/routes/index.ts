@@ -13,5 +13,5 @@ router.post('/findquestions', forumController.findQuestionsByTitle);
 router.post('/questions', forumController.addQuestion);
 router.post('/messages', forumController.addMessage);
 // routes for theme
-router.get('/theme', themeController.findTheme);
-router.post('/theme', themeController.createTheme);
+router.get('/theme', themeController.getUserTheme);
+router.post('/theme', themeController.setUserTheme);

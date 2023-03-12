@@ -1,12 +1,15 @@
 import { getUser, signInYandex } from '../../../src/store/user/thunk';
-import { useAppDispatch } from '../../../src/utils/hooks';
+import { useAppDispatch, useAppSelector } from '../../../src/utils/hooks';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { REDIRECT_URI } from '@/common/consts/consts';
+import { getUserTheme } from '@/store/theme/thunk';
 
 export function Layout({ children }: { children: JSX.Element }) {
   const dispatch = useAppDispatch();
   const location = useLocation();
+
+  const currentUser = useAppSelector(state => state.userReducer.user);
 
   const oAuth = () => {
     if (location.search) {
@@ -24,6 +27,7 @@ export function Layout({ children }: { children: JSX.Element }) {
 
   useEffect(() => {
     oAuth();
+    if (currentUser) dispatch(getUserTheme(currentUser?.id));
   }, []);
 
   return children;

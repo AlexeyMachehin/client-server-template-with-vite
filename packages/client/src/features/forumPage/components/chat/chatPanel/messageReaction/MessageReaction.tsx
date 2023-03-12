@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Menu from '@mui/material/Menu';
-import { IconButton } from '@mui/material';
+import { IconButton, Popover } from '@mui/material';
 import { IMessage } from '../../../../../../service/types/forumPage/IMessage';
 import classes from './messageReaction.module.css';
 import EmojiPicker, { Categories, EmojiClickData } from 'emoji-picker-react';
@@ -35,16 +34,11 @@ export default function MessageDashboard({ message }: IMessageReactionProps) {
 
   return (
     <div>
-      <IconButton
-        className={classes.button}
-        aria-controls={isOpen ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={isOpen ? 'true' : undefined}
-        onClick={handleClick}>
+      <IconButton className={classes.button} onClick={handleClick}>
         <AddReactionOutlined className={classes.buttonIcon} />
       </IconButton>
 
-      <Menu
+      <Popover
         anchorEl={anchorEl}
         open={isOpen}
         onClose={() => {
@@ -60,7 +54,7 @@ export default function MessageDashboard({ message }: IMessageReactionProps) {
             },
           ]}
         />
-      </Menu>
+      </Popover>
     </div>
   );
 }

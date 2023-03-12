@@ -26,10 +26,9 @@ export default function MessageDashboard({ message }: IMessageReactionProps) {
     setAnchorEl(null);
     dispatch(
       addMessageReaction({ reaction: emojiData.unified, messageId: message.id })
-    );
-    if (mainTopic) {
-      dispatch(loadSection(mainTopic));
-    }
+    ).then(() => {
+      if (mainTopic) dispatch(loadSection(mainTopic));
+    });
   };
 
   return (

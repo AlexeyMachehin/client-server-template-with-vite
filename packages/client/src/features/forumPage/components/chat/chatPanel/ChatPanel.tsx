@@ -64,6 +64,7 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
 
   const closeAnswerMessageBox = (): void => {
     setAnswerMessage(null);
+    setAnswerMessageId(null);
   };
 
   const renderMessages = (messages: IMessage[]) => {
@@ -148,8 +149,9 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
                     questionId: selectedQuestion?.id,
                     answeredId: answerMessageId,
                   })
-                );
-                if (mainTopic) dispatch(loadSection(mainTopic));
+                ).then(() => {
+                  if (mainTopic) dispatch(loadSection(mainTopic));
+                });
               }}
               variant="outlined"
               endIcon={<SendIcon />}>

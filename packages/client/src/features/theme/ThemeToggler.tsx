@@ -1,4 +1,5 @@
 import { setTheme } from '@/store/theme/themeSlice';
+import { saveTheme } from '@/store/theme/thunk';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
@@ -16,6 +17,7 @@ export const ThemeToggler = () => {
   const handleChange = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
     dispatch(setTheme(next));
+    dispatch(saveTheme(next));
   };
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({

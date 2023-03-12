@@ -93,6 +93,23 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
     [selectedQuestion]
   );
 
+  const sendButtonHandler = () => {
+    if (inputValue === '') return;
+    closeAnswerMessageBox();
+    setInputValue('');
+    dispatch(
+      sendMessage({
+        userId: currentUser?.id,
+        message: inputValue,
+        time: new Date().toString(),
+        questionId: selectedQuestion?.id,
+        answeredId: answerMessageId,
+      })
+    ).then(() => {
+      if (mainTopic) dispatch(loadSection(mainTopic));
+    });
+  };
+
   return (
     <>
       <div className={classes.chatPanel}>
@@ -110,7 +127,7 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
         </div>
 
         <div ref={messagesPanelRef} className={classes.chatPanelMain}>
-          <>{messages}</>
+          {messages}
         </div>
 
         <div className={classes.chatPanelFooterWrapper}>
@@ -121,7 +138,6 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
                   <CloseIcon className={classes.answerMessageBoxCloseIcon} />
                 </IconButton>
               </div>
-
               {answerMessage}
             </div>
           )}
@@ -139,22 +155,7 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
             <Button
               className={classes.sendButton}
               component="button"
-              onClick={() => {
-                if (inputValue === '') return;
-                closeAnswerMessageBox();
-                setInputValue('');
-                dispatch(
-                  sendMessage({
-                    userId: currentUser?.id,
-                    message: inputValue,
-                    time: new Date().toString(),
-                    questionId: selectedQuestion?.id,
-                    answeredId: answerMessageId,
-                  })
-                ).then(() => {
-                  if (mainTopic) dispatch(loadSection(mainTopic));
-                });
-              }}
+              onClick={sendButtonHandler}
               variant="outlined"
               endIcon={<SendIcon />}>
               Send

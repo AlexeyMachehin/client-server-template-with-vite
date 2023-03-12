@@ -33,7 +33,7 @@ export default function Chat() {
         ) ?? null;
       setSelectedQuestion(selectedQuestion);
     }
-  });
+  }, [currentSection, id]);
 
   return (
     <div className={classes.chatWrapper}>

@@ -68,22 +68,24 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
   };
 
   const renderMessages = (messages: IMessage[]) => {
-    return messages.map((message: IMessage) => {
-      const answerMessage = message.answeredId
-        ? messages.find(item => item.id === message.answeredId)
-        : null;
+    return [...messages]
+      .sort((a, b) => +new Date(a.time) - +new Date(b.time))
+      .map((message: IMessage) => {
+        const answerMessage = message.answeredId
+          ? messages.find(item => item.id === message.answeredId)
+          : null;
 
-      return (
-        <Message
-          createAnswer={createAnswer}
-          key={`${message.name}${message.id}`}
-          message={message}
-          answerMessage={
-            answerMessage ? createAnswerTemplate(answerMessage) : null
-          }
-        />
-      );
-    });
+        return (
+          <Message
+            createAnswer={createAnswer}
+            key={`${message.name}${message.id}`}
+            message={message}
+            answerMessage={
+              answerMessage ? createAnswerTemplate(answerMessage) : null
+            }
+          />
+        );
+      });
   };
 
   const messages = useMemo(
@@ -145,7 +147,7 @@ export default function ChatPanel({ selectedQuestion }: IChatPanelProps) {
                   sendMessage({
                     userId: currentUser?.id,
                     message: inputValue,
-                    time: new Date().toDateString(),
+                    time: new Date().toString(),
                     questionId: selectedQuestion?.id,
                     answeredId: answerMessageId,
                   })

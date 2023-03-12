@@ -13,7 +13,7 @@ export const ThemeToggler = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
     dispatch(setTheme(next));
   };

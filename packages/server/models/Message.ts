@@ -6,6 +6,7 @@ import {
   Column,
   DataType,
   ForeignKey,
+  Index,
   Model,
   PrimaryKey,
   Table,
@@ -32,6 +33,7 @@ export class Message extends Model {
   })
   userId: string;
 
+  @Index
   @Column(DataType.STRING(10000))
   message: string;
 

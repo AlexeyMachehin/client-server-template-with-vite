@@ -3,6 +3,7 @@ import { dbConfig } from '../config/db.config';
 import { Message } from './Message';
 import { Question } from './Question';
 import { Section } from './Section';
+import { SiteTheme } from './SiteTheme';
 import { User } from './User';
 import { UserTheme } from './UserTheme';
 
@@ -23,4 +24,4 @@ export const db: Record<string, any> = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-sequelize.addModels([Message, Question, Section, User, UserTheme]);
+sequelize.addModels([Message, Question, Section, User, UserTheme, SiteTheme]);

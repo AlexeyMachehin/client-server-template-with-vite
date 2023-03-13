@@ -27,7 +27,7 @@ export function Layout({ children }: { children: JSX.Element }) {
 
   useEffect(() => {
     oAuth();
-    if (currentUser) dispatch(getUserTheme(currentUser?.id));
+    dispatch(getUserTheme(currentUser?.id));
   }, []);
 
   return children;

@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 
 export const ThemeToggler = () => {
   const theme = useAppSelector(state => state.themeReducer.theme);
+  const user = useAppSelector(state => state.userReducer.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export const ThemeToggler = () => {
   const handleChange = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
     dispatch(setTheme(next));
-    dispatch(saveTheme(next));
+    dispatch(saveTheme({ userId: user?.id, theme: next }));
   };
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({

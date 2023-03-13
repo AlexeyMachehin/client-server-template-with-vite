@@ -1,41 +1,73 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { SiteTheme } from '../models/SiteTheme';
 import { UserTheme } from '../models/UserTheme';
 
 class ThemeService {
-  public getUserTheme = async (payload: { userId: number }) => {
+  public getUserTheme = async (payload: { userId?: number }) => {
+    if (!payload.userId) return null;
     const userTheme = await UserTheme.findOne({
       where: {
         ownerId: payload.userId,
       },
     });
-    return userTheme;
+    if (!userTheme) return null;
+    const result = await SiteTheme.findByPk(userTheme.themeId);
+    return result;
+  };
+
+  public findSiteTheme = async (title: string) => {
+    const siteTheme = await SiteTheme.findOne({
+      where: {
+        title: title, // Защита от SQL Injection присутствует
+      },
+    });
+
+    return siteTheme;
+  };
+
+  public createSiteTheme = async (title: string) => {
+    const result = SiteTheme.create({ title });
+    return result;
   };
 
   public setUserTheme = async (payload: {
-    userId: number;
+    userId?: number;
     newTheme: string;
   }) => {
     const { userId, newTheme } = payload;
 
-    const oldTheme = await this.getUserTheme({ userId });
-    if (!oldTheme) {
-      const result = await UserTheme.create({
-        ownerId: userId,
-        theme: newTheme,
-      });
-      return result;
+    if (!userId) {
+      const theme = await this.findSiteTheme(newTheme);
+      if (!theme) {
+        const result = await this.createSiteTheme(newTheme);
+        return result;
+      } else {
+        return theme;
+      }
     } else {
-      const result = await UserTheme.update(
-        {
-          theme: newTheme,
-        },
-        {
-          where: {
-            ownerId: userId,
+      const oldUserTheme = await this.getUserTheme({ userId });
+      let siteTheme = await this.findSiteTheme(newTheme);
+      if (!siteTheme) siteTheme = await this.createSiteTheme(newTheme);
+
+      if (!oldUserTheme) {
+        const result = await UserTheme.create({
+          ownerId: userId,
+          themeId: siteTheme.id,
+        });
+        return result;
+      } else {
+        const result = await UserTheme.update(
+          {
+            themeId: siteTheme.id,
           },
-        }
-      );
-      return result;
+          {
+            where: {
+              ownerId: userId,
+            },
+          }
+        );
+        return result;
+      }
     }
   };
 }

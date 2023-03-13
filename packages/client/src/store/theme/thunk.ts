@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const saveTheme = createAsyncThunk(
   'saveusertheme',
-  async (payload: { userId: number; theme: string }) => {
+  async (payload: { userId?: number; theme: string }) => {
     const response = await themeService.saveUserTheme(payload);
     return response;
   }
@@ -11,7 +11,7 @@ export const saveTheme = createAsyncThunk(
 
 export const getUserTheme = createAsyncThunk(
   'getusertheme',
-  async (userId: number) => {
+  async (userId?: number) => {
     const response = await themeService.getUserTheme(userId);
     return response;
   }

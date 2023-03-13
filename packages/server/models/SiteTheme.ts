@@ -4,20 +4,19 @@ import {
   AutoIncrement,
   Column,
   DataType,
-  HasMany,
   Index,
   Model,
   PrimaryKey,
   Table,
+  Unique,
 } from 'sequelize-typescript';
-import { Question } from './Question';
 
 @Table({
   timestamps: false,
   paranoid: true,
-  tableName: 'section',
+  tableName: 'site_theme',
 })
-export class Section extends Model {
+export class SiteTheme extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
@@ -25,9 +24,10 @@ export class Section extends Model {
 
   @Index
   @AllowNull(false)
+  @Unique
   @Column(DataType.STRING)
   title: string;
 
-  @HasMany(() => Question)
-  questions: Question[];
+  @Column(DataType.STRING)
+  description: string;
 }

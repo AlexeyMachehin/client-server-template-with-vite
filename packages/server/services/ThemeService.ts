@@ -48,7 +48,6 @@ class ThemeService {
       const oldUserTheme = await this.getUserTheme({ userId });
       let siteTheme = await this.findSiteTheme(newTheme);
       if (!siteTheme) siteTheme = await this.createSiteTheme(newTheme);
-
       if (!oldUserTheme) {
         const result = await UserTheme.create({
           ownerId: userId,

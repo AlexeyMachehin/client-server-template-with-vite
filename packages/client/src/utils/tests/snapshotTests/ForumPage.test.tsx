@@ -9,7 +9,7 @@ test('ForumPage renders correctly', () => {
     <MemoryRouter>
       <Provider store={store}>
         <Routes>
-          <Route path="/signup" element={<ForumPage />} />
+          <Route path="/forum" element={<ForumPage />} />
         </Routes>
       </Provider>
     </MemoryRouter>

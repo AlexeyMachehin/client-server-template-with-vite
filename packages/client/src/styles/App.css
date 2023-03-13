@@ -3,9 +3,9 @@
 @import '@fontsource/orbitron';
 
 :root[data-theme='light'] {
-  --bstartPageTitle: #ffb74d;
+  --startPageTitle: #4caf50;
 }
 
 :root[data-theme='dark'] {
-  --startPageTitle: #4caf50;
+  --bstartPageTitle: #ffb74d;
 }

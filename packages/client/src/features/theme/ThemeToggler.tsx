@@ -70,6 +70,10 @@ export const ThemeToggler = () => {
   }));
 
   return (
-    <MaterialUISwitch sx={{ m: 1 }} onChange={handleChange} defaultChecked />
+    <MaterialUISwitch
+      sx={{ m: 1 }}
+      onChange={handleChange}
+      checked={theme === 'dark' ? true : false}
+    />
   );
 };

@@ -24,6 +24,9 @@ export const userSlice = createSlice({
     builder.addCase(logout.fulfilled, state => {
       state.user = null;
     });
+    builder.addCase(logout.rejected, (state, action) => {
+      state.error = action.error.message ?? null;
+    });
     builder.addCase(login.rejected, (state, action) => {
       state.error = action.error.message ?? null;
     });

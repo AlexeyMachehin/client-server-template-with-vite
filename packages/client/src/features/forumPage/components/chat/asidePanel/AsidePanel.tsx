@@ -12,7 +12,7 @@ import classes from './asidePanel.module.css';
 
 interface IAsidePanelProps {
   selectedQuestion: IQuestion | null;
-  foundedQuestions: IQuestion[];
+  foundedQuestions: IQuestion[] | undefined;
 }
 
 const SELECTED_QUESTION_COLOR = '#4caf4f2f';
@@ -84,13 +84,13 @@ export default function AsidePanel({
   };
 
   const sortAsidePanelItems = (items: IQuestion[]) => {
-    return items.sort((a: IQuestion, b: IQuestion) =>
+    return items?.sort((a: IQuestion, b: IQuestion) =>
       a.title.localeCompare(b.title)
     );
   };
 
   const asidePanelItems = useMemo(
-    () => sortAsidePanelItems(foundedQuestions),
+    () => sortAsidePanelItems(foundedQuestions ? [...foundedQuestions] : []),
     [foundedQuestions]
   );
 

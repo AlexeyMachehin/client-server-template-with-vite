@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { errorSnackbarSlice } from './errorSnackbar/errorSnackbarSlice';
 import { userSlice } from './user/userSlice';
+import { forumSlice } from './forum/forumSlice';
 
 export const store = configureStore({
   reducer: {
     userReducer: userSlice.reducer,
     errorSnackbarReducer: errorSnackbarSlice.reducer,
+    forumReducer: forumSlice.reducer,
   },
 });
 

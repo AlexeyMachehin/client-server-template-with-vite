@@ -17,7 +17,6 @@ export const ThemeToggler = () => {
 
   const handleChange = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
-    console.log(user?.id, theme);
     dispatch(setTheme(next));
     dispatch(saveTheme({ userId: user?.id, newTheme: next }));
   };
